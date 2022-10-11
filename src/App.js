@@ -4,15 +4,8 @@ import React from "react";
 import Header from "./components/Header/Header";
 import Level1 from "./components/Level1/Level";
 
-import {
-  Route,
-  Link as RouterLink,
-  Routes,
-  BrowserRouter as Router,
-  useLocation,
-} from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import Home from "./components/Home/Home";
-import Breadcrumbs from "./UI/Breadcrumbs";
 
 function App() {
   const sidebarColor = (item) => {

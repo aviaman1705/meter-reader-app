@@ -5,13 +5,14 @@ import {
   Typography,
 } from "@material-ui/core";
 import { useLocation, useNavigate } from "react-router-dom";
+import "./Breadcrumbs.css";
 
 const Breadcrumbs = () => {
   let location = useLocation();
   const navigate = useNavigate();
 
   const pathnames = location.pathname.split("/").filter((x) => x);
-  console.log(location.pathname);
+
   return (
     <MUIBreadcrumbs seperator="/" aria-label="breadcrumb">
       {pathnames.length > 0 ? (
@@ -26,10 +27,10 @@ const Breadcrumbs = () => {
         const isLast = index === pathnames.length - 1;
 
         return isLast ? (
-          <Typography>{name}</Typography>
+          <Typography>{decodeURI(name)}</Typography>
         ) : (
           <Link onClick={() => navigate(routeTo)} color="inherit">
-            {name}
+            {decodeURI(name)}
           </Link>
         );
       })}
