@@ -3,6 +3,8 @@ import { Route, Routes } from "react-router-dom";
 import Breadcrumbs from "../../UI/Breadcrumbs";
 import Home from "../Home/Home";
 import Level1 from "../Level1/Level";
+import NotFound from "../../pages/NotFound";
+
 const Header = () => {
   return (
     <>
@@ -176,8 +178,9 @@ const Header = () => {
         <div className="container-fluid py-4">
           <div>
             <Routes>
-              <Route path="/" component={Home} />
-              <Route path="/search-result" component={Level1} />
+              <Route path="/" element={<Home />} />
+              <Route path="/search-results/:productId" element={<Level1 />} />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </div>
           {/* <div className="row">
