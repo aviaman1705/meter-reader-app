@@ -1,11 +1,9 @@
 import "./App.css";
 import React from "react";
-
 import Header from "./components/Header/Header";
-import Level1 from "./components/Level1/Level";
-
-import { BrowserRouter as Router } from "react-router-dom";
-import Home from "./components/Home/Home";
+import { Route, Routes } from "react-router-dom";
+import Home from "./pages/Home.js";
+import SearchResult from "./pages/SearchResult.js";
 
 function App() {
   const sidebarColor = (item) => {

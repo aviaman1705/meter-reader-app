@@ -27,7 +27,7 @@ const Breadcrumbs = () => {
         const isLast = index === pathnames.length - 1;
 
         return isLast ? (
-          <Typography>{decodeURI(name)}</Typography>
+          <Typography key={index}>{decodeURI(name)}</Typography>
         ) : (
           <Link onClick={() => navigate(routeTo)} color="inherit">
             {decodeURI(name)}
