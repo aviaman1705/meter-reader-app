@@ -1,15 +1,9 @@
-import React from "react";
-import { Route, Routes } from "react-router-dom";
-import Breadcrumbs from "../../UI/Breadcrumbs";
-import Home from "../Home/Home";
-import Level1 from "../Level1/Level";
-import NotFound from "../../pages/NotFound";
 import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
-import Home from "../../pages/Home";
-import SearchResult from "../../pages/SearchResult";
 import Breadcrumbs from "../../UI/Breadcrumbs";
-import SearchForm from "../Search/SearchForm";
+import Level1 from "../../pages/Level";
+import NotFound from "../../pages/NotFound";
+import Home from "../../pages/Home";
 
 const Header = () => {
   const [searchList, setSearchList] = useState([]);
@@ -2041,7 +2035,6 @@ const Header = () => {
                 </div>
               </div>
             </div>
-<<<<<<< HEAD
           </div> */}
           <footer className="footer py-4  ">
             <div className="container-fluid">
@@ -2053,38 +2046,10 @@ const Header = () => {
                     <a
                       href="https://www.creative-tim.com"
                       className="font-weight-bold"
-=======
-          </div>
-        </div> */}
-        <footer className="footer py-4  ">
-          <div className="container-fluid">
-            <div className="row align-items-center justify-content-lg-between">
-              <div className="col-lg-6 mb-lg-0 mb-4">
-                <div className="copyright text-center text-sm text-muted text-lg-end">
-                  © <script>document.write(new Date().getFullYear())</script>,
-                  made with <i className="fa fa-heart"></i> by
-                  <a
-                    href="https://www.creative-tim.com"
-                    className="font-weight-bold"
-                    target="_blank"
-                  >
-                    Creative Tim
-                  </a>
-                  for a better web.
-                </div>
-              </div>
-              <div className="col-lg-6">
-                <ul className="nav nav-footer justify-content-center justify-content-lg-end">
-                  <li className="nav-item">
-                    <a
-                      href="https://www.creative-tim.com"
-                      className="nav-link text-muted"
->>>>>>> implement-search
                       target="_blank"
                     >
                       Creative Tim
                     </a>
-<<<<<<< HEAD
                     for a better web.
                   </div>
                 </div>
@@ -2134,42 +2099,6 @@ const Header = () => {
         </div>
       </main>
       <Breadcrumbs />
-=======
-                  </li>
-                  <li className="nav-item">
-                    <a
-                      href="https://www.creative-tim.com/presentation"
-                      className="nav-link text-muted"
-                      target="_blank"
-                    >
-                      About Us
-                    </a>
-                  </li>
-                  <li className="nav-item">
-                    <a
-                      href="https://www.creative-tim.com/blog"
-                      className="nav-link text-muted"
-                      target="_blank"
-                    >
-                      Blog
-                    </a>
-                  </li>
-                  <li className="nav-item">
-                    <a
-                      href="https://www.creative-tim.com/license"
-                      className="nav-link pe-0 text-muted"
-                      target="_blank"
-                    >
-                      License
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </footer>
-      </div>
->>>>>>> implement-search
     </>
   );
 };
