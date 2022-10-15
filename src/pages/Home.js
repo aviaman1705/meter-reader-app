@@ -6,7 +6,7 @@ const Home = () => {
     <>
       {" "}
       <h1> Welcome Home </h1>{" "}
-      <RouterLink to="/level1/level2">Go to Level2</RouterLink>
+      {/* <RouterLink to="/level1/level2">Go to Level2</RouterLink> */}
     </>
   );
 };
