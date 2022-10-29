@@ -1,9 +1,8 @@
 import "./App.css";
 import React from "react";
 import Header from "./components/Header/Header";
-import { Route, Routes } from "react-router-dom";
-import Home from "./pages/Home.js";
-import SearchResult from "./pages/SearchResult.js";
+
+import "./App.css";
 
 function App() {
   const sidebarColor = (item) => {
@@ -34,11 +33,7 @@ function App() {
             aria-hidden="true"
             id="iconSidenav"
           ></i>
-          <a
-            className="navbar-brand m-0"
-            href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard "
-            target="_blank"
-          >
+          <a className="navbar-brand m-0" href="/#" target="_blank">
             <img
               src="../assets/img/logo-ct.png"
               className="navbar-brand-img h-100"
@@ -56,7 +51,7 @@ function App() {
         >
           <ul className="navbar-nav">
             <li className="nav-item">
-              <a className="nav-link " href="../pages/dashboard.html">
+              <a className="nav-link " href="/#">
                 <div className="text-white text-center ms-2 d-flex align-items-center justify-content-center">
                   <i className="material-icons-round opacity-10">dashboard</i>
                 </div>
@@ -64,7 +59,7 @@ function App() {
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link " href="../pages/tables.html">
+              <a className="nav-link " href="/#">
                 <div className="text-white text-center ms-2 d-flex align-items-center justify-content-center">
                   <i className="material-icons-round opacity-10">table_view</i>
                 </div>
@@ -72,7 +67,7 @@ function App() {
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link " href="../pages/billing.html">
+              <a className="nav-link " href="/#">
                 <div className="text-white text-center ms-2 d-flex align-items-center justify-content-center">
                   <i className="material-icons-round opacity-10">
                     receipt_long
@@ -82,7 +77,7 @@ function App() {
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link " href="../pages/virtual-reality.html">
+              <a className="nav-link " href="/#">
                 <div className="text-white text-center ms-2 d-flex align-items-center justify-content-center">
                   <i className="material-icons-round opacity-10">view_in_ar</i>
                 </div>
@@ -90,7 +85,7 @@ function App() {
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link active" href="../pages/rtl.html">
+              <a className="nav-link active" href="/#">
                 <div className="text-white text-center ms-2 d-flex align-items-center justify-content-center">
                   <i className="material-icons-round opacity-10">
                     format_textdirection_r_to_l
@@ -100,7 +95,7 @@ function App() {
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link " href="../pages/notifications.html">
+              <a className="nav-link " href="/#">
                 <div className="text-white text-center ms-2 d-flex align-items-center justify-content-center">
                   <i className="material-icons opacity-10">notifications</i>
                 </div>
@@ -108,7 +103,7 @@ function App() {
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link " href="../pages/profile.html">
+              <a className="nav-link " href="/#">
                 <div className="text-white text-center ms-2 d-flex align-items-center justify-content-center">
                   <i className="material-icons-round opacity-10">person</i>
                 </div>
@@ -116,7 +111,7 @@ function App() {
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link " href="../pages/sign-in.html">
+              <a className="nav-link " href="/#">
                 <div className="text-white text-center ms-2 d-flex align-items-center justify-content-center">
                   <i className="material-icons-round opacity-10">login</i>
                 </div>
@@ -124,7 +119,7 @@ function App() {
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link " href="../pages/sign-up.html">
+              <a className="nav-link " href="/#">
                 <div className="text-white text-center ms-2 d-flex align-items-center justify-content-center">
                   <i className="material-icons-round opacity-10">assignment</i>
                 </div>
@@ -137,7 +132,7 @@ function App() {
           <div className="mx-3">
             <a
               className="btn bg-gradient-primary mt-4 w-100"
-              href="https://www.creative-tim.com/product/material-dashboard-pro?ref=sidebarfree"
+              href="/#"
               type="button"
             >
               Upgrade to pro
@@ -147,7 +142,10 @@ function App() {
       </aside>
       <Header />
       <div className="fixed-plugin">
-        <a className="fixed-plugin-button text-dark position-fixed px-3 py-2">
+        <a
+          className="fixed-plugin-button text-dark position-fixed px-3 py-2"
+          href="/#"
+        >
           <i className="material-icons py-2">settings</i>
         </a>
         <div className="card shadow-lg">
@@ -261,13 +259,13 @@ function App() {
               </div>
             </div>
             <hr className="horizontal dark my-sm-4" />
-            <a className="btn btn-outline-dark w-100" href="">
+            <a className="btn btn-outline-dark w-100" href="/#">
               View documentation
             </a>
             <div className="w-100 text-center">
               <a
                 className="github-button"
-                href="https://github.com/creativetimofficial/material-dashboard"
+                href="/#"
                 data-icon="octicon-star"
                 data-size="large"
                 data-show-count="true"
@@ -276,18 +274,10 @@ function App() {
                 Star
               </a>
               <h6 className="mt-3">Thank you for sharing!</h6>
-              <a
-                href="https://twitter.com/intent/tweet?text=Check%20Material%20UI%20Dashboard%20made%20by%20%40CreativeTim%20%23webdesign%20%23dashboard%20%23bootstrap5&amp;url=https%3A%2F%2Fwww.creative-tim.com%2Fproduct%2Fsoft-ui-dashboard"
-                className="btn btn-dark mb-0 me-2"
-                target="_blank"
-              >
+              <a href="/#" className="btn btn-dark mb-0 me-2" target="_blank">
                 <i className="fab fa-twitter me-1" aria-hidden="true"></i> Tweet
               </a>
-              <a
-                href="https://www.facebook.com/sharer/sharer.php?u=https://www.creative-tim.com/product/material-dashboard"
-                className="btn btn-dark mb-0 me-2"
-                target="_blank"
-              >
+              <a href="/#" className="btn btn-dark mb-0 me-2" target="_blank">
                 <i
                   className="fab fa-facebook-square me-1"
                   aria-hidden="true"

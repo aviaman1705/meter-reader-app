@@ -29,7 +29,7 @@ const Breadcrumbs = () => {
         return isLast ? (
           <Typography key={index}>{decodeURI(name)}</Typography>
         ) : (
-          <Link onClick={() => navigate(routeTo)} color="inherit">
+          <Link key={index} onClick={() => navigate(routeTo)} color="inherit">
             {decodeURI(name)}
           </Link>
         );
