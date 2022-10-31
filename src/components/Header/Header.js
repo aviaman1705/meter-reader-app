@@ -1,10 +1,11 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Link, Route, Routes } from "react-router-dom";
 import Breadcrumbs from "../../UI/Breadcrumbs";
 import NotFound from "../../pages/NotFound";
 import Home from "../../pages/Home";
 import SearchResult from "../../pages/SearchResult";
 import SearchForm from "../../components/Search/SearchForm/SearchForm";
+import UserDetails from "../../pages/UserDetails";
 
 const Header = () => {
   return (
@@ -27,13 +28,15 @@ const Header = () => {
               </div>
               <ul className="navbar-nav me-auto ms-0 justify-content-end">
                 <li className="nav-item d-flex align-items-center">
-                  <a
-                    href="/#"
-                    className="nav-link text-body font-weight-bold px-0"
+                  <Link
+                    className="nav-link text-body p-0"
+                    id="iconNavbarSidenav"
+                    to={{
+                      pathname: "/user-details",
+                    }}
                   >
-                    <i className="fa fa-user me-sm-1"></i>
-                    <span className="d-sm-inline d-none">يسجل دخول</span>
-                  </a>
+                    <span className="d-sm-inline d-none">משתמש</span>
+                  </Link>
                 </li>
                 <li className="nav-item d-xl-none pe-3 d-flex align-items-center">
                   <a
@@ -183,6 +186,7 @@ const Header = () => {
               path="/search-results/search-item/:item"
               element={<SearchResult />}
             />
+            <Route path="/user-details" element={<UserDetails />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
 
