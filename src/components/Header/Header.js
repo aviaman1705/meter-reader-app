@@ -6,6 +6,7 @@ import Home from "../../pages/Home";
 import SearchResult from "../../pages/SearchResult";
 import SearchForm from "../../components/Search/SearchForm/SearchForm";
 import UserDetails from "../../pages/UserDetails";
+import Settings from "../../pages/Settings";
 
 const Header = () => {
   return (
@@ -52,9 +53,12 @@ const Header = () => {
                   </a>
                 </li>
                 <li className="nav-item px-3 d-flex align-items-center">
-                  <a href="/#" className="nav-link text-body p-0">
+                  <Link
+                    className="nav-link text-body p-0"
+                    to={{ pathname: "/settings" }}
+                  >
                     <i className="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item dropdown ps-2 d-flex align-items-center">
                   <a
@@ -187,6 +191,7 @@ const Header = () => {
               element={<SearchResult />}
             />
             <Route path="/user-details" element={<UserDetails />} />
+            <Route path="/settings" element={<Settings />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
 
