@@ -1,11 +1,13 @@
 import "./App.css";
-import React from "react";
+import React, { useState } from "react";
 import Header from "./components/Header/Header";
 
 import "./App.css";
 import Sidebar from "./components/Sidebar/Sidebar";
 
 function App() {
+  const [isOpen, setIsOpen] = useState(false);
+
   const sidebarColor = (item) => {
     //console.log(item);
   };
@@ -22,14 +24,21 @@ function App() {
     //console.log(item);
   };
 
+  const toggleCard = (event) => {
+    event.preventDefault();
+
+    setIsOpen((current) => !current);
+  };
+
   return (
     <>
       <Sidebar />
       <Header />
-      <div className="fixed-plugin">
+      <div className={isOpen ? "fixed-plugin ps show" : "fixed-plugin ps"}>
         <a
           className="fixed-plugin-button text-dark position-fixed px-3 py-2"
           href="/#"
+          onClick={toggleCard}
         >
           <i className="material-icons py-2">settings</i>
         </a>
@@ -40,7 +49,10 @@ function App() {
               <p>See our dashboard options.</p>
             </div>
             <div className="float-start mt-4">
-              <button className="btn btn-link text-dark p-0 fixed-plugin-close-button">
+              <button
+                className="btn btn-link text-dark p-0 fixed-plugin-close-button"
+                onClick={toggleCard}
+              >
                 <i className="material-icons">clear</i>
               </button>
             </div>
