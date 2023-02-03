@@ -1,0 +1,6 @@
+/* COMPONENTS */
+div#bar-chart-container {
+    border: 2px solid gray;
+    height: 500px !important;
+    width: 100% !important;
+}

@@ -1,0 +1,38 @@
+button:disabled {
+    background-color: #ccc;
+    color: #292929;
+    border-color: #ccc;
+    cursor: not-allowed;
+}
+
+.card.card-form.card-plain {
+    background-color: #344767;
+}
+
+.card-form-header.card-header {
+    background-color: transparent;
+}
+
+h4.card-form-title.font-weight-bolder {
+    color: #fff;
+    text-align: center;
+}
+
+p.card-form-description.mb-0 {
+    color: #fff;
+    text-align: center;
+}
+
+p.input-error {
+    color: red;
+    text-align: right;
+    direction: rtl;
+}
+
+.form-control {
+    color: #fff;
+}
+
+.form-control:focus {
+    color: #fff;
+}

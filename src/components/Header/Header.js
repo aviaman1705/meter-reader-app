@@ -8,6 +8,8 @@ import SearchForm from "../../components/Search/SearchForm/SearchForm";
 import UserDetails from "../../pages/UserDetails";
 import Settings from "../../pages/Settings";
 import Footer from "../Footer/Footer";
+import Login from "../../pages/Login";
+import Register from "../../pages/Register";
 
 const Header = () => {
   return (
@@ -193,6 +195,8 @@ const Header = () => {
             />
             <Route path="/user-details" element={<UserDetails />} />
             <Route path="/settings" element={<Settings />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
