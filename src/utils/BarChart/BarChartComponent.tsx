@@ -5,52 +5,12 @@ import "./BarChartComponent.css";
 import {
   BarChart,
   Bar,
-  Cell,
-  XAxis,
   YAxis,
   CartesianGrid,
   Tooltip,
   Legend,
   ResponsiveContainer,
 } from "recharts";
-
-// const data = [
-//   {
-//     month: "12/22",
-//     called: 4000,
-//     uncalled: 2400,
-//   },
-//   {
-//     month: "12/22",
-//     called: 4000,
-//     uncalled: 2400,
-//   },
-//   {
-//     month: "12/22",
-//     called: 4000,
-//     uncalled: 2400,
-//   },
-//   {
-//     month: "12/22",
-//     called: 4000,
-//     uncalled: 2400,
-//   },
-//   {
-//     month: "12/22",
-//     called: 4000,
-//     uncalled: 2400,
-//   },
-//   {
-//     month: "12/22",
-//     called: 4000,
-//     uncalled: 2400,
-//   },
-//   {
-//     month: "12/22",
-//     called: 4000,
-//     uncalled: 2400,
-//   },
-// ];
 
 export default function BarChartComponent<T>(props: barChartEntityProps<T>) {
   const [data, setData] = useState<T[]>();
@@ -73,7 +33,7 @@ export default function BarChartComponent<T>(props: barChartEntityProps<T>) {
           <CartesianGrid strokeDasharray="3 3" />
           <YAxis type="number" domain={[0, 10000]} />
           <Tooltip />
-          {/* <Legend /> */}
+          <Legend />
 
           {props.dataKeys.map((dataKey, index) => (
             <Bar
