@@ -2,10 +2,10 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import useInput from "../../../hooks/use-input";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const RegisterForm = () => {
-  const navigate = useNavigate();
+  let history = useHistory();
 
   const [usernameServerError, setUsernameServerError] = useState("");
   const [passwordServerError, setPasswordServerError] = useState("");
@@ -46,7 +46,7 @@ const RegisterForm = () => {
 
   const navigateTLogin = (event) => {
     event.preventDefault();
-    navigate("/login");
+    history.push("/login");
   };
 
   const register = (event) => {

@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import "./SearchForm.css";
 
 const SearchForm = ({ fetchSearchResult }) => {
@@ -7,7 +7,7 @@ const SearchForm = ({ fetchSearchResult }) => {
   const [enteredTermIsValid, setEnteredTermIsValid] = useState(null);
 
   const term = useRef(0);
-  const navigate = useNavigate();
+  let history = useHistory();
 
   const termInputChangeHandler = (event) => {
     setEnteredTerm(event.target.value);
@@ -23,7 +23,7 @@ const SearchForm = ({ fetchSearchResult }) => {
 
     setEnteredTermIsValid(true);
 
-    navigate(`/search-results/${term.current.value}`);
+    history.push(`/search-results/${term.current.value}`);
   };
 
   return (

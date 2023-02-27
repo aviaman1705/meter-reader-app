@@ -4,19 +4,19 @@ import {
   Link,
   Typography,
 } from "@material-ui/core";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import "./Breadcrumbs.css";
 
 const Breadcrumbs = () => {
   let location = useLocation();
-  const navigate = useNavigate();
+  let history = useHistory();
 
   const pathnames = location.pathname.split("/").filter((x) => x);
 
   return (
     <MUIBreadcrumbs seperator="/" aria-label="breadcrumb">
       {pathnames.length > 0 ? (
-        <Link onClick={() => navigate("/")} color="inherit">
+        <Link onClick={() => history.push("/")} color="inherit">
           עמוד הבית
         </Link>
       ) : (
@@ -29,7 +29,11 @@ const Breadcrumbs = () => {
         return isLast ? (
           <Typography key={index}>{decodeURI(name)}</Typography>
         ) : (
-          <Link key={index} onClick={() => navigate(routeTo)} color="inherit">
+          <Link
+            key={index}
+            onClick={() => history.push(routeTo)}
+            color="inherit"
+          >
             {decodeURI(name)}
           </Link>
         );

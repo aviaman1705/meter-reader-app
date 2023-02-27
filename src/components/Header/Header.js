@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Route, Routes } from "react-router-dom";
+import { Link, Route, Switch } from "react-router-dom";
 import Breadcrumbs from "../../UI/Breadcrumbs";
 import NotFound from "../../pages/NotFound";
 import Home from "../../pages/Home";
@@ -186,7 +186,7 @@ const Header = () => {
         </nav>
         {/* <!-- End Navbar --> */}
         <div className="container-fluid py-4">
-          <Routes>
+          <Switch>
             <Route path="/" element={<Home />} />
             <Route path="/search-results/:term" element={<SearchResult />} />
             <Route
@@ -198,7 +198,7 @@ const Header = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="*" element={<NotFound />} />
-          </Routes>
+          </Switch>
         </div>
 
         <Footer />

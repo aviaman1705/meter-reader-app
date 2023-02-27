@@ -1,10 +1,10 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import "./SearchItem.css";
 
 const SearchItem = ({ item, link, trackDone, searchItem }) => {
-  const navigate = useNavigate();
+  const history = useHistory();
 
   return (
     <>
@@ -13,7 +13,7 @@ const SearchItem = ({ item, link, trackDone, searchItem }) => {
           className="col-md-2 col-2"
           onClick={(event) => {
             event.preventDefault();
-            navigate(`/search-results/search-item/${item}`);
+            history.push(`/search-results/search-item/${item}`);
           }}
         >
           <div className="card search-item">
