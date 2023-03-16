@@ -1,7 +1,7 @@
 export default function RecordsPerPageSelect(props: recordsPerPageSelectProps) {
   return (
     <div className="mb-3" style={{ width: "150px" }}>
-      <label>Records per page:</label>
+      <label>רשומות לכל דף:</label>
       <select
         className="form-select"
         defaultValue={5}

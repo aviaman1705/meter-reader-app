@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import "./Pagination.css";
 
 export default function Pagination(props: paginationProps) {
   const [linkModels, setLinkModels] = useState<linkModel[]>([]);
@@ -33,7 +34,7 @@ export default function Pagination(props: paginationProps) {
     const links: linkModel[] = [];
 
     links.push({
-      text: "Previous",
+      text: "הקודם",
       enabled: previousPageEnabled,
       page: previousPage,
       active: false,
@@ -59,7 +60,7 @@ export default function Pagination(props: paginationProps) {
     const nextPage = props.currentPage + 1;
 
     links.push({
-      text: "Next",
+      text: "הבא",
       enabled: nextPageEnabled,
       page: nextPage,
       active: false,

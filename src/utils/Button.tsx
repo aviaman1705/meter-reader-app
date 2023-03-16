@@ -24,5 +24,5 @@ interface buttonProps {
 Button.defaultProps = {
   type: "button",
   disabled: false,
-  className: "btn btn-primary ms-1",
+  className: "",
 };

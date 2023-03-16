@@ -8,3 +8,9 @@
     outline: 0;
     box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
 }
+li.page-item.cursor.pointer:hover{
+    cursor: pointer;
+}
+table.MuiTable-root.css-12lx6p8-MuiTable-root,td.MuiTableCell-root.MuiTableCell-body{
+  text-align: right !important;
+}

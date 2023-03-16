@@ -5,7 +5,15 @@ export interface trackCreationDTO {
     date: Date;
 }
 
-export interface trackDTO {
+// export interface trackDTO {
+//     id: number;
+//     called: number;
+//     unCalled: number;
+//     desc: string;
+//     date: Date;
+// }
+
+interface trackDTO {
     id: number;
     called: number;
     unCalled: number;
