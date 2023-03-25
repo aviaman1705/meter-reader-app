@@ -1,104 +1,73 @@
+import React, { useEffect, useState } from "react";
 import axios, { AxiosResponse } from "axios";
-import { useEffect, useState } from "react";
-import { ReactElement } from "react-markdown/lib/react-markdown";
-import { Link } from "react-router-dom";
-import { urlTracks } from "../../endpoints";
-import Button from "../Button";
-import customConfirm from "../customConfirm";
-import GenericList from "../GenericList";
-import Pagination from "../Pagination/Pagination";
-import RecordsPerPageSelect from "../RecordsPerPageSelect";
+import MaterialReactTable, { MRT_ColumnDef } from "material-react-table";
 import "./IndexEntity.css";
 
-export default function IndexEntity<T>(props: indxEntityProps<T>) {
-  const [entities, setEntities] = useState<T[]>();
-  const [totalAmountOfPages, setTotalAmountOfPages] = useState(0);
-  const [recordsPerPage, setRecordsPerPage] = useState(5);
-  const [page, setPage] = useState(1);
+export default function IndexEntity<T>(props: indexEntityProps<T>) {
+  const [data, setData] = useState<T[]>([]);
+  const [globalFilter, setGlobalFilter] = useState("");
+  const [sorting, setSorting] = useState([{ id: "date", desc: true }]);
+  const [pagination, setPagination] = useState({
+    pageIndex: 0,
+    pageSize: 5,
+  });
+  const [totalAmountOfRcords, setTotalAmountOfRcords] = useState<number>(0);
 
   useEffect(() => {
-    loadData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page, recordsPerPage]);
+    if (sorting.length > 0) {
+      axios
+        .get(
+          `${props.url}?pageIndex=${pagination.pageIndex + 1}&pageSize=${
+            pagination.pageSize
+          }&sortColumn=${sorting[0].id}&sortDir=${
+            sorting[0].desc ? "desc" : "asc"
+          }&search=${globalFilter}`
+        )
+        .then((response: AxiosResponse<T[]>) => {
+          setData(response.data);
+          const totalAmountOfRcords = parseInt(
+            response.headers["totalamountofrcords"],
+            10
+          );
 
-  function loadData() {
-    axios
-      .get(`${urlTracks}?Page=${page}&RecrdsPerPage=${recordsPerPage}`)
-      .then((response: AxiosResponse<T[]>) => {
-        const totalAmountOfRcords = parseInt(
-          response.headers["totalamountofrcords"],
-          10
-        );
-        setTotalAmountOfPages(Math.ceil(totalAmountOfRcords / recordsPerPage));
-        setEntities(response.data);
-      });
-  }
-
-  async function deleteEntity(id: number) {
-    try {
-      await axios.delete(`${props.url}/${id}`);
-      loadData();
-    } catch (error) {
-      //   if (error && error.response) console.log(error.response.data);
+          setTotalAmountOfRcords(totalAmountOfRcords);
+        });
     }
-  }
-
-  const buttons = (editUrl: string, id: number) => (
-    <>
-      <Link to={editUrl} className="btn-edit-grid-item">
-        <i className="material-icons">edit</i>
-      </Link>
-      <Link
-        to="/#"
-        className="btn-delete-grid-item"
-        onClick={() => customConfirm(() => deleteEntity(id))}
-      >
-        <i className="material-icons">clear</i>
-      </Link>
-    </>
-  );
+  }, [pagination.pageIndex, pagination.pageSize, sorting, globalFilter]);
 
   return (
-    <>
-      <h3>{props.title}</h3>
-      <Link className="btn btn-primary" to={props.createURL}>
-        {props.buttonText}
-      </Link>
-      <RecordsPerPageSelect
-        onChange={(amnoutOfRecords) => {
-          setPage(1);
-          setRecordsPerPage(amnoutOfRecords);
-        }}
-      />
-
-      <div id="wrap-table">
-        <GenericList list={entities}>
-          <table className="table table-hover">
-            {props.children(entities!, buttons)}
-          </table>
-        </GenericList>
-      </div>
-
-      <Pagination
-        currentPage={page}
-        totalAmontOfPages={totalAmountOfPages}
-        onChange={(newPage) => {
-          console.log(`newPage ${newPage}`);
-          setPage(newPage);
-        }}
-      />
-    </>
+    <MaterialReactTable
+      columns={props.columns}
+      data={data}
+      rowCount={totalAmountOfRcords}
+      manualPagination={true}
+      manualSorting={true}
+      manualFiltering={true}
+      enableColumnFilters={false}
+      onPaginationChange={setPagination}
+      onSortingChange={setSorting}
+      onGlobalFilterChange={setGlobalFilter}
+      state={{ pagination, sorting, globalFilter }}
+      localization={{
+        toggleFullScreen: "החלף מסך מלא",
+        toggleDensity: "החלף צפיפות",
+        showHideFilters: "הצג/הסתר סינון",
+        showHideSearch: "הצג/הסתר חיפוש",
+        rowsPerPage: "אייטמים בעמוד",
+        showHideColumns: "הצג/הסתר עמודות",
+        filterByColumn: "סנן לפי {column}",
+        noRecordsToDisplay: "אין רשומות להצגה",
+        noResultsFound: "לא נמצאו תוצאות",
+        goToFirstPage: "עבור לדף הראשון",
+        goToNextPage: "עבור לדף הבא",
+        goToLastPage: "עבור לדף האחרון",
+        search: "חפש",
+      }}
+    />
   );
 }
 
-interface indxEntityProps<T> {
+interface indexEntityProps<T> {
   url: string;
-  title: string;
-  createURL: string;
-  entityName: string;
-  buttonText: string;
-  children(
-    entities: T[],
-    buttons: (editUrl: string, id: number) => ReactElement
-  ): ReactElement;
+  columns: MRT_ColumnDef<T>[];
 }
