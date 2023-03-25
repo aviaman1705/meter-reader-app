@@ -177,7 +177,7 @@ export default function Header() {
           </div>
         </nav>
         {/* <!-- End Navbar --> */}
-        <div className="container-fluid py-4">
+        <div id="main-container" className="container-fluid py-4">
           <Switch>
             {routes.map((route) => (
               <Route key={route.path} path={route.path} exact={route.exact}>

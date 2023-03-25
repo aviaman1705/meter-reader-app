@@ -33,5 +33,7 @@ export default function IndexTracks() {
     []
   );
 
-  return <IndexEntity<trackDTO> url={urlTracks} columns={columns} />;
+  return (
+    <IndexEntity<trackDTO> url={urlTracks} columns={columns} title="מסלולים" />
+  );
 }
