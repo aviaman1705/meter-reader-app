@@ -1,0 +1,9 @@
+form#search-form {
+    display: flex;
+    flex-direction: row-reverse;
+    height: 40px;
+}
+
+button#search-form-btn {
+    height: 100%;
+}

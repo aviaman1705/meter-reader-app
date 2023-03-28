@@ -1,0 +1,30 @@
+.search-form {
+    padding: 1rem 0;
+}
+
+button#btn-search {
+    height: 100%;
+}
+.search-result {
+    text-align: right;
+    direction: ltr;
+}
+
+a.search-link {
+    background-color: #dedededb;
+    padding: 0.5rem 1.5rem;
+}
+
+a.search-link:hover {
+    cursor: pointer;
+    color: #dedededb;
+    background-color: #344767;
+}
+
+.hr-line-dashed {
+    border-top: 1px dashed #7b809a;
+    color: #ffffff;
+    background-color: #ffffff;
+    height: 1px;
+    margin: 20px 0;
+}

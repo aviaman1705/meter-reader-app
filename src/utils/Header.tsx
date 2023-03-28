@@ -1,7 +1,7 @@
 import { Link, Route, Switch } from "react-router-dom";
 import routes from "../route-config";
+import SearchForm from "../search/searchForm/SearchForm";
 import Breadcrumbs from "./Breadcrumbs";
-import SearchForm from "./SearchForm";
 
 export default function Header() {
   return (
@@ -184,17 +184,6 @@ export default function Header() {
                 <route.component />
               </Route>
             ))}
-            {/* <Route path="/" element={<Home />} />
-            <Route path="/search-results/:term" element={<SearchResult />} />
-            <Route
-              path="/search-results/search-item/:item"
-              element={<SearchResult />}
-            />
-            <Route path="/user-details" element={<UserDetails />} />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="*" element={<NotFound />} /> */}
           </Switch>
         </div>
 
