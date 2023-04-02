@@ -1,24 +1,28 @@
 import axios, { AxiosResponse } from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { urlSearch } from "../endpoints";
 import Button from "../utils/Button";
 import Loading from "../utils/loading/Loading";
 import "./IndexSearch.css";
+import SearchContext from "./SearchContext";
 
 export default function IndexSearch() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { term }: any = useParams();
   const [data, setData] = useState<searchDTO[]>([]);
+  const { update } = useContext(SearchContext);
 
   useEffect(() => {
     if (term) {
       loadData();
+      update(true);
     }
   }, []);
 
   const loadData = () => {
     setIsLoading(true);
+    setData([]);
 
     setTimeout(() => {
       axios
@@ -35,13 +39,16 @@ export default function IndexSearch() {
       <div className="container bootstrap snippets bootdey">
         <div className="row">
           <div className="col-lg-12">
+            <h1>תוצאות חיפוש</h1>
+          </div>
+          <div className="col-lg-12">
             <div className="ibox float-e-margins">
               <div className="ibox-content">
                 {!isLoading ? (
-                  <h2>
+                  <h4>
                     נמצאו {data?.length} תוצאות עבור :
                     <span className="text-navy"> {term}</span>
-                  </h2>
+                  </h4>
                 ) : (
                   <h2>מחפש...</h2>
                 )}
@@ -52,13 +59,12 @@ export default function IndexSearch() {
                       <div className="search-result">
                         <h3>
                           <a href="/#">
-                            <div>{item.title}</div>
+                            <h5>{item.title}</h5>
                           </a>
                         </h3>
                         <Link to={item.link} className="search-link">
                           מעבר לעמוד
                         </Link>
-                        <p></p>
                       </div>
                     </div>
                   ))

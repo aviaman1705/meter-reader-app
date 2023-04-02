@@ -1,9 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useContext } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import Button from "../../utils/Button";
+import { SearchContext } from "../SearchContext";
+
 import "./SearchForm.css";
 
 export default function SearchForm() {
+  const search = useContext(SearchContext);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
   const [enteredTerm, setEnteredTerm] = useState<string | undefined>("");
@@ -12,9 +15,9 @@ export default function SearchForm() {
 
   const termInputChangeHandler = (event: any) => {
     if (event.target.value === "") {
-      setIsDisabled(true);
+      search.update(true);
     } else {
-      setIsDisabled(false);
+      search.update(false);
     }
     setEnteredTerm(event.target.value);
   };
@@ -38,12 +41,11 @@ export default function SearchForm() {
         onChange={termInputChangeHandler}
         placeholder="חפש..."
       />
-
       <Button
         type="submit"
         id="search-form-btn"
         className="btn btn-primary ms-1"
-        disabled={isDisabled}
+        disabled={search.isDisabled}
       >
         <i className="fa fa-search" aria-hidden="true"></i>
       </Button>

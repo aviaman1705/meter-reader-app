@@ -23,14 +23,14 @@ export default function IndexEntity<T>(props: indexEntityProps<T>) {
       setTimeout(() => {
         axios
           .get(
-            `${props.url}?pageIndex=${pagination.pageIndex + 1}&pageSize=${
+            `${props.url}?page=${pagination.pageIndex + 1}&itemPerPage=${
               pagination.pageSize
-            }&sortColumn=${sorting[0].id}&sortDir=${
+            }&sortColumn=${sorting[0].id}&sortType=${
               sorting[0].desc ? "desc" : "asc"
             }&search=${globalFilter}`
           )
-          .then((response: AxiosResponse<T[]>) => {
-            setData(response.data);
+          .then((response: AxiosResponse<gridDTO>) => {
+            setData(response.data.aaData);
             const totalAmountOfRcords = parseInt(
               response.headers["totalamountofrcords"],
               10

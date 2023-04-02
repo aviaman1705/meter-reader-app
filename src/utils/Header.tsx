@@ -1,11 +1,22 @@
+import React, { useState } from "react";
 import { Link, Route, Switch } from "react-router-dom";
 import routes from "../route-config";
+import { SearchContext } from "../search/SearchContext";
 import SearchForm from "../search/searchForm/SearchForm";
 import Breadcrumbs from "./Breadcrumbs";
 
 export default function Header() {
+  const [isDisabled, setIsDisabled] = useState<boolean>(true);
+
   return (
-    <>
+    <SearchContext.Provider
+      value={{
+        isDisabled: isDisabled,
+        update: (val) => {
+          setIsDisabled(val);
+        },
+      }}
+    >
       <main className="main-content position-relative max-height-vh-100 h-100 border-radius-lg overflow-x-hidden">
         {/* <!-- Navbar --> */}
         <nav
@@ -190,6 +201,6 @@ export default function Header() {
         {/* <Footer /> */}
       </main>
       <Breadcrumbs />
-    </>
+    </SearchContext.Provider>
   );
 }
