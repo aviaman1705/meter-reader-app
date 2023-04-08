@@ -49,7 +49,7 @@ export default function Pagination(props: paginationProps) {
           text: `${i}`,
           active: props.currentPage === i,
           enabled: true,
-          page: 1,
+          page: i,
         });
       }
     }

@@ -52,7 +52,11 @@ export default function TrackForm(props: trackFormProps) {
             <TextField field="unCalled" displayName="לא נקרא"></TextField>
             <MarkdownField field="desc" displayName="תיאור" />
             <DateField field="date" displayName="תאריך" />
-            <Button disabled={formikProps.isSubmitting} type="submit">
+            <Button
+              className="btn btn-primary ms-1"
+              disabled={formikProps.isSubmitting}
+              type="submit"
+            >
               עריכה
             </Button>
             <Link className="btn btn-secondary" to="/tracks">
