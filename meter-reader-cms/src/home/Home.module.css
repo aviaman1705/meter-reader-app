@@ -1,0 +1,10 @@
+.meter-reader-detail-item {
+    background-color: #fff;
+}
+.meter-reader-detail-item > a {
+    text-align: center;
+}
+.meter-reader-detail-item > div {
+    text-align: center;
+    padding: 1em 0em;
+}

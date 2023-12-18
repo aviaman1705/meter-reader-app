@@ -1,0 +1,16 @@
+.recharts-responsive-container {
+    background-color: #fdf8f8;
+    /* margin: 5rem 0rem; */
+}
+
+#recharts-container{
+    margin-top: 2em;
+}
+
+svg#bar-chart-item {
+    background-color: #fff;
+}
+.recharts-default-legend {
+    position: relative;
+    top: 2em;
+}

@@ -1,0 +1,44 @@
+/* //Mobile */
+@media (min-width: 300px) {
+    .table-row.row {
+        position: relative;
+    }
+
+    .form-wrap {
+        padding: 0 0.5rem;
+    }
+
+    .form-group.p-2 {
+        margin-bottom: 0.25rem;
+    }
+
+    button#system-btn,
+    #btn-cancel {
+        width: 100%;
+    }
+
+
+    label.form-label {
+        display: none;
+    }
+
+    .form-group.buttons-section {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
+
+/* Small devies (tablets, 768px and up) */
+@media (min-width: 768px) {
+
+    .form-group.buttons-section {
+        flex-direction: row;
+    }
+}
+
+/* Small devies (desktops, 992px and up) */
+@media (min-width: 992px) {}
+
+/* Small devies (large desktops, 1200px and up) */
+@media (min-width: 1200px) {}

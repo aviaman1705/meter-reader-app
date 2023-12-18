@@ -1,0 +1,5 @@
+// const baseURL = process.env.REACT_APP_API_URL;
+const baseURL = "https://localhost:7089/api";
+export const urlTracks = `${baseURL}/tracks`;
+export const urlAccounts = `${baseURL}/accounts`;
+export const urlNotebooks = `${baseURL}/notebooks`;

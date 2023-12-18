@@ -1,0 +1,79 @@
+/* //Mobile */
+@media (min-width: 300px) {
+    #navbarScrollingDropdown {
+        display: none;
+    }
+
+    #logout-mobile-btn {
+        display: block;
+        color: #fff;
+    }
+
+    a.navbar-brand {
+        margin: 0;
+    }
+
+    .navbar {
+        padding: 0.5rem 0;
+    }
+
+    nav {
+        background-color: #5d5b6a;
+    }
+
+    .nav-link {
+        color: #fff;
+    }
+
+    button.navbar-toggler {
+        border: none;
+        background-repeat: no-repeat !important;
+        background-position: left, center !important;
+    }
+
+    span.navbar-toggler-icon {
+        background-image: none;
+    }
+
+    a.navbar-brand {
+        color: #fff;
+        font-size: 1.5rem;
+    }
+
+    .navbar-toggler:focus {
+        box-shadow: none;
+    }
+
+    .navbar-nav .nav-link.active,
+    .navbar-nav .nav-link.show {
+        color: #fff;
+    }
+
+    a.nav-link {
+        color: #81c6c8;
+    }
+
+    h1#logo {
+        background-color: #acadae4f;
+        color: #fff;
+        margin: 0px 0px 0px 10px;
+    }
+}
+
+/* Small devies (tablets, 768px and up) */
+@media (min-width: 768px) {}
+
+/* Small devies (desktops, 992px and up) */
+@media (min-width: 992px) {
+    #navbarScrollingDropdown {
+        display: block;
+    }
+
+    #logout-mobile-btn {
+        display: none;
+        cursor: pointer;
+    }
+}
+
+/* Small devies (large desktops, 1200px and up) */
+@media (min-width: 1200px) {}
