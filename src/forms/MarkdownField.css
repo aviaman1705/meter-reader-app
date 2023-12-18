@@ -1,0 +1,14 @@
+.form-markdown {
+    display: flex;
+    flex-direction: column;
+    /* grid-template-columns: repeat(2, 1fr); */
+    gap: 10px;
+}
+.form-markdown textarea {
+    height: 200px;
+}
+
+.form-markdown .markdown-container {
+    border: 1px dashed black;
+    height: 200px;
+}

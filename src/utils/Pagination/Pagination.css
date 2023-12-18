@@ -1,0 +1,10 @@
+.pagination {
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+    text-align: center;
+    /* background-color: #eee; */
+    color: #000000;
+    justify-content: center;
+    gap: 5px;
+}

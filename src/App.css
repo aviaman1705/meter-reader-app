@@ -1,19 +1,4 @@
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
 
-input.form-control.invalid {
-  border: 1px solid #e91e63;
-}
-
-.page-header {
-  padding: 0;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  background-size: cover;
-  background-position: 50%;
+div#main-container {
+    min-height: 500px;
 }
