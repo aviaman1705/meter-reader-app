@@ -1,0 +1,6 @@
+select#table-select-option {
+    width: auto;
+    display: inline-block;
+    margin-left: 1rem;
+    margin: 0em 0.5rem 0rem 1em;
+}

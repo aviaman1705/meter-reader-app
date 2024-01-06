@@ -6,7 +6,7 @@ export default function Loading(props: loadingProps) {
       style={{
         position: "absolute",
         left: props.left,
-        bottom: props.bottom,
+        top: props.top,
         width: "80px",
         height: "80px",
         zIndex: 2,
@@ -17,10 +17,10 @@ export default function Loading(props: loadingProps) {
 
 interface loadingProps {
   left: string;
-  bottom: string;
+  top: string;
 }
 
 Loading.defaultProps = {
   left: "65%",
-  bottom: "30%",
+  top: "30%",
 };

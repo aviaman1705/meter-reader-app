@@ -1,0 +1,8 @@
+ul.pagination {
+    padding: 0;
+    margin: 0.5rem;
+}
+
+div#total-records-text {
+    text-align: center;
+}

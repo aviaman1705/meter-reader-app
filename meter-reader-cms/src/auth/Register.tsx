@@ -68,7 +68,7 @@ export default function Register() {
     <>
       <h1 className="text-lg-center">הרשמה</h1>
       <div className={css["login-page"]}>
-        {loading && <Loading left="48%" bottom="55%" />}
+        {loading && <Loading left="48%" top="55%" />}
         <div className={css["form"]}>
           <AuthForm
             model={{ email: "", password: "" }}

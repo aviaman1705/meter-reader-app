@@ -28,7 +28,7 @@
     button.navbar-toggler {
         border: none;
         background-repeat: no-repeat !important;
-        background-position: left, center !important;
+        background-position: 13px 8px !important;
     }
 
     span.navbar-toggler-icon {
@@ -36,7 +36,7 @@
     }
 
     a.navbar-brand {
-        color: #fff;
+        color: #fff !important;
         font-size: 1.5rem;
     }
 
@@ -54,9 +54,7 @@
     }
 
     h1#logo {
-        background-color: #acadae4f;
-        color: #fff;
-        margin: 0px 0px 0px 10px;
+        padding-right: 1.2rem;
     }
 }
 

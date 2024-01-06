@@ -157,7 +157,7 @@ export default function IndexNotebooks() {
   return (
     <Container id="notebooks-container">
       <Row className="table-row">
-        {loading && <Loading left="50%" bottom="0%" />}
+        {loading && <Loading left="50%" top="0%" />}
         <Col>
           <Card>
             <Row>

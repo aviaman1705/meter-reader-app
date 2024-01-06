@@ -13,34 +13,39 @@ import TableFooter from "../utils/TableFooter";
 import "./IndexTracks.css";
 import Loading from "../utils/Loading";
 import { trackDTO } from "./track.models";
+import Pagination from "../utils/Pagination";
 
 export default function IndexTracks() {
   const history = useHistory();
   const [data, setData] = useState<trackDTO[]>([]);
+
+  //pagination
+  const [page, setPage] = useState(1);
+  const [totalAmontOfPages, setTotalAmontOfPages] = useState(0);
+  const [recordsPerPage, setRecordsPerPage] = useState(10);
+
   const [search, setSearch] = useState("");
   const [limit, setLimit] = useState(10);
-  const [page, setPage] = useState(1);
+
   const [pagesCount, setPagesCount] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
   const [sortColumn, setSortColumn] = useState("number");
   const [sortDirection, setSortDirection] = useState<string>("asc");
   let [currentPage, setCurrentPage] = useState(1);
-  const optins = [5, 10, 25, 50];
+  const options = [5, 10, 25, 50];
   const [loading, setLoading] = useState(false);
   const [columns, setColumns] = useState([
     {
-      dataKey: "unCalled",
-      title: "לא נקרא",
-      color: "black",
+      dataKey: "id",
+      title: "#",
       cursor: "pointer",
-      backgroundImage: `url("./../icons/sort_asc.png")`,
+      backgroundImage: "",
       backgroundRepeat: "no-repeat",
       backgroundPosition: "left center",
     },
     {
-      dataKey: "called",
-      title: "נקרא",
-      color: "black",
+      dataKey: "date",
+      title: "תאריך",
       cursor: "pointer",
       backgroundImage: `url("./../icons/sort_asc.png")`,
       backgroundRepeat: "no-repeat",
@@ -49,28 +54,24 @@ export default function IndexTracks() {
     {
       dataKey: "desc",
       title: "תיאור",
-      color: "black",
-      cursor: "pointer",
-      backgroundImage: `url("./../icons/sort_asc.png")`,
-      backgroundRepeat: "no-repeat",
-      backgroundPosition: "left center",
-    },
-
-    {
-      dataKey: "date",
-      color: "black",
-      title: "תאריך",
       cursor: "pointer",
       backgroundImage: `url("./../icons/sort_asc.png")`,
       backgroundRepeat: "no-repeat",
       backgroundPosition: "left center",
     },
     {
-      dataKey: "id",
-      title: "#",
-      color: "black",
+      dataKey: "called",
+      title: "נקרא",
       cursor: "pointer",
-      backgroundImage: "",
+      backgroundImage: `url("./../icons/sort_asc.png")`,
+      backgroundRepeat: "no-repeat",
+      backgroundPosition: "left center",
+    },
+    {
+      dataKey: "unCalled",
+      title: "לא נקרא",
+      cursor: "pointer",
+      backgroundImage: `url("./../icons/sort_asc.png")`,
       backgroundRepeat: "no-repeat",
       backgroundPosition: "left center",
     },
@@ -90,6 +91,13 @@ export default function IndexTracks() {
         `${urlTracks}?page=${page}&itemPerPage=${limit}&sortColumn=${sortColumn}&sortDirection=${sortDirection}&search=${search}`
       )
       .then((response: AxiosResponse<sysDataTablePager<trackDTO>>) => {
+        debugger;
+        const totalAmontOfRecords = parseInt(
+          response.headers["totalamountofrcords"],
+          10
+        );
+        setTotalAmontOfPages(Math.ceil(totalAmontOfRecords / recordsPerPage));
+
         let mappedTracks = response.data.aaData.map((track) => {
           return {
             id: track.id,
@@ -103,6 +111,12 @@ export default function IndexTracks() {
 
         setLimit(response.data.iTotalDisplayRecords);
         setTotalItems(response.data.iTotalRecords);
+
+        let totalPages = Math.floor(
+          response.data.iTotalRecords / response.data.iTotalDisplayRecords
+        );
+
+        setPagesCount(totalPages);
         setData(mappedTracks);
         setLoading(false);
       })
@@ -180,41 +194,44 @@ export default function IndexTracks() {
 
   return (
     <>
-      <Container id="notebooks-container">
-        <Row className="table-row">
-          {loading && <Loading left="50%" bottom="0%" />}
-          <Col>
+      <Container>
+        <Row>
+          <Col md={12}>
             <Card>
-              <Row>
-                <Col md="12">
+              {loading && <Loading left="50%" top="50%" />}
+              <Row id="table-one-section">
+                <Col id="table-one-section-col">
                   <Link
-                    className="btn btn-secondary m-3"
+                    id="btn-add-item-redirect"
+                    className="btn btn-secondary"
                     to="/tracks/create"
                     title="הוספת מסלול"
                   >
                     הוספת מסלול
                   </Link>
+                  <Search onSearch={(e: any) => onSearch(e)} />
+                  <ItemsPerPage
+                    limit={limit}
+                    optins={options}
+                    onChange={(e: any) => handlePageItemCount(e)}
+                  />
                 </Col>
-                <Col md="12">
-                  <Row className="align-items-center p-3">
-                    <Col md="3">
-                      <Search onSearch={(e: any) => onSearch(e)} />
-                    </Col>
-                    <Col md={{ span: 2, offset: 7 }}>
-                      <ItemsPerPage
-                        limit={limit}
-                        optins={optins}
-                        onChange={(e: any) => handlePageItemCount(e)}
-                      />
-                    </Col>
-                  </Row>
+              </Row>
+              <Row id="table-two-section">
+                <Col md={12}>
+                  <h1 className="grid-title">רשימת מסלולים</h1>
                 </Col>
-                <Col md="12">
-                  <Table striped bordered hover>
+                <Col md={12}>
+                  <Table responsive bordered hover striped>
                     <TableHeader columns={columns} onSorting={onSorting} />
                     <tbody>
                       {data?.map((item, index, currentArray) => (
                         <tr key={index}>
+                          <td>{index + 1}</td>
+                          <td>{item.date}</td>
+                          <td>{item.desc}</td>
+                          <td>{item.called}</td>
+                          <td>{item.unCalled}</td>
                           <td>
                             <Button variant="danger">מחיקה</Button>
                           </td>
@@ -229,123 +246,29 @@ export default function IndexTracks() {
                               עריכה
                             </Button>
                           </td>
-                          <td>{item.unCalled}</td>
-                          <td>{item.called}</td>
-                          <td>{item.desc}</td>
-                          <td>{item.date}</td>
-                          <td>{index + 1}</td>
                         </tr>
                       ))}
                     </tbody>
                   </Table>
                 </Col>
-                <Col md="12">
-                  <TableFooter
-                    pageCount={pagesCount}
-                    page={page}
-                    totalItems={totalItems}
-                    onClick={handlePageChange}
-                  />
-                </Col>
+              </Row>
+              <Row id="table-three-section">
+                <Pagination
+                  currentPage={page}
+                  totalAmontOfPages={totalAmontOfPages}
+                  onChange={(newPage) => setPage(newPage)}
+                />
+                {/* <TableFooter
+                  pageCount={pagesCount}
+                  page={page}
+                  totalItems={totalItems}
+                  onClick={handlePageChange}
+                /> */}
               </Row>
             </Card>
           </Col>
         </Row>
       </Container>
     </>
-
-    // <Container>
-    //   <Row>
-    //     <Col xl={24}>
-    //       <h1 className="h1 mb-4 mt-4">רשימת מסלולים</h1>
-    //     </Col>
-    //     <Col xl={24}>
-    //       <Button
-    //         className="mt-2 mb-2"
-    //         appearance="primary"
-    //         onClick={handleRediredctToAddTrack}
-    //       >
-    //         הוספת מסלול
-    //       </Button>
-    //     </Col>
-    //     <Col xl={4} xlOffset={20}>
-    //       <Input
-    //         className="mt-2 mb-4"
-    //         placeholder="חפש..."
-    //         onChange={handleSearch}
-    //       />
-    //     </Col>
-    //     <Col xl={24}>
-    //       <div style={{ height: "auto" }}>
-    //         <CustomProvider locale={he_IL} rtl>
-    //           <Table
-    //             id="grid-table"
-    //             loading={loading}
-    //             height={300}
-    //             hover={true}
-    //             sortColumn={sortColumn}
-    //             sortType={sortType}
-    //             fillHeight={false}
-    //             autoHeight={true}
-    //             data={rowData}
-    //             bordered={true}
-    //             cellBordered={true}
-    //             headerHeight={40}
-    //             rowHeight={46}
-    //             onSortColumn={handleSortColumn}
-    //             locale={{ emptyMessage: "לא נמצאו רשומות" }}
-    //           >
-    //             {columns.map((column, index) => {
-    //               const { key, label, ...rest } = column;
-
-    //               return (
-    //                 <>
-    //                   {key === "operation" ? (
-    //                     <Column flexGrow={1} key={index}>
-    //                       <HeaderCell>עריכה/מחיקה</HeaderCell>
-    //                       <ActionCell
-    //                         dataKey="id"
-    //                         onClick={redirectToEditPage}
-    //                       />
-    //                     </Column>
-    //                   ) : (
-    //                     <Column {...rest} sortable key={index}>
-    //                       <CustomHeaderCell
-    //                         className="table-header"
-    //                         key={index}
-    //                       >
-    //                         {label}
-    //                       </CustomHeaderCell>
-    //                       <CustomCell dataKey={key} />
-    //                     </Column>
-    //                   )}
-    //                 </>
-    //               );
-    //             })}
-    //           </Table>
-    //           <div style={{ padding: "20px 0px 0px 0px" }}>
-    //             <Pagination
-    //               prev
-    //               next
-    //               first
-    //               last
-    //               ellipsis
-    //               boundaryLinks
-    //               maxButtons={5}
-    //               size="xs"
-    //               layout={["total", "-", "limit", "|", "pager", "skip"]}
-    //               total={totalItems}
-    //               limitOptions={[10, 30, 50]}
-    //               limit={limit}
-    //               activePage={page}
-    //               onChangePage={handleChangePage}
-    //               onChangeLimit={handleChangeLimit}
-    //             />
-    //           </div>
-    //         </CustomProvider>
-    //       </div>
-    //     </Col>
-    //   </Row>
-    // </Container>
   );
 }

@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 export default function Pagination(props: paginationProps) {
   const [linkModels, setLinkModels] = useState<linkModel[]>([]);
-
+  debugger;
   function selectPage(link: linkModel) {
     if (link.page === props.currentPage) {
       return;
@@ -101,5 +101,5 @@ interface paginationProps {
 }
 
 Pagination.defaultProps = {
-  radio: 3,
+  radio: 2,
 };

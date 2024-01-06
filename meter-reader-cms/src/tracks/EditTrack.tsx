@@ -42,7 +42,7 @@ export default function EditTrack() {
   return (
     <>
       <DisplayErrors errors={errors} />
-      {loading === true ? <Loading left="60%" bottom="62%" /> : null}
+      {loading === true ? <Loading left="60%" top="62%" /> : null}
       {track && (
         <TrackForm
           title="עריכת מסלול"

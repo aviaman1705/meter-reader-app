@@ -43,7 +43,7 @@ export default function CreateTrack() {
   return (
     <>
       <DisplayErrors errors={errors} />
-      {loading === true ? <Loading left="60%" bottom="62%" /> : null}
+      {loading === true ? <Loading left="60%" top="62%" /> : null}
       <TrackForm
         title="יצירת מסלול"
         model={track}

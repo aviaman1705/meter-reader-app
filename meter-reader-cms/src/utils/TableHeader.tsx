@@ -3,10 +3,8 @@ import { tableHeaderDTO } from "./table.model";
 export default function TableHeader(props: tableHeaderProps) {
   return (
     <>
-      <thead>
+      <thead className="thead-dark">
         <tr>
-          <th>מחיקה</th>
-          <th>עריכה</th>
           {props.columns?.map(function (item, index) {
             return (
               <th
@@ -18,7 +16,6 @@ export default function TableHeader(props: tableHeaderProps) {
                   backgroundImage: item.backgroundImage,
                   backgroundRepeat: item.backgroundRepeat,
                   backgroundPosition: item.backgroundPosition,
-                  color: item.color,
                 }}
                 onClick={(event: any) => {
                   const td = event.target;
@@ -30,6 +27,8 @@ export default function TableHeader(props: tableHeaderProps) {
               </th>
             );
           })}
+          <th>עריכה</th>
+          <th>מחיקה</th>
         </tr>
       </thead>
     </>
