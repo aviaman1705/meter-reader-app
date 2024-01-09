@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import axios, { AxiosResponse, AxiosError } from "axios";
-import { Button, Card, Col, Container, Row, Table } from "react-bootstrap";
+import { Button, Card, Col, Row, Table } from "react-bootstrap";
+
 import { urlNotebooks } from "../endpoints";
 import { sysDataTablePager } from "../models/sysDataTablePager.models";
 import { notebookDTO } from "./notebook.models";
+
 import Search from "../utils/Search";
 import ItemsPerPage from "../utils/ItemsPerPage";
 import TableHeader from "../utils/TableHeader";
@@ -12,36 +14,41 @@ import TableFooter from "../utils/TableFooter";
 
 import "./IndexNotebooks.css";
 import Loading from "../utils/Loading";
+import Pagination from "../utils/Pagination";
 
 export default function IndexNotebooks() {
   const history = useHistory();
   const [data, setData] = useState<notebookDTO[]>([]);
+
+  //pagination
+  const [page, setPage] = useState(1);
+  const [totalAmontOfPages, setTotalAmontOfPages] = useState(0);
+  const [recordsPerPage, setRecordsPerPage] = useState(10);
+
   const [search, setSearch] = useState("");
   const [limit, setLimit] = useState(10);
-  const [page, setPage] = useState(1);
+
   const [pagesCount, setPagesCount] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
   const [sortColumn, setSortColumn] = useState("number");
   const [sortDirection, setSortDirection] = useState<string>("asc");
   let [currentPage, setCurrentPage] = useState(1);
-  const optins = [5, 10, 25, 50];
+  const options = [5, 10, 25, 50];
   const [loading, setLoading] = useState(false);
   const [columns, setColumns] = useState([
     {
-      dataKey: "number",
-      title: "מספר פנקס",
-      color: "black",
+      dataKey: "id",
+      title: "#",
       cursor: "pointer",
-      backgroundImage: `url("./../icons/sort_asc.png")`,
+      backgroundImage: "",
       backgroundRepeat: "no-repeat",
       backgroundPosition: "left center",
     },
     {
-      dataKey: "",
-      color: "black",
-      title: "#",
+      dataKey: "number",
+      title: "מספר פנקס",
       cursor: "pointer",
-      backgroundImage: "",
+      backgroundImage: `url("./../icons/sort_asc.png")`,
       backgroundRepeat: "no-repeat",
       backgroundPosition: "left center",
     },
@@ -56,13 +63,17 @@ export default function IndexNotebooks() {
   }, [page, limit, sortColumn, sortDirection, search]);
 
   const loadData = () => {
-    setLoading(true);
-
     axios
       .get(
-        `${urlNotebooks}/?page=${page}&itemPerPage=${limit}&sortColumn=${sortColumn}&sortDirection=${sortDirection}&search=${search}`
+        `${urlNotebooks}?page=${page}&itemPerPage=${limit}&sortColumn=${sortColumn}&sortDirection=${sortDirection}&search=${search}`
       )
       .then((response: AxiosResponse<sysDataTablePager<notebookDTO>>) => {
+        const totalAmontOfRecords = parseInt(
+          response.headers["totalamountofrcords"],
+          10
+        );
+        setTotalAmontOfPages(Math.ceil(totalAmontOfRecords / recordsPerPage));
+
         let mappedNotebooks = response.data.aaData.map((notebook) => {
           return {
             id: notebook.id,
@@ -155,41 +166,48 @@ export default function IndexNotebooks() {
   };
 
   return (
-    <Container id="notebooks-container">
-      <Row className="table-row">
-        {loading && <Loading left="50%" top="0%" />}
-        <Col>
+    <>
+      <Row>
+        <Col md={12}>
           <Card>
-            <Row>
-              <Col md="12">
-                <Row className="align-items-center p-3">
-                  <Col md="3">
-                    <Search onSearch={(e: any) => onSearch(e)} />
-                  </Col>
-                  <Col md={{ span: 2, offset: 7 }}>
-                    <ItemsPerPage
-                      limit={limit}
-                      optins={optins}
-                      onChange={(e: any) => handlePageItemCount(e)}
-                    />
-                  </Col>
-                </Row>
+            {loading && <Loading left="50%" top="50%" />}
+            <Row id="table-one-section">
+              <Col id="table-one-section-col">
+                <Link
+                  id="btn-add-item-redirect"
+                  className="btn btn-secondary"
+                  to="/notebooks/create"
+                  title="הוספת פנקס"
+                >
+                  הוספת פנקס
+                </Link>
+                <Search onSearch={(e: any) => onSearch(e)} />
+                <ItemsPerPage
+                  limit={limit}
+                  optins={options}
+                  onChange={(e: any) => handlePageItemCount(e)}
+                />
               </Col>
-              <Col md="12">
-                <Table striped bordered hover>
+            </Row>
+            <Row id="table-two-section">
+              <Col md={12}>
+                <h1 className="grid-title">רשימת פנקסים</h1>
+              </Col>
+              <Col md={12}>
+                <Table responsive bordered hover striped>
                   <TableHeader columns={columns} onSorting={onSorting} />
                   <tbody>
                     {data?.map((item, index, currentArray) => (
                       <tr key={index}>
+                        <td>{index + 1}</td>
+                        <td>{item.number}</td>
                         <td>
-                          {item.tracksCount === 0 ? (
-                            <Button variant="danger">מחיקה</Button>
-                          ) : null}
+                          <Button variant="danger">מחיקה</Button>
                         </td>
                         <td>
                           <Button
                             variant="info"
-                            title={item.tracksCount.toString()}
+                            title={item.number.toString()}
                             onClick={() => {
                               history.push(`/notebooks/edit/${item.id}`);
                             }}
@@ -197,25 +215,22 @@ export default function IndexNotebooks() {
                             עריכה
                           </Button>
                         </td>
-                        <td>{item.number}</td>
-                        <td>{index + 1}</td>
                       </tr>
                     ))}
                   </tbody>
                 </Table>
               </Col>
-              <Col md="12">
-                <TableFooter
-                  pageCount={pagesCount}
-                  page={page}
-                  totalItems={totalItems}
-                  onClick={handlePageChange}
-                />
-              </Col>
+            </Row>
+            <Row id="table-three-section">
+              <Pagination
+                currentPage={page}
+                totalAmontOfPages={totalAmontOfPages}
+                onChange={(newPage) => setPage(newPage)}
+              />
             </Row>
           </Card>
         </Col>
       </Row>
-    </Container>
+    </>
   );
 }

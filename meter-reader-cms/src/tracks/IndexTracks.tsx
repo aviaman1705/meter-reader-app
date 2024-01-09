@@ -5,15 +5,14 @@ import { Button, Card, Col, Container, Row, Table } from "react-bootstrap";
 import dayjs from "dayjs";
 import { urlTracks } from "../endpoints";
 import { sysDataTablePager } from "../models/sysDataTablePager.models";
+import { trackDTO } from "./track.models";
 import Search from "../utils/Search";
 import ItemsPerPage from "../utils/ItemsPerPage";
 import TableHeader from "../utils/TableHeader";
-import TableFooter from "../utils/TableFooter";
+import Loading from "../utils/Loading";
+import Pagination from "../utils/Pagination";
 
 import "./IndexTracks.css";
-import Loading from "../utils/Loading";
-import { trackDTO } from "./track.models";
-import Pagination from "../utils/Pagination";
 
 export default function IndexTracks() {
   const history = useHistory();
@@ -258,12 +257,6 @@ export default function IndexTracks() {
                   totalAmontOfPages={totalAmontOfPages}
                   onChange={(newPage) => setPage(newPage)}
                 />
-                {/* <TableFooter
-                  pageCount={pagesCount}
-                  page={page}
-                  totalItems={totalItems}
-                  onClick={handlePageChange}
-                /> */}
               </Row>
             </Card>
           </Col>

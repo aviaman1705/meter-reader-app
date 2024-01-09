@@ -1,3 +1,4 @@
+import { notebookDTO } from "../notebooks/notebook.models";
 import { trackCreationDTO, trackDTO } from "../tracks/track.models";
 
 export function convertTrackToFormData(track: trackDTO): FormData {
@@ -25,6 +26,20 @@ export function convertTrackToFormData(track: trackDTO): FormData {
 
     if (track.notebookId) {
         formData.append('notebookId', track.notebookId.toString());
+    }
+
+    return formData;
+}
+
+export function convertNotebookToFormData(notebook: notebookDTO): FormData {
+    const formData = new FormData();
+
+    if (notebook.id) {
+        formData.append('id', notebook.id.toString());
+    }
+
+    if (notebook.number) {
+        formData.append('number', notebook.number.toString());
     }
 
     return formData;

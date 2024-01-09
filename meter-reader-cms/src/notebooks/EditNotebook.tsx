@@ -1,57 +1,57 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { urlTracks } from "../endpoints";
+import { urlNotebooks } from "../endpoints";
+import { notebookDTO } from "./notebook.models";
+import { convertNotebookToFormData } from "../utils/formDataUtils";
 import DisplayErrors from "../utils/DisplayErrors";
-import { convertTrackToFormData } from "../utils/formDataUtils";
 import Loading from "../utils/Loading";
-import { trackDTO } from "../tracks/track.models";
-import TrackForm from "../tracks/TrackForm";
+import NotebookForm from "./NotebookForm";
 
 export default function EditNotebook() {
   const { id }: any = useParams();
-  const [track, setTrack] = useState<trackDTO>();
+  const [notebook, setNotebook] = useState<notebookDTO>();
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<string[]>([]);
   const history = useHistory();
 
-  //   useEffect(() => {
-  //     axios
-  //       .get(`${urlTracks}/${id}`)
-  //       .then((response: AxiosResponse<trackDTO>) => {
-  //         setTrack(response.data);
-  //       });
-  //   }, [id]);
+  useEffect(() => {
+    axios
+      .get(`${urlNotebooks}/${id}`)
+      .then((response: AxiosResponse<notebookDTO>) => {
+        setNotebook(response.data);
+      });
+  }, [id]);
 
-  //   async function edit(track: trackDTO) {
-  //     setLoading(true);
-  //     const formData = convertTrackToFormData(track);
-  //     axios
-  //       .put(`${urlTracks}/${id}`, formData)
-  //       .then((response: AxiosResponse<trackDTO>) => {
-  //         setTimeout(() => {
-  //           setLoading(false);
-  //           history.push(`/tracks`);
-  //         }, 2000);
-  //       })
-  //       .catch((error: AxiosError) => {
-  //         console.log(error);
-  //       });
-  //   }
+  async function edit(notebook: notebookDTO) {
+    setLoading(true);
+    const formData = convertNotebookToFormData(notebook);
+    axios
+      .put(`${urlNotebooks}/${id}`, formData)
+      .then((response: AxiosResponse<notebookDTO>) => {
+        setTimeout(() => {
+          setLoading(false);
+          history.push(`/notebooks`);
+        }, 2000);
+      })
+      .catch((error: AxiosError) => {
+        console.log(error);
+      });
+  }
 
   return (
     <>
-      {/* <DisplayErrors errors={errors} />
-      {loading === true ? <Loading left="60%" bottom="62%" /> : null}
-      {track && (
-        <TrackForm
-          title="עריכת מסלול"
-          model={track}
+      <DisplayErrors errors={errors} />
+      {loading === true ? <Loading left="60%" top="62%" /> : null}
+      {notebook && (
+        <NotebookForm
+          title="עריכת פנקס"
+          model={notebook}
           onSubmit={async (value) => {
             await edit(value);
           }}
         />
-      )} */}
+      )}
     </>
   );
 }
