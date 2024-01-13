@@ -25,13 +25,14 @@ export default function IndexNotebooks() {
   const [totalAmontOfPages, setTotalAmontOfPages] = useState(0);
   const [recordsPerPage, setRecordsPerPage] = useState(10);
 
+  //sorting
+  const [sortColumn, setSortColumn] = useState("number");
+  const [sortType, setSortType] = useState<string>("asc");
+
   const [search, setSearch] = useState("");
   const [limit, setLimit] = useState(10);
-
   const [pagesCount, setPagesCount] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
-  const [sortColumn, setSortColumn] = useState("number");
-  const [sortDirection, setSortDirection] = useState<string>("asc");
   let [currentPage, setCurrentPage] = useState(1);
   const options = [5, 10, 25, 50];
   const [loading, setLoading] = useState(false);
@@ -60,12 +61,12 @@ export default function IndexNotebooks() {
     setTimeout(() => {
       loadData();
     }, 1000);
-  }, [page, limit, sortColumn, sortDirection, search]);
+  }, [page, limit, sortColumn, sortType, search]);
 
   const loadData = () => {
     axios
       .get(
-        `${urlNotebooks}?page=${page}&itemPerPage=${limit}&sortColumn=${sortColumn}&sortDirection=${sortDirection}&search=${search}`
+        `${urlNotebooks}?page=${page}&itemPerPage=${limit}&sortColumn=${sortColumn}&sortType=${sortType}&search=${search}`
       )
       .then((response: AxiosResponse<sysDataTablePager<notebookDTO>>) => {
         const totalAmontOfRecords = parseInt(
@@ -108,24 +109,24 @@ export default function IndexNotebooks() {
 
   const onSorting = (dataKey: string) => {
     if (sortColumn === dataKey) {
-      if (sortDirection === "asc") {
-        setSortDirection("desc");
+      if (sortType === "asc") {
+        setSortType("desc");
         const index = columns.findIndex((emp) => emp.dataKey === dataKey);
         let copyArr = [...columns];
         copyArr[index].backgroundImage = `url("./../icons/sort_desc.png")`;
         setColumns(copyArr);
       } else {
-        setSortDirection("asc");
+        setSortType("asc");
         let copyArr = [...columns];
         updateState(copyArr);
       }
     } else {
       setSortColumn(dataKey);
-      setSortDirection("asc");
+      setSortType("asc");
 
       let copyArr = [...columns];
       updateState(copyArr);
-    } // // אם העמודה כבר מממשת את הסיד
+    }
   };
 
   const handlePageChange = (event: any) => {
