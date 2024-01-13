@@ -10,11 +10,10 @@ import { notebookDTO } from "./notebook.models";
 import Search from "../utils/Search";
 import ItemsPerPage from "../utils/ItemsPerPage";
 import TableHeader from "../utils/TableHeader";
-import TableFooter from "../utils/TableFooter";
-
-import "./IndexNotebooks.css";
 import Loading from "../utils/Loading";
 import Pagination from "../utils/Pagination";
+
+import "./IndexNotebooks.css";
 
 export default function IndexNotebooks() {
   const history = useHistory();
