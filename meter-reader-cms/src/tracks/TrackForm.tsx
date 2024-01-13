@@ -10,7 +10,7 @@ import DropDownField, { dropDownItemDTO } from "../forms/DropDownField";
 import TextField from "../forms/TextField/TextField";
 import NumberField from "../forms/NumberField";
 import DateField from "../forms/DateField";
-import parse from "date-fns/parse";
+import { parse } from "date-fns";
 import "./TrackFrom.css";
 
 export default function TrackForm(props: trackFormProps) {
