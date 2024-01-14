@@ -12,6 +12,7 @@ import NumberField from "../forms/NumberField";
 import DateField from "../forms/DateField";
 import { parse } from "date-fns";
 import "./TrackFrom.css";
+import { notebookDTO } from "../notebooks/notebook.models";
 
 export default function TrackForm(props: trackFormProps) {
   const [notebooks, setNotebooks] = useState<dropDownItemDTO[]>([]);
@@ -23,8 +24,17 @@ export default function TrackForm(props: trackFormProps) {
   const loadData = () => {
     axios
       .get(`${urlNotebooks}/GetNotebooks`)
-      .then((response: AxiosResponse<dropDownItemDTO[]>) => {
-        setNotebooks(response.data);
+      .then((response: AxiosResponse<notebookDTO[]>) => {
+        let mappedNotebooks: dropDownItemDTO[];
+
+        mappedNotebooks = response.data.map((notebook) => {
+          return {
+            text: notebook.number.toString(),
+            value: notebook.id.toString(),
+          };
+        });
+
+        setNotebooks(mappedNotebooks);
       })
       .catch((error: AxiosError) => {
         console.log(error);
