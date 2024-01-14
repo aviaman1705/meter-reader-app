@@ -200,6 +200,7 @@ export default function IndexTracks() {
           <Col md={12}>
             <Card>
               {loading && <Loading left="50%" top="50%" />}
+
               <Row id="table-one-section">
                 <Col id="table-one-section-col">
                   <Link

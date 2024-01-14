@@ -1,26 +1,26 @@
 import { useContext } from "react";
-import { FiUser } from "react-icons/fi";
-
-// import { Navbar, Nav } from "rsuite";
+import { NavLink, Link } from "react-router-dom";
+import { Container, Nav, NavDropdown, Navbar } from "react-bootstrap";
 import Authorized from "./auth/Authorized";
-// import Button from "./utils/Button";
 import { logout } from "./auth/handleJWT";
 import AuthenticationContext from "./auth/AuthenticationContext";
-import { Container, Nav, NavDropdown, Navbar } from "react-bootstrap";
-import { Link, NavLink } from "react-router-dom";
+
 import "./Header.css";
+
 export default function Header() {
   const { update, claims } = useContext(AuthenticationContext);
 
-  function getUserEmail(): string {
-    return claims.filter((x) => x.name === "email")[0]?.value;
-  }
+  // function getUserEmail(): string {
+  //   return claims.filter((x) => x.name === "email")[0]?.value;
+  // }
 
   return (
     <Navbar expand="lg" dir="rtl">
       <Container fluid>
         <h1 id="logo">
-          <Navbar.Brand href="#">קריאת מונים</Navbar.Brand>
+          <Navbar.Brand as={Link} to="/">
+            קריאת מונים
+          </Navbar.Brand>
         </h1>
         <Navbar.Toggle
           style={{

@@ -1,5 +1,6 @@
+import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import "./App.css";
+
 import Header from "./Header";
 import routes from "./route-config";
 import configureInterceptor from "./utils/httpInterceptors";
@@ -11,8 +12,8 @@ import ThemeProvider from "react-bootstrap/ThemeProvider";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.min.js";
+
+import "./App.css";
 
 configureInterceptor();
 
