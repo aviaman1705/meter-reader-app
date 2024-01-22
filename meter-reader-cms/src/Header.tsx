@@ -1,104 +1,128 @@
-import { useContext } from "react";
+import { Nav, NavDropdown, Navbar } from "react-bootstrap";
+import { useContext, useState } from "react";
 import { NavLink, Link } from "react-router-dom";
-import { Container, Nav, NavDropdown, Navbar } from "react-bootstrap";
+
 import Authorized from "./auth/Authorized";
 import { logout } from "./auth/handleJWT";
 import AuthenticationContext from "./auth/AuthenticationContext";
-
+import logo from "./logo.svg";
 import "./Header.css";
 
 export default function Header() {
   const { update, claims } = useContext(AuthenticationContext);
-
-  // function getUserEmail(): string {
-  //   return claims.filter((x) => x.name === "email")[0]?.value;
-  // }
-
+  const [expanded, setexpanded] = useState(false);
   return (
-    <Navbar expand="lg" dir="rtl">
-      <Container fluid>
-        <h1 id="logo">
-          <Navbar.Brand as={Link} to="/">
-            קריאת מונים
-          </Navbar.Brand>
-        </h1>
-        <Navbar.Toggle
-          style={{
-            background: `url("../../icons/hamburger-icon.svg")`,
-            backgroundSize: 28,
-            border: "none",
-          }}
-          aria-controls="navbarScroll"
-        />
-        <Navbar.Collapse id="navbarScroll">
-          <Nav
-            className="ms-auto my-2 my-lg-0"
-            style={{ maxHeight: "100px" }}
-            navbarScroll
+    <Navbar
+      bg="custom"
+      variant="dark"
+      sticky="top"
+      expand="lg"
+      dir="rtl"
+      collapseOnSelect
+      expanded={expanded}
+    >
+      <Navbar.Brand>
+        <NavLink className="nav-link" to="/" exact={true}>
+          <img src={logo} width="40px" height="40px" />
+        </NavLink>
+      </Navbar.Brand>
+      <Navbar.Toggle
+        id="close-button"
+        style={{
+          background: `url("../../icons/hamburger-icon.svg")`,
+          backgroundSize: 28,
+          border: "none",
+        }}
+        aria-controls="navbarScroll"
+        onClick={() => setexpanded(expanded ? false : true)}
+      />
+      <Navbar.Collapse id="navbarScroll">
+        <Nav
+          className="ms-auto my-2 my-lg-0 pe-2"
+          style={{ maxHeight: "120px" }}
+          navbarScroll
+        >
+          <NavLink
+            className="nav-link"
+            to="/"
+            exact={true}
+            onClick={() => setexpanded(false)}
           >
-            <Authorized
-              role="admin"
-              notAuthorized={
-                <NavLink className="nav-link" to="/" exact={true}>
-                  עמוד הבית
+            עמוד הבית
+          </NavLink>
+          <Authorized
+            role="admin"
+            authorized={
+              <>
+                <NavLink
+                  className="nav-link"
+                  to="/tracks"
+                  onClick={() => setexpanded(false)}
+                >
+                  מסלולים
                 </NavLink>
-              }
-              authorized={
-                <>
-                  <NavLink className="nav-link" to="/tracks">
-                    מסלולים
-                  </NavLink>
-                  <NavLink className="nav-link" to="/notebooks">
-                    פנקסים
-                  </NavLink>
-                </>
-              }
-            />
-          </Nav>
-          <Nav className="d-flex">
-            <Authorized
-              role="admin"
-              authorized={
-                <>
-                  <NavDropdown title="היי משתמש" id="navbarScrollingDropdown">
-                    <NavDropdown.Item>
-                      <a
-                        className="nav-link"
-                        onClick={() => {
-                          logout();
-                          update([]);
-                        }}
-                      >
-                        יציאה
-                      </a>
-                    </NavDropdown.Item>
-                  </NavDropdown>
-
-                  <a
-                    id="logout-mobile-btn"
+                <NavLink
+                  className="nav-link"
+                  to="/notebooks"
+                  onClick={() => setexpanded(false)}
+                >
+                  פנקסים
+                </NavLink>
+              </>
+            }
+          />
+        </Nav>
+        <Nav className="d-flex pe-2">
+          <Authorized
+            role="admin"
+            authorized={
+              <>
+                <NavDropdown title="היי משתמש" id="navbarScrollingDropdown">
+                  <NavDropdown.Item
+                    href="#"
                     onClick={() => {
+                      setexpanded(false);
                       logout();
                       update([]);
                     }}
                   >
                     יציאה
-                  </a>
-                </>
-              }
-              notAuthorized={
-                <>
-                  <NavLink className="nav-link" to="/login">
-                    כניסה
-                  </NavLink>
-                  <NavLink className="nav-link" to="/register">
-                    הרשמה
-                  </NavLink>
-                </>
-              }
-            />
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
+                  </NavDropdown.Item>
+                </NavDropdown>
+
+                <a
+                  id="logout-mobile-btn"
+                  onClick={() => {
+                    setexpanded(false);
+                    logout();
+                    update([]);
+                  }}
+                >
+                  יציאה
+                </a>
+              </>
+            }
+            notAuthorized={
+              <>
+                <NavLink
+                  className="nav-link"
+                  to="/login"
+                  onClick={() => setexpanded(false)}
+                >
+                  כניסה
+                </NavLink>
+                <NavLink
+                  className="nav-link"
+                  to="/register"
+                  onClick={() => setexpanded(false)}
+                >
+                  הרשמה
+                </NavLink>
+              </>
+            }
+          />
+        </Nav>
+      </Navbar.Collapse>
     </Navbar>
   );
 }

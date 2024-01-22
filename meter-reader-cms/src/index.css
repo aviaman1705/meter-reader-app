@@ -7,9 +7,9 @@
         position: relative;
     }
 
-    div#select-option-wrapper {
+    /* div#select-option-wrapper {
         display: none;
-    }
+    } */
 
     div#btn-add-item-redirect-wrap {
         display: flex;
@@ -22,11 +22,6 @@
         flex-grow: 1;
     } */
 
-    h1.grid-title {
-        text-align: center;
-        font-size: 6vw;
-        padding: 0.5rem 0rem;
-    }
 
     .table .thead-dark th {
         color: #fff;

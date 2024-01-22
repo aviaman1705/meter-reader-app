@@ -2,14 +2,14 @@ import { Form } from "react-bootstrap";
 import { Button as Btn } from "rsuite";
 import { TypeAttributes } from "rsuite/esm/@types/common";
 
-import "./ItemsPerPage.css";
+import classes from "./../Table.module.css";
 
 export default function ItemsPerPage(props: buttonProps) {
   return (
-    <div id="select-option-wrapper">
-      <label>הצג </label>
+    <div id={`${classes["select-option-wrapper"]}`}>
+      <label id={`${classes["table-select-label"]}`}>הצג </label>
       <Form.Select
-        id="table-select-option"
+        id={`${classes["table-select-option"]}`}
         onChange={props.onChange}
         defaultValue={props.limit}
         aria-label="Default select example"

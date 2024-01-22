@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 
+import classes from "./../Table.module.css";
+
 export default function Pagination(props: paginationProps) {
   const [linkModels, setLinkModels] = useState<linkModel[]>([]);
 
@@ -16,6 +18,10 @@ export default function Pagination(props: paginationProps) {
   }
 
   function getClass(link: linkModel) {
+    if (link.text.indexOf("הקודם") > -1 || link.text.indexOf("הבא") > -1) {
+      link.class = "fixed";
+    }
+
     if (link.active) {
       return "active pointer";
     }
@@ -23,7 +29,6 @@ export default function Pagination(props: paginationProps) {
     if (link.enabled) {
       return "disabled";
     }
-
     return "pointer";
   }
 
@@ -37,6 +42,7 @@ export default function Pagination(props: paginationProps) {
       enabled: previousPageEnabled,
       page: previousPage,
       active: false,
+      class: "",
     });
 
     for (let i = 1; i <= props.totalAmontOfPages; i++) {
@@ -49,6 +55,7 @@ export default function Pagination(props: paginationProps) {
           active: props.currentPage === i,
           enabled: true,
           page: 1,
+          class: "",
         });
       }
     }
@@ -63,25 +70,24 @@ export default function Pagination(props: paginationProps) {
       enabled: nextPageEnabled,
       page: nextPage,
       active: false,
+      class: "",
     });
 
     setLinkModels(links);
   }, [props.currentPage, props.totalAmontOfPages, props.radio]);
 
   return (
-    <nav>
-      <ul className="pagination justify-content-center">
-        {linkModels.map((link) => (
-          <li
-            key={link.text}
-            onClick={() => selectPage(link)}
-            className={`page-item cursor ${getClass(link)}`}
-          >
-            <span className="page-link">{link.text}</span>
-          </li>
-        ))}
-      </ul>
-    </nav>
+    <ul className={`${classes["pagination"]}`}>
+      {linkModels.map((link) => (
+        <li
+          key={link.text}
+          onClick={() => selectPage(link)}
+          className={`page-item cursor ${getClass(link)} ${link.class}`}
+        >
+          <span className="page-link">{link.text}</span>
+        </li>
+      ))}
+    </ul>
   );
 }
 
@@ -90,6 +96,7 @@ interface linkModel {
   enabled: boolean;
   text: string;
   active: boolean;
+  class: string;
 }
 
 interface paginationProps {

@@ -1,12 +1,15 @@
 /* //Mobile */
 @media (min-width: 300px) {
+    .bg-custom{
+    background-color: #009688;
+}
     #navbarScrollingDropdown {
         display: none;
     }
 
     #logout-mobile-btn {
         display: block;
-        color: #fff;
+        color: rgba(255, 255, 255, 0.55);
     }
 
     a.navbar-brand {
@@ -15,14 +18,6 @@
 
     .navbar {
         padding: 0.5rem 0;
-    }
-
-    nav {
-        background-color: #5d5b6a;
-    }
-
-    .nav-link {
-        color: #fff;
     }
 
     button.navbar-toggler {
@@ -47,10 +42,6 @@
     .navbar-nav .nav-link.active,
     .navbar-nav .nav-link.show {
         color: #fff;
-    }
-
-    a.nav-link {
-        color: #81c6c8;
     }
 
     h1#logo {

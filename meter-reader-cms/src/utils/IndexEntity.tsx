@@ -11,7 +11,7 @@ import { sysDataTablePager } from "../models/sysDataTablePager.models";
 // import "./IndexNotebooks.css";
 import Search from "../utils/Search";
 import { event } from "jquery";
-import ItemsPerPage from "../utils/ItemsPerPage";
+import ItemsPerPage from "./ItemsPerPage";
 import { ReactElement } from "react-markdown/lib/react-markdown";
 
 export default function IndexEntity<T>(props: indexEntityProps<T>) {

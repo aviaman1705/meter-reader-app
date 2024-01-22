@@ -1,8 +1,10 @@
 import { Col, Form, Row } from "react-bootstrap";
 
+import classes from "./../Table.module.css";
+
 export default function Search(props: searchProps) {
   return (
-    <div id="search-input-wrap">
+    <div id={`${classes["search-input-wrap"]}`}>
       <Form.Control
         type="text"
         placeholder="חפש..."
