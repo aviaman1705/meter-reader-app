@@ -1,10 +1,12 @@
 import { Button as Btn } from "rsuite";
 import { TypeAttributes } from "rsuite/esm/@types/common";
 
+import classes from "./../Table.module.css";
+
 export default function Button(props: buttonProps) {
   return (
     <Btn
-      id="system-btn"
+      id={`${classes["system-btn"]}`}
       type={props.type}
       disabled={props.disabled}
       appearance={props.appearance}

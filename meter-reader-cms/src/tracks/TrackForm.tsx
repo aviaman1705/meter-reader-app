@@ -1,18 +1,19 @@
 import { useState, useEffect } from "react";
 import { Form, Formik, FormikHelpers } from "formik";
-import { trackDTO } from "./track.models";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
-import Button from "../utils/Button";
 import axios, { AxiosError, AxiosResponse } from "axios";
+import { parse } from "date-fns";
 import { urlNotebooks } from "../endpoints";
-import DropDownField, { dropDownItemDTO } from "../forms/DropDownField";
+import { trackDTO } from "./track.models";
+import { notebookDTO } from "../notebooks/notebook.models";
+import Button from "../utils/Button";
 import TextField from "../forms/TextField/TextField";
 import NumberField from "../forms/NumberField";
 import DateField from "../forms/DateField";
-import { parse } from "date-fns";
-import "./TrackFrom.css";
-import { notebookDTO } from "../notebooks/notebook.models";
+import DropDownField, { dropDownItemDTO } from "../forms/DropDownField";
+
+import classes from "./../Table.module.css";
 
 export default function TrackForm(props: trackFormProps) {
   const [notebooks, setNotebooks] = useState<dropDownItemDTO[]>([]);
@@ -90,12 +91,12 @@ export default function TrackForm(props: trackFormProps) {
                 <TextField displayName="תיאור" field="desc" />
                 <NumberField displayName="נקרא" field="called" />
                 <NumberField displayName="לא נקרא" field="unCalled" />
-                <div className="form-group buttons-section">
+                <div className={`form-group ${classes["buttons-section"]} p-2`}>
                   <Button disabled={formikProps.isSubmitting} type="submit">
                     שמור שינויים
                   </Button>
                   <Link
-                    id="btn-cancel"
+                    id={`${classes["btn-cancel"]}`}
                     className="btn btn-secondary"
                     to="/tracks"
                   >

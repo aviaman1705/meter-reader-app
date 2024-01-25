@@ -1,9 +1,11 @@
 import { Form, Formik, FormikHelpers } from "formik";
-import { notebookDTO } from "./notebook.models";
 import * as Yup from "yup";
+import { Link } from "react-router-dom";
+import { notebookDTO } from "./notebook.models";
 import NumberField from "../forms/NumberField";
 import Button from "../utils/Button";
-import { Link } from "react-router-dom";
+
+import classes from "./../Table.module.css";
 
 export default function NotebookForm(props: notebookFormProps) {
   return (
@@ -26,12 +28,12 @@ export default function NotebookForm(props: notebookFormProps) {
             {(formikProps) => (
               <Form>
                 <NumberField displayName="מספר פנקס" field="number" />
-                <div className="form-group buttons-section">
+                <div className={`form-group ${classes["buttons-section"]} p-2`}>
                   <Button disabled={formikProps.isSubmitting} type="submit">
                     שמור שינויים
                   </Button>
                   <Link
-                    id="btn-cancel"
+                    id={`${classes["btn-cancel"]}`}
                     className="btn btn-secondary"
                     to="/tracks"
                   >

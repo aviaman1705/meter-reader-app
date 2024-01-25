@@ -7,21 +7,10 @@
         position: relative;
     }
 
-    /* div#select-option-wrapper {
-        display: none;
-    } */
-
     div#btn-add-item-redirect-wrap {
         display: flex;
         justify-content: center;
     }
-
- 
-
-    /* div#search-input-wrap {
-        flex-grow: 1;
-    } */
-
 
     .table .thead-dark th {
         color: #fff;
@@ -41,21 +30,6 @@
 
     .form-group.p-2 {
         margin-bottom: 0.25rem;
-    }
-
-    button#system-btn,
-    #btn-cancel {
-        width: 100%;
-    }
-
-    /* label.form-label {
-        display: none;
-    } */
-
-    .form-group.buttons-section {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
     }
 }
 
