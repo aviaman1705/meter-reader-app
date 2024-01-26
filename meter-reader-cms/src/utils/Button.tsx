@@ -1,37 +1,38 @@
-import { Button as Btn } from "rsuite";
-import { TypeAttributes } from "rsuite/esm/@types/common";
-
-import classes from "./../Table.module.css";
+import { Button as Btn } from "react-bootstrap";
 
 export default function Button(props: buttonProps) {
   return (
-    <Btn
-      id={`${classes["system-btn"]}`}
-      type={props.type}
-      disabled={props.disabled}
-      appearance={props.appearance}
-      className={props.className}
-      onClick={props.onClick}
-    >
-      {props.children}
-    </Btn>
+    <>
+      <Btn
+        id={props.id}
+        type={props.type}
+        variant={props.variant}
+        className={props.className}
+        title={props.title}
+        onClick={props.onClick}
+      >
+        {props.children}
+      </Btn>
+    </>
   );
 }
 
 interface buttonProps {
-  children: React.ReactNode;
-  onClick?(): void;
-  type: "button" | "submit";
-  disabled: boolean;
+  id: string;
   className: string;
-  appearance: TypeAttributes.Appearance;
-  width: string;
+  variant: string;
+  onClick?(): void;
+  disabled: boolean;
+  children: React.ReactNode;
+  type: "button" | "submit";
+  title: string;
 }
 
 Button.defaultProps = {
+  id: "",
+  className: "",
+  variant: "primary",
   type: "button",
   disabled: false,
-  className: "btn btn-primary",
-  appearance: "primary",
-  width: "",
+  title: "",
 };

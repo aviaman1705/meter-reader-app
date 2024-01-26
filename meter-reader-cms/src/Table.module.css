@@ -7,7 +7,7 @@
         gap: 5px
     }
 
-    a.btn-add-item-redirect {
+    a#btn-add-item-redirect {
         margin-top: 0.5rem;
     }
 
@@ -84,7 +84,7 @@
         /* border: 1px solid #000; */
     }
 
-    a.btn-add-item-redirect {
+    a#btn-add-item-redirect {
         margin: 0;
     }
 

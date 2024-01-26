@@ -1,6 +1,6 @@
 import { Form, Formik, FormikHelpers } from "formik";
+import { useHistory } from "react-router-dom";
 import * as Yup from "yup";
-import { Link } from "react-router-dom";
 import { notebookDTO } from "./notebook.models";
 import NumberField from "../forms/NumberField";
 import Button from "../utils/Button";
@@ -8,6 +8,8 @@ import Button from "../utils/Button";
 import classes from "./../Table.module.css";
 
 export default function NotebookForm(props: notebookFormProps) {
+  const history = useHistory();
+
   return (
     <div className="col-xl-5 col-lg-6 col-md-8 offset-xl-7 offset-lg-6 offset-md-4 form-wrap">
       <div className="card card-primary">
@@ -29,16 +31,23 @@ export default function NotebookForm(props: notebookFormProps) {
               <Form>
                 <NumberField displayName="מספר פנקס" field="number" />
                 <div className={`form-group ${classes["buttons-section"]} p-2`}>
-                  <Button disabled={formikProps.isSubmitting} type="submit">
+                  <Button
+                    id={`${classes["system-btn"]}`}
+                    disabled={formikProps.isSubmitting}
+                    type="submit"
+                  >
                     שמור שינויים
                   </Button>
-                  <Link
+
+                  <Button
                     id={`${classes["btn-cancel"]}`}
-                    className="btn btn-secondary"
-                    to="/tracks"
+                    variant="secondary"
+                    onClick={() => {
+                      history.push("/notebooks");
+                    }}
                   >
                     בטל
-                  </Link>
+                  </Button>
                 </div>
               </Form>
             )}

@@ -1,17 +1,16 @@
 import { useState, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import axios, { AxiosResponse, AxiosError } from "axios";
-import { Button, Card, Col, Container, Row, Table } from "react-bootstrap";
-
+import { Card, Col, Container, Row, Table } from "react-bootstrap";
 import { urlNotebooks } from "../endpoints";
 import { sysDataTablePager } from "../models/sysDataTablePager.models";
 import { notebookDTO } from "./notebook.models";
-
 import Search from "../utils/Search";
 import ItemsPerPage from "../utils/ItemsPerPage";
 import TableHeader from "../utils/TableHeader";
 import Loading from "../utils/Loading";
 import Pagination from "../utils/Pagination";
+import Button from "../utils/Button";
 
 import classes from "./../Table.module.css";
 
@@ -149,13 +148,15 @@ export default function IndexNotebooks() {
             <Container>
               <Row>
                 <Col id={`${classes["table-one-section"]}`}>
-                  <Link
-                    className={`btn btn-secondary ${classes["btn-add-item-redirect"]}`}
-                    to="/notebooks/create"
-                    title="הוספת פנקס"
+                  <Button
+                    id={`${classes["btn-add-item-redirect"]}`}
+                    variant="secondary"
+                    onClick={() => {
+                      history.push(`/notebooks/create`);
+                    }}
                   >
                     הוספת פנקס
-                  </Link>
+                  </Button>
                   <Search onSearch={(e: any) => onSearch(e)} />
                   <ItemsPerPage
                     limit={limit}

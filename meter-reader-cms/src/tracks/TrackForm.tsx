@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Form, Formik, FormikHelpers } from "formik";
 import * as Yup from "yup";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { parse } from "date-fns";
 import { urlNotebooks } from "../endpoints";
@@ -17,6 +17,8 @@ import classes from "./../Table.module.css";
 
 export default function TrackForm(props: trackFormProps) {
   const [notebooks, setNotebooks] = useState<dropDownItemDTO[]>([]);
+
+  const history = useHistory();
 
   useEffect(() => {
     loadData();
@@ -92,16 +94,22 @@ export default function TrackForm(props: trackFormProps) {
                 <NumberField displayName="נקרא" field="called" />
                 <NumberField displayName="לא נקרא" field="unCalled" />
                 <div className={`form-group ${classes["buttons-section"]} p-2`}>
-                  <Button disabled={formikProps.isSubmitting} type="submit">
+                  <Button
+                    id={`${classes["system-btn"]}`}
+                    disabled={formikProps.isSubmitting}
+                    type="submit"
+                  >
                     שמור שינויים
                   </Button>
-                  <Link
+                  <Button
                     id={`${classes["btn-cancel"]}`}
-                    className="btn btn-secondary"
-                    to="/tracks"
+                    variant="secondary"
+                    onClick={() => {
+                      history.push("/tracks");
+                    }}
                   >
                     בטל
-                  </Link>
+                  </Button>
                 </div>
               </Form>
             )}

@@ -179,13 +179,15 @@ export default function IndexTracks() {
               <Container>
                 <Row>
                   <Col id={`${classes["table-one-section"]}`}>
-                    <Link
-                      className={`btn btn-secondary ${classes["btn-add-item-redirect"]}`}
-                      to="/tracks/create"
-                      title="הוספת מסלול"
+                    <Button
+                      id={`${classes["btn-add-item-redirect"]}`}
+                      variant="secondary"
+                      onClick={() => {
+                        history.push(`/tracks/create`);
+                      }}
                     >
                       הוספת מסלול
-                    </Link>
+                    </Button>
                     <Search onSearch={(e: any) => onSearch(e)} />
                     <ItemsPerPage
                       limit={limit}
