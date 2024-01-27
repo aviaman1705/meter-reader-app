@@ -1,14 +1,14 @@
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import * as Yup from "yup";
 import YupPassword from "yup-password";
 import axios, { AxiosResponse } from "axios";
-import { useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
-import { authenticationResponse, userCredentials } from "./auth.models";
+import { authenticationResponse, registerDTO } from "./auth.models";
 import { urlAccounts } from "../endpoints";
 import DisplayErrors from "../utils/DisplayErrors";
-import AuthForm from "./AuthForm";
 import Loading from "../utils/Loading";
+import RegisterForm from "./Register/RegisterForm";
 
 import css from "./Register.module.css";
 
@@ -20,6 +20,9 @@ export default function Register() {
   const history = useHistory();
 
   const SignupSchema = Yup.object().shape({
+    username: Yup.string()
+      .min(2, "שם חייב להכיל להכיל 2 תווים לפחות")
+      .required("חובה להזין שם"),
     email: Yup.string().email("הזן מייל תקין").required("חובה להזין מייל"),
     password: Yup.string()
       .password()
@@ -31,7 +34,7 @@ export default function Register() {
       .required("חובה להזין סיסמא"),
   });
 
-  async function register(credentials: userCredentials, actions: any) {
+  async function register(credentials: registerDTO, actions: any) {
     setLoading(true);
     setErrors([]);
 
@@ -70,8 +73,8 @@ export default function Register() {
       <div className={css["login-page"]}>
         {loading && <Loading left="48%" top="55%" />}
         <div className={css["form"]}>
-          <AuthForm
-            model={{ email: "", password: "" }}
+          <RegisterForm
+            model={{ username: "", email: "", password: "" }}
             validationSchema={SignupSchema}
             btnText="הרשמה"
             secondBtnText="התחבר"

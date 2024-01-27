@@ -1,16 +1,29 @@
+import { useContext, useEffect, useState } from "react";
 import { Nav, NavDropdown, Navbar } from "react-bootstrap";
-import { useContext, useState } from "react";
-import { NavLink, Link } from "react-router-dom";
-
-import Authorized from "./auth/Authorized";
+import utf8 from "utf8";
+import { NavLink } from "react-router-dom";
 import { logout } from "./auth/handleJWT";
 import AuthenticationContext from "./auth/AuthenticationContext";
+import Authorized from "./auth/Authorized";
 import logo from "./logo.svg";
+
 import "./Header.css";
 
 export default function Header() {
   const { update, claims } = useContext(AuthenticationContext);
   const [expanded, setexpanded] = useState(false);
+  const [username, setUsername] = useState("");
+
+  useEffect(() => {
+    if (claims.find((claim) => claim.name === "username") !== undefined) {
+      const currentUsername = utf8.decode(
+        claims.find((claim) => claim.name === "username").value
+      );
+
+      setUsername(`היי ${currentUsername}`);
+    }
+  }, [claims]);
+
   return (
     <Navbar
       bg="custom"
@@ -77,7 +90,7 @@ export default function Header() {
             role="admin"
             authorized={
               <>
-                <NavDropdown title="היי משתמש" id="navbarScrollingDropdown">
+                <NavDropdown title={username} id="navbarScrollingDropdown">
                   <NavDropdown.Item
                     href="#"
                     onClick={() => {

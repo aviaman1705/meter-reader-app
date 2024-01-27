@@ -13,6 +13,12 @@ export interface authenticationResponse {
     expiration: Date;
 }
 
+export interface registerDTO {
+    username: string;
+    email: string;
+    password: string;
+}
+
 export interface userDTO {
     id: string;
     email: string;
