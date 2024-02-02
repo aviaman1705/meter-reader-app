@@ -15,4 +15,5 @@ export interface monthlyDataDTO {
     date: date;
     called: number;
     unCalled: number;
+    percentage: number;
 }

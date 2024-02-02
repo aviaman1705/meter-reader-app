@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { monthlyDataDTO } from "../home/dashboard.models";
+import { monthlyDataDTO } from "../../../home/dashboard.models";
 import {
   BarChart,
   Bar,
@@ -35,8 +35,8 @@ export default function BarChartItem(props: BarChartItemProps) {
         <YAxis domain={[0, 12000]} />
         <Tooltip />
         <Legend />
-        <Bar dataKey="called" fill="#2196F3" name="נקרא" />
         <Bar dataKey="unCalled" fill="#cecece" name="לא נקרא" />
+        <Bar dataKey="called" fill="#00BCD4" name="נקרא" />
       </BarChart>
     </ResponsiveContainer>
   );

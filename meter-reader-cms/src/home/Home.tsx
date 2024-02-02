@@ -2,15 +2,13 @@ import { useState, useEffect } from "react";
 import axios, { AxiosResponse } from "axios";
 import { Col, Container, Row } from "react-bootstrap";
 import { urlTracks } from "../endpoints";
-import {
-  dashboardDTO,
-  dashboardSummaryDTO,
-  monthlyDataDTO,
-} from "./dashboard.models";
-import BarChartItem from "../BarChartItem/BarChartItem";
-import PanelItem from "../utils/PanelItem";
+import { dashboardDTO, dashboardSummaryDTO } from "./dashboard.models";
+import PanelItem from "../utils/Panel/PanelItem";
+import Chart from "../utils/Chart/Chart";
+import Panel from "../utils/Panel/Panel";
 
 export default function Home() {
+  const [chartData, setChartData] = useState([]);
   const [dashboardSummary, setDashboardSummary] = useState<dashboardSummaryDTO>(
     {
       called: 0,
@@ -22,8 +20,6 @@ export default function Home() {
     }
   );
 
-  const [monthlyData, setMonthlyData] = useState<monthlyDataDTO[]>([]);
-
   useEffect(() => {
     loadDashboardData();
   }, []);
@@ -32,66 +28,27 @@ export default function Home() {
     axios
       .get(`${urlTracks}/getDashboardData`)
       .then(function (response: AxiosResponse<dashboardDTO>) {
-        setDashboardSummary(response.data?.dashboardSummary);
-        setMonthlyData(response.data.monthlyData);
+        const { dashboardSummary: dashboardData } = response.data;
+        const { monthlyData } = response.data;
+
+        setDashboardSummary(dashboardData);
+        setChartData(monthlyData);
       })
       .catch(function (error) {
-        // handle error
         console.log(error);
       })
-      .finally(function () {
-        // always executed
-      });
+      .finally(function () {});
   }
 
   return (
     <>
       <Container>
         <Row>
-          <Col xl={12}>
-            <h1>נתוני קריאות</h1>
-          </Col>
-          <Col xl={4}>
-            <PanelItem
-              header="מונים שנקראו החודש"
-              text={dashboardSummary.monthlyCalled.toString()}
-            />
-          </Col>
-          <Col xl={4}>
-            <PanelItem
-              header="מונים שלא שנקראו החודש"
-              text={dashboardSummary.monthlyUnCalled.toString()}
-            />
-          </Col>
-
-          <Col xl={4}>
-            <PanelItem
-              header="אחוזי אי קריאה החודש"
-              text={`${dashboardSummary.monthlyUncalledPercentage}%`}
-            />
-          </Col>
-          <Col xl={4}>
-            <PanelItem
-              header='סה"כ מונים שנקראו'
-              text={dashboardSummary.called.toString()}
-            />
-          </Col>
-          <Col xl={4}>
-            <PanelItem
-              header='סה"כ מונים שלא שנקראו'
-              text={dashboardSummary.unCalled.toString()}
-            />
-          </Col>
-          <Col xl={4}>
-            <PanelItem
-              header='סה"כ אחוזי אי קריאה'
-              text={`${dashboardSummary.totalUncalledPercentage}%`}
-            />
-          </Col>
+          <Panel data={dashboardSummary} />
         </Row>
         <Row>
           <Col className="pt-4" xl={24}>
-            <BarChartItem data={monthlyData} />
+            <Chart data={chartData} />
           </Col>
         </Row>
       </Container>
