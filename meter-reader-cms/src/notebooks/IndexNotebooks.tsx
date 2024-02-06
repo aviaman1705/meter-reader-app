@@ -13,6 +13,7 @@ import Pagination from "../utils/Pagination";
 import Button from "../utils/Button";
 
 import classes from "./../Table.module.css";
+import customConfirm from "../utils/customConfirm";
 
 export default function IndexNotebooks() {
   const history = useHistory();
@@ -139,6 +140,11 @@ export default function IndexNotebooks() {
   const handlePageItemCount = (event: any) => {
     setLimit(event.target.value!);
   };
+  const handleDelete = (id: number) => {
+    customConfirm(() => {
+      console.log(id);
+    }, "אתה בטוח שברצונך למחוק את הפריט ?");
+  };
 
   return (
     <Container className="p-0">
@@ -188,7 +194,12 @@ export default function IndexNotebooks() {
                             </Button>
                           </td>
                           <td>
-                            <Button variant="danger">מחיקה</Button>
+                            <a
+                              className="btn btn-danger"
+                              onClick={() => handleDelete(item.id)}
+                            >
+                              מחיקה
+                            </a>
                           </td>
                         </tr>
                       ))}

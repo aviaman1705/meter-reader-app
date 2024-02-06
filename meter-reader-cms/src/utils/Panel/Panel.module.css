@@ -8,10 +8,15 @@
         grid-auto-rows: minmax(150px, auto);
         row-gap: 1rem;
         column-gap: 0.5rem;
-    }   
-    .card:hover{
+    }
+
+    .card {
+        padding: 0.5rem;
+    }
+
+    .card:hover {
         color: #009688;
-    } 
+    }
 }
 
 
@@ -23,7 +28,8 @@
     }
 
     #panel-page-title {
-        padding: 0;
+        padding: 1rem 0rem;
+        text-align: center;
     }
 
 }

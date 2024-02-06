@@ -1,4 +1,6 @@
-
+body{
+    min-height: 100vh;
+}
 /* //Mobile */
 @media (min-width: 300px) {
 

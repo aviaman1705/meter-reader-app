@@ -5,6 +5,7 @@ import { NavLink } from "react-router-dom";
 import { logout } from "./auth/handleJWT";
 import AuthenticationContext from "./auth/AuthenticationContext";
 import Authorized from "./auth/Authorized";
+import { FcElectricity } from "react-icons/fc";
 import logo from "./logo.svg";
 
 import "./Header.css";
@@ -36,7 +37,7 @@ export default function Header() {
     >
       <Navbar.Brand>
         <NavLink className="nav-link" to="/" exact={true}>
-          <img src={logo} width="40px" height="40px" />
+          <FcElectricity title="מערכת קריאת מונים" />
         </NavLink>
       </Navbar.Brand>
       <Navbar.Toggle

@@ -43,13 +43,11 @@ export default function Home() {
   return (
     <>
       <Container>
-        <Row>
+        <Row className="mb-4">
           <Panel data={dashboardSummary} />
         </Row>
         <Row>
-          <Col className="pt-4" xl={24}>
-            <Chart data={chartData} />
-          </Col>
+          <Chart data={chartData} />
         </Row>
       </Container>
     </>
