@@ -40,9 +40,9 @@ export default function EditNotebook() {
   }
 
   return (
-    <>
+    <div className="form-container">
       <DisplayErrors errors={errors} />
-      {loading === true ? <Loading left="60%" top="62%" /> : null}
+      {loading === true ? <Loading left="75%" top="45%" /> : null}
       {notebook && (
         <NotebookForm
           title="עריכת פנקס"
@@ -52,6 +52,6 @@ export default function EditNotebook() {
           }}
         />
       )}
-    </>
+    </div>
   );
 }

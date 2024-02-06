@@ -1,13 +1,11 @@
 import { useState, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import axios, { AxiosResponse, AxiosError } from "axios";
 import { Button, Card, Col, Container, Row, Table } from "react-bootstrap";
 import dayjs from "dayjs";
-
 import { urlTracks } from "../endpoints";
 import { sysDataTablePager } from "../models/sysDataTablePager.models";
 import { trackDTO } from "./track.models";
-
 import Search from "../utils/Search";
 import ItemsPerPage from "../utils/ItemsPerPage";
 import TableHeader from "../utils/TableHeader";
@@ -15,6 +13,7 @@ import Loading from "../utils/Loading";
 import Pagination from "../utils/Pagination";
 
 import classes from "./../Table.module.css";
+import customConfirm from "../utils/customConfirm";
 
 export default function IndexTracks() {
   const history = useHistory();
@@ -24,16 +23,10 @@ export default function IndexTracks() {
   const [page, setPage] = useState(1);
   const [totalAmontOfPages, setTotalAmontOfPages] = useState(0);
   const [recordsPerPage, setRecordsPerPage] = useState(10);
-
-  //sorting
   const [sortColumn, setSortColumn] = useState("number");
   const [sortType, setSortType] = useState<string>("asc");
-
   const [search, setSearch] = useState("");
   const [limit, setLimit] = useState(10);
-  const [pagesCount, setPagesCount] = useState(0);
-  const [totalItems, setTotalItems] = useState(0);
-  let [currentPage, setCurrentPage] = useState(1);
   const options = [5, 10, 25, 50];
   const [loading, setLoading] = useState(false);
   const [columns, setColumns] = useState([
@@ -78,6 +71,8 @@ export default function IndexTracks() {
       backgroundPosition: "left center",
     },
   ]);
+  // const [pagesCount, setPagesCount] = useState(0);
+  //const [totalItems, setTotalItems] = useState(0);
 
   useEffect(() => {
     setLoading(true);
@@ -111,13 +106,13 @@ export default function IndexTracks() {
         });
 
         setLimit(response.data.iTotalDisplayRecords);
-        setTotalItems(response.data.iTotalRecords);
+        //setTotalItems(response.data.iTotalRecords);
 
-        let totalPages = Math.floor(
-          response.data.iTotalRecords / response.data.iTotalDisplayRecords
-        );
+        // let totalPages = Math.floor(
+        //   response.data.iTotalRecords / response.data.iTotalDisplayRecords
+        // );
 
-        setPagesCount(totalPages);
+        // setPagesCount(totalPages);
         setData(mappedTracks);
         setLoading(false);
       })
@@ -156,11 +151,6 @@ export default function IndexTracks() {
     }
   };
 
-  const initilazePagination = (num: number) => {
-    setCurrentPage(num);
-    setPage(num);
-  };
-
   const onSearch = (event: any) => {
     setSearch(event.target.value);
   };
@@ -168,6 +158,24 @@ export default function IndexTracks() {
   const handlePageItemCount = (event: any) => {
     setLimit(event.target.value!);
   };
+
+  async function remove(id: number) {
+    customConfirm(() => {
+      setLoading(true);
+      axios
+        .delete(`${urlTracks}/${id}`)
+        .then((response: AxiosResponse<any>) => {
+          setTimeout(() => {
+            console.log(response);
+            setData(data.filter((track) => track.id !== id));
+            setLoading(false);
+          }, 2000);
+        })
+        .catch((error: AxiosError) => {
+          console.log(error);
+        });
+    }, "האם אתה בטוח שברצונך למחוק את הפריט ?");
+  }
 
   return (
     <>
@@ -224,7 +232,15 @@ export default function IndexTracks() {
                               </Button>
                             </td>
                             <td>
-                              <Button variant="danger">מחיקה</Button>
+                              <Button
+                                variant="danger"
+                                title="מחיקה"
+                                onClick={() => {
+                                  remove(item.id);
+                                }}
+                              >
+                                מחיקה
+                              </Button>
                             </td>
                           </tr>
                         ))}

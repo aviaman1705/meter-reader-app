@@ -29,8 +29,8 @@ export default function IndexNotebooks() {
 
   const [search, setSearch] = useState("");
   const [limit, setLimit] = useState(10);
-  const [pagesCount, setPagesCount] = useState(0);
-  const [totalItems, setTotalItems] = useState(0);
+  // const [pagesCount, setPagesCount] = useState(0);
+  // const [totalItems, setTotalItems] = useState(0);
   let [currentPage, setCurrentPage] = useState(1);
   const options = [5, 10, 25, 50];
   const [loading, setLoading] = useState(false);
@@ -82,13 +82,13 @@ export default function IndexNotebooks() {
         });
 
         setLimit(response.data.iTotalDisplayRecords);
-        setTotalItems(response.data.iTotalRecords);
+        //setTotalItems(response.data.iTotalRecords);
 
-        let totalPages = Math.floor(
-          response.data.iTotalRecords / response.data.iTotalDisplayRecords
-        );
+        // let totalPages = Math.floor(
+        //   response.data.iTotalRecords / response.data.iTotalDisplayRecords
+        // );
 
-        setPagesCount(totalPages);
+        //setPagesCount(totalPages);
         setData(mappedNotebooks);
         setLoading(false);
       })

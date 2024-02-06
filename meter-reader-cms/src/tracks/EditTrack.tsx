@@ -5,7 +5,7 @@ import { urlTracks } from "../endpoints";
 import DisplayErrors from "../utils/DisplayErrors";
 import { convertTrackToFormData } from "../utils/formDataUtils";
 import Loading from "../utils/Loading";
-import { trackCreationDTO, trackDTO } from "./track.models";
+import { trackDTO } from "./track.models";
 import TrackForm from "./TrackForm";
 
 export default function EditTrack() {
@@ -40,9 +40,9 @@ export default function EditTrack() {
   }
 
   return (
-    <>
+    <div className="form-container">
       <DisplayErrors errors={errors} />
-      {loading === true ? <Loading left="60%" top="62%" /> : null}
+      {loading === true ? <Loading left="75%" top="50%" /> : null}
       {track && (
         <TrackForm
           title="עריכת מסלול"
@@ -53,6 +53,6 @@ export default function EditTrack() {
           }}
         />
       )}
-    </>
+    </div>
   );
 }
