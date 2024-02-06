@@ -40,4 +40,10 @@ body{
 @media (min-width: 992px) {}
 
 /* Small devies (large desktops, 1200px and up) */
-@media (min-width: 1200px) {}
+@media (min-width: 1200px) {
+
+    /* FORM */
+    .form-container{
+        position: relative;
+    }
+}

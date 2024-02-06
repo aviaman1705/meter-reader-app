@@ -34,14 +34,14 @@ export default function CreateNotebook() {
   }
 
   return (
-    <>
+    <div className="form-container">
       <DisplayErrors errors={errors} />
-      {loading === true ? <Loading left="60%" top="62%" /> : null}
+      {loading === true ? <Loading left="75%" top="45%" /> : null}
       <NotebookForm
         title="יצירת פנקס"
-        model={{ id: null, number: null, tracksCount: null }}
+        model={{ id: 0, number: null, tracksCount: null }}
         onSubmit={async (values) => await create(values)}
       />
-    </>
+    </div>
   );
 }

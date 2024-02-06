@@ -41,14 +41,14 @@ export default function CreateTrack() {
   }
 
   return (
-    <>
+    <div className="form-container">
       <DisplayErrors errors={errors} />
-      {loading === true ? <Loading left="60%" top="62%" /> : null}
+      {loading === true ? <Loading left="75%" top="50%" /> : null}
       <TrackForm
         title="יצירת מסלול"
         model={track}
         onSubmit={async (values) => await create(values)}
       />
-    </>
+    </div>
   );
 }
