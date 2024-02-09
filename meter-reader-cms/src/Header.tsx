@@ -82,6 +82,13 @@ export default function Header() {
                 >
                   פנקסים
                 </NavLink>
+                <NavLink
+                  className="nav-link"
+                  to="/statistics"
+                  onClick={() => setexpanded(false)}
+                >
+                  סטטיסטיקות
+                </NavLink>
               </>
             }
           />
