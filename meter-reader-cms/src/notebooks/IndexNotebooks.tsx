@@ -14,6 +14,7 @@ import Button from "../utils/Button";
 
 import classes from "./../Table.module.css";
 import customConfirm from "../utils/customConfirm";
+import alert from "../utils/alert";
 
 export default function IndexNotebooks() {
   const history = useHistory();
@@ -56,10 +57,8 @@ export default function IndexNotebooks() {
 
   useEffect(() => {
     setLoading(true);
-
-    setTimeout(() => {
-      loadData();
-    }, 1000);
+    loadData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, limit, sortColumn, sortType, search]);
 
   const loadData = () => {
@@ -141,9 +140,22 @@ export default function IndexNotebooks() {
     setLimit(event.target.value!);
   };
   const handleDelete = (id: number) => {
-    customConfirm(() => {
-      console.log(id);
-    }, "אתה בטוח שברצונך למחוק את הפריט ?");
+    setLoading(true);
+    axios
+      .delete(`${urlNotebooks}/${id}`)
+      .then((response: AxiosResponse<any>) => {
+        loadData();
+        setLoading(false);
+      })
+      .catch((error: AxiosError) => {
+        const errors: any = error.response.data;
+        const errorMsg = errors[0];
+
+        setTimeout(() => {
+          alert(errorMsg);
+          setLoading(false);
+        }, 1000);
+      });
   };
 
   return (
@@ -196,7 +208,12 @@ export default function IndexNotebooks() {
                           <td>
                             <a
                               className="btn btn-danger"
-                              onClick={() => handleDelete(item.id)}
+                              onClick={() =>
+                                customConfirm(
+                                  () => handleDelete(item.id),
+                                  "האם אתה בטוח שברצונך למחוק ?"
+                                )
+                              }
                             >
                               מחיקה
                             </a>
