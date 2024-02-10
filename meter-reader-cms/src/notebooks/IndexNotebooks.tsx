@@ -19,21 +19,13 @@ import alert from "../utils/alert";
 export default function IndexNotebooks() {
   const history = useHistory();
   const [data, setData] = useState<notebookDTO[]>([]);
-
-  //pagination
   const [page, setPage] = useState(1);
   const [totalAmontOfPages, setTotalAmontOfPages] = useState(0);
   const [recordsPerPage, setRecordsPerPage] = useState(10);
-
-  //sorting
   const [sortColumn, setSortColumn] = useState("number");
   const [sortType, setSortType] = useState<string>("asc");
-
   const [search, setSearch] = useState("");
   const [limit, setLimit] = useState(10);
-  // const [pagesCount, setPagesCount] = useState(0);
-  // const [totalItems, setTotalItems] = useState(0);
-  let [currentPage, setCurrentPage] = useState(1);
   const options = [5, 10, 25, 50];
   const [loading, setLoading] = useState(false);
   const [columns, setColumns] = useState([
@@ -82,13 +74,6 @@ export default function IndexNotebooks() {
         });
 
         setLimit(response.data.iTotalDisplayRecords);
-        //setTotalItems(response.data.iTotalRecords);
-
-        // let totalPages = Math.floor(
-        //   response.data.iTotalRecords / response.data.iTotalDisplayRecords
-        // );
-
-        //setPagesCount(totalPages);
         setData(mappedNotebooks);
         setLoading(false);
       })
@@ -127,11 +112,6 @@ export default function IndexNotebooks() {
     }
   };
 
-  const initilazePagination = (num: number) => {
-    setCurrentPage(num);
-    setPage(num);
-  };
-
   const onSearch = (event: any) => {
     setSearch(event.target.value);
   };
@@ -139,6 +119,7 @@ export default function IndexNotebooks() {
   const handlePageItemCount = (event: any) => {
     setLimit(event.target.value!);
   };
+
   const handleDelete = (id: number) => {
     setLoading(true);
     axios
@@ -159,81 +140,79 @@ export default function IndexNotebooks() {
   };
 
   return (
-    <Container className="p-0">
-      <Row>
-        <Col md={12}>
-          <Card>
-            <Container>
-              <Row>
-                <Col id={`${classes["table-one-section"]}`}>
-                  <Button
-                    id={`${classes["btn-add-item-redirect"]}`}
-                    variant="secondary"
-                    onClick={() => {
-                      history.push(`/notebooks/create`);
-                    }}
-                  >
-                    הוספת פנקס
-                  </Button>
-                  <Search onSearch={(e: any) => onSearch(e)} />
-                  <ItemsPerPage
-                    limit={limit}
-                    optins={options}
-                    onChange={(e: any) => handlePageItemCount(e)}
-                  />
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <h1 className={`${classes["grid-title"]}`}>רשימת פנקסים</h1>
-                  {loading && <Loading left="50%" top="50%" />}
-                  <Table responsive bordered hover striped>
-                    <TableHeader columns={columns} onSorting={onSorting} />
-                    <tbody>
-                      {data?.map((item, index, currentArray) => (
-                        <tr key={index}>
-                          <td>{index + 1}</td>
-                          <td>{item.number}</td>
-                          <td>
-                            <Button
-                              variant="info"
-                              title={item.number.toString()}
-                              onClick={() => {
-                                history.push(`/notebooks/edit/${item.id}`);
-                              }}
-                            >
-                              עריכה
-                            </Button>
-                          </td>
-                          <td>
-                            <a
-                              className="btn btn-danger"
-                              onClick={() =>
-                                customConfirm(
-                                  () => handleDelete(item.id),
-                                  "האם אתה בטוח שברצונך למחוק ?"
-                                )
-                              }
-                            >
-                              מחיקה
-                            </a>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </Table>
-                  <Pagination
-                    currentPage={page}
-                    totalAmontOfPages={totalAmontOfPages}
-                    onChange={(newPage) => setPage(newPage)}
-                  />
-                </Col>
-              </Row>
-            </Container>
-            <Row id="table-three-section"></Row>
-          </Card>
-        </Col>
-      </Row>
-    </Container>
+    <Row>
+      <Col md={12}>
+        <Card>
+          <Container>
+            <Row>
+              <Col id={`${classes["table-one-section"]}`}>
+                <Button
+                  id={`${classes["btn-add-item-redirect"]}`}
+                  variant="secondary"
+                  onClick={() => {
+                    history.push(`/notebooks/create`);
+                  }}
+                >
+                  הוספת פנקס
+                </Button>
+                <Search onSearch={(e: any) => onSearch(e)} />
+                <ItemsPerPage
+                  limit={limit}
+                  optins={options}
+                  onChange={(e: any) => handlePageItemCount(e)}
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <h1 className={`${classes["grid-title"]}`}>רשימת פנקסים</h1>
+                {loading && <Loading left="50%" top="50%" />}
+                <Table responsive bordered hover striped>
+                  <TableHeader columns={columns} onSorting={onSorting} />
+                  <tbody>
+                    {data?.map((item, index, currentArray) => (
+                      <tr key={index}>
+                        <td>{index + 1}</td>
+                        <td>{item.number}</td>
+                        <td>
+                          <Button
+                            variant="info"
+                            title={item.number.toString()}
+                            onClick={() => {
+                              history.push(`/notebooks/edit/${item.id}`);
+                            }}
+                          >
+                            עריכה
+                          </Button>
+                        </td>
+                        <td>
+                          <a
+                            className="btn btn-danger"
+                            onClick={() =>
+                              customConfirm(
+                                () => handleDelete(item.id),
+                                "האם אתה בטוח שברצונך למחוק ?"
+                              )
+                            }
+                          >
+                            מחיקה
+                          </a>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </Table>
+                <Pagination
+                  currentPage={page}
+                  totalAmontOfPages={totalAmontOfPages}
+                  onChange={(newPage) => setPage(newPage)}
+                />
+              </Col>
+            </Row>
+          </Container>
+          <Row id="table-three-section"></Row>
+        </Card>
+      </Col>
+    </Row>
   );
 }

@@ -18,8 +18,6 @@ import customConfirm from "../utils/customConfirm";
 export default function IndexTracks() {
   const history = useHistory();
   const [data, setData] = useState<trackDTO[]>([]);
-
-  //pagination
   const [page, setPage] = useState(1);
   const [totalAmontOfPages, setTotalAmontOfPages] = useState(0);
   const [recordsPerPage, setRecordsPerPage] = useState(10);
@@ -71,8 +69,6 @@ export default function IndexTracks() {
       backgroundPosition: "left center",
     },
   ]);
-  // const [pagesCount, setPagesCount] = useState(0);
-  //const [totalItems, setTotalItems] = useState(0);
 
   useEffect(() => {
     setLoading(true);
@@ -179,86 +175,82 @@ export default function IndexTracks() {
 
   return (
     <>
-      <Container className="p-0">
-        <Row>
-          <Col md={12}>
-            <Card>
-              {loading && <Loading left="50%" top="50%" />}
-              <Container>
-                <Row>
-                  <Col id={`${classes["table-one-section"]}`}>
-                    <Button
-                      id={`${classes["btn-add-item-redirect"]}`}
-                      variant="secondary"
-                      onClick={() => {
-                        history.push(`/tracks/create`);
-                      }}
-                    >
-                      הוספת מסלול
-                    </Button>
-                    <Search onSearch={(e: any) => onSearch(e)} />
-                    <ItemsPerPage
-                      limit={limit}
-                      optins={options}
-                      onChange={(e: any) => handlePageItemCount(e)}
-                    />
-                  </Col>
-                </Row>
-                <Row>
-                  <Col>
-                    <h1 className={`${classes["grid-title"]}`}>
-                      רשימת מסלולים
-                    </h1>
-                    {loading && <Loading left="50%" top="50%" />}
-                    <Table responsive bordered hover striped>
-                      <TableHeader columns={columns} onSorting={onSorting} />
-                      <tbody>
-                        {data?.map((item, index, currentArray) => (
-                          <tr key={index}>
-                            <td>{index + 1}</td>
-                            <td>{item.date}</td>
-                            <td>{item.desc}</td>
-                            <td>{item.called}</td>
-                            <td>{item.unCalled}</td>
-                            <td>
-                              <Button
-                                variant="info"
-                                title={item.desc}
-                                onClick={() => {
-                                  history.push(`/tracks/edit/${item.id}`);
-                                }}
-                              >
-                                עריכה
-                              </Button>
-                            </td>
-                            <td>
-                              <Button
-                                variant="danger"
-                                title="מחיקה"
-                                onClick={() => {
-                                  remove(item.id);
-                                }}
-                              >
-                                מחיקה
-                              </Button>
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </Table>
-                    <Pagination
-                      currentPage={page}
-                      totalAmontOfPages={totalAmontOfPages}
-                      onChange={(newPage) => setPage(newPage)}
-                    />
-                  </Col>
-                </Row>
-              </Container>
-              <Row id="table-three-section"></Row>
-            </Card>
-          </Col>
-        </Row>
-      </Container>
+      <Row>
+        <Col md={12}>
+          <Card>
+            {loading && <Loading left="50%" top="50%" />}
+            <Container>
+              <Row>
+                <Col id={`${classes["table-one-section"]}`}>
+                  <Button
+                    id={`${classes["btn-add-item-redirect"]}`}
+                    variant="secondary"
+                    onClick={() => {
+                      history.push(`/tracks/create`);
+                    }}
+                  >
+                    הוספת מסלול
+                  </Button>
+                  <Search onSearch={(e: any) => onSearch(e)} />
+                  <ItemsPerPage
+                    limit={limit}
+                    optins={options}
+                    onChange={(e: any) => handlePageItemCount(e)}
+                  />
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <h1 className={`${classes["grid-title"]}`}>רשימת מסלולים</h1>
+                  {loading && <Loading left="50%" top="50%" />}
+                  <Table responsive bordered hover striped>
+                    <TableHeader columns={columns} onSorting={onSorting} />
+                    <tbody>
+                      {data?.map((item, index, currentArray) => (
+                        <tr key={index}>
+                          <td>{index + 1}</td>
+                          <td>{item.date}</td>
+                          <td>{item.desc}</td>
+                          <td>{item.called}</td>
+                          <td>{item.unCalled}</td>
+                          <td>
+                            <Button
+                              variant="info"
+                              title={item.desc}
+                              onClick={() => {
+                                history.push(`/tracks/edit/${item.id}`);
+                              }}
+                            >
+                              עריכה
+                            </Button>
+                          </td>
+                          <td>
+                            <Button
+                              variant="danger"
+                              title="מחיקה"
+                              onClick={() => {
+                                remove(item.id);
+                              }}
+                            >
+                              מחיקה
+                            </Button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </Table>
+                  <Pagination
+                    currentPage={page}
+                    totalAmontOfPages={totalAmontOfPages}
+                    onChange={(newPage) => setPage(newPage)}
+                  />
+                </Col>
+              </Row>
+            </Container>
+            <Row id="table-three-section"></Row>
+          </Card>
+        </Col>
+      </Row>
     </>
   );
 }

@@ -13,6 +13,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 import "./App.css";
+import Footer from "./Footer";
 
 configureInterceptor();
 
@@ -44,17 +45,24 @@ function App() {
           <Row>
             <Col className="p-0">
               <Header />
-              <Switch>
-                {routes.map((route, index) => (
-                  <Route exact={route.exact} path={route.path} key={route.path}>
-                    {route.isAdmin && !isAdmin() ? (
-                      <>You are not allowed to see this page</>
-                    ) : (
-                      <route.component />
-                    )}
-                  </Route>
-                ))}
-              </Switch>
+              <Container id="main-container">
+                <Switch>
+                  {routes.map((route, index) => (
+                    <Route
+                      exact={route.exact}
+                      path={route.path}
+                      key={route.path}
+                    >
+                      {route.isAdmin && !isAdmin() ? (
+                        <>You are not allowed to see this page</>
+                      ) : (
+                        <route.component />
+                      )}
+                    </Route>
+                  ))}
+                </Switch>
+              </Container>
+              <Footer />
             </Col>
           </Row>
         </Container>
