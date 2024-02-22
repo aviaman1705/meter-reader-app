@@ -59,7 +59,7 @@
     }
 
     #logout-mobile-btn {
-        display: none;
+        /* display: none; */
         cursor: pointer;
     }
 }
