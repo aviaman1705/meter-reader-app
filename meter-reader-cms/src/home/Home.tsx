@@ -42,12 +42,8 @@ export default function Home() {
 
   return (
     <>
-      <Row className="mb-4">
-        <Panel data={dashboardSummary} />
-      </Row>
-      <Row>
-        <Chart data={chartData} />
-      </Row>
+      <Panel data={dashboardSummary} />
+      <Chart data={chartData} />
     </>
   );
 }

@@ -8,7 +8,6 @@ import { claim } from "./auth/auth.models";
 import { getClaims } from "./auth/handleJWT";
 import AuthenticationContext from "./auth/AuthenticationContext";
 import ThemeProvider from "react-bootstrap/ThemeProvider";
-import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
@@ -41,11 +40,11 @@ function App() {
       <AuthenticationContext.Provider
         value={{ claims: claims, update: setClaims }}
       >
-        <Container>
+        <div className="container-fluid">
           <Row>
             <Col className="p-0">
               <Header />
-              <Container id="main-container">
+              <div id="main-container" className="container-fluid p-3">
                 <Switch>
                   {routes.map((route, index) => (
                     <Route
@@ -61,11 +60,11 @@ function App() {
                     </Route>
                   ))}
                 </Switch>
-              </Container>
+              </div>
               <Footer />
             </Col>
           </Row>
-        </Container>
+        </div>
 
         <div className="container"></div>
       </AuthenticationContext.Provider>

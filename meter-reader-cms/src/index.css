@@ -1,5 +1,6 @@
 body{
     min-height: 100vh;
+    margin-top: 48px;
 }
 /* //Mobile */
 @media (min-width: 300px) {
