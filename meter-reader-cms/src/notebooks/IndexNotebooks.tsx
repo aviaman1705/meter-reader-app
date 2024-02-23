@@ -145,7 +145,7 @@ export default function IndexNotebooks() {
         <Button
           id={classes["grid-redirect-btn"]}
           onClick={() => {
-            history.push(`/tracks/create`);
+            history.push(`/notebooks/create`);
           }}
         >
           הוספת פנקס

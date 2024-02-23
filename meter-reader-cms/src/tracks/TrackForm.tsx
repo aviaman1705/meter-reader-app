@@ -45,7 +45,8 @@ export default function TrackForm(props: trackFormProps) {
   };
 
   return (
-    <div className="col-xl-5 col-lg-6 col-md-8 offset-xl-7 offset-lg-6 offset-md-4 form-wrap">
+    // <div className="col-xl-5 col-lg-6 col-md-8 offset-xl-7 offset-lg-6 offset-md-4 form-wrap">
+    <div className="col-lg-3 offset-lg-9">
       <div className="card card-primary">
         <div className="card-header">
           <h3 className="card-title">{props.title}</h3>

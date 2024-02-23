@@ -1,21 +1,18 @@
-@media (min-width: 300px) {
-}
+@media (min-width: 300px) {}
 
-@media (min-width: 768px) {
-}
+@media (min-width: 768px) {}
 
 /* Small devies (desktops, 992px and up) */
-@media (min-width: 992px) {
-  
-}
+@media (min-width: 992px) {}
 
 /* Small devies (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
 
-    h1.grid-title{
+    h1.grid-title {
         text-align: center;
     }
-    div#table-wrapper{
+
+    div#table-wrapper {
         min-height: 500px;
     }
 
@@ -76,8 +73,13 @@
 
     div.buttons-section {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         gap: 0.5rem;
+    }
+
+    button#system-btn,
+    #btn-cancel {
+        flex-basis: 30%;
     }
 
 }
