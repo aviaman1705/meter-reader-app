@@ -177,6 +177,7 @@ export default function IndexTracks() {
     <>
       <div className="row">
         <div className="col-lg-12">
+          <h1 className={`${classes["grid-title"]}`}>רשימת מסלולים</h1>
           <Button
             id={classes["grid-redirect-btn"]}
             onClick={() => {

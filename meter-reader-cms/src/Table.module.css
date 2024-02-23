@@ -12,6 +12,9 @@
 /* Small devies (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
 
+    h1.grid-title{
+        text-align: center;
+    }
     div#table-wrapper{
         min-height: 500px;
     }
