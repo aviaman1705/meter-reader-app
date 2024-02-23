@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import axios, { AxiosResponse, AxiosError } from "axios";
-import { Button, Card, Col, Container, Row, Table } from "react-bootstrap";
 import dayjs from "dayjs";
 import { urlTracks } from "../endpoints";
 import { sysDataTablePager } from "../models/sysDataTablePager.models";
@@ -11,9 +10,10 @@ import ItemsPerPage from "../utils/ItemsPerPage";
 import TableHeader from "../utils/TableHeader";
 import Loading from "../utils/Loading";
 import Pagination from "../utils/Pagination";
+import customConfirm from "../utils/customConfirm";
+import Button from "../utils/Button";
 
 import classes from "./../Table.module.css";
-import customConfirm from "../utils/customConfirm";
 
 export default function IndexTracks() {
   const history = useHistory();
@@ -175,82 +175,77 @@ export default function IndexTracks() {
 
   return (
     <>
-      <Row>
-        <Col md={12}>
-          <Card>
-            {loading && <Loading left="50%" top="50%" />}
-            <Container>
-              <Row>
-                <Col id={`${classes["table-one-section"]}`}>
-                  <Button
-                    id={`${classes["btn-add-item-redirect"]}`}
-                    variant="secondary"
-                    onClick={() => {
-                      history.push(`/tracks/create`);
-                    }}
-                  >
-                    הוספת מסלול
-                  </Button>
-                  <Search onSearch={(e: any) => onSearch(e)} />
-                  <ItemsPerPage
-                    limit={limit}
-                    optins={options}
-                    onChange={(e: any) => handlePageItemCount(e)}
-                  />
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <h1 className={`${classes["grid-title"]}`}>רשימת מסלולים</h1>
-                  {loading && <Loading left="50%" top="50%" />}
-                  <Table responsive bordered hover striped>
-                    <TableHeader columns={columns} onSorting={onSorting} />
-                    <tbody>
-                      {data?.map((item, index, currentArray) => (
-                        <tr key={index}>
-                          <td>{index + 1}</td>
-                          <td>{item.date}</td>
-                          <td>{item.desc}</td>
-                          <td>{item.called}</td>
-                          <td>{item.unCalled}</td>
-                          <td>
-                            <Button
-                              variant="info"
-                              title={item.desc}
-                              onClick={() => {
-                                history.push(`/tracks/edit/${item.id}`);
-                              }}
-                            >
-                              עריכה
-                            </Button>
-                          </td>
-                          <td>
-                            <Button
-                              variant="danger"
-                              title="מחיקה"
-                              onClick={() => {
-                                remove(item.id);
-                              }}
-                            >
-                              מחיקה
-                            </Button>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </Table>
-                  <Pagination
-                    currentPage={page}
-                    totalAmontOfPages={totalAmontOfPages}
-                    onChange={(newPage) => setPage(newPage)}
-                  />
-                </Col>
-              </Row>
-            </Container>
-            <Row id="table-three-section"></Row>
-          </Card>
-        </Col>
-      </Row>
+      <div className="row">
+        <div className="col-lg-12">
+          <Button
+            id={classes["grid-redirect-btn"]}
+            onClick={() => {
+              history.push(`/tracks/create`);
+            }}
+          >
+            הוספת מסלול
+          </Button>
+        </div>
+        <div className="col-lg-2 offset-lg-4">
+          <Search onSearch={(e: any) => onSearch(e)} />
+        </div>
+        <div className="col-lg-6">
+          <div id={classes["select-option-wrapper"]} className="row">
+            <div className="col-lg-3">
+              <ItemsPerPage
+                limit={limit}
+                optins={options}
+                onChange={(e: any) => handlePageItemCount(e)}
+              />
+            </div>
+          </div>
+        </div>
+        <div id={classes["table-wrapper"]} className="col">
+          {loading && <Loading left="50%" top="50%" />}
+          <table className="table table-bordered table-hover table-striped table-responsive">
+            <TableHeader columns={columns} onSorting={onSorting} />
+            <tbody>
+              {data?.map((item, index, currentArray) => (
+                <tr key={index}>
+                  <td>{index + 1}</td>
+                  <td>{item.date}</td>
+                  <td>{item.desc}</td>
+                  <td>{item.called}</td>
+                  <td>{item.unCalled}</td>
+                  <td>
+                    <Button
+                      variant="info"
+                      title={item.desc}
+                      onClick={() => {
+                        history.push(`/tracks/edit/${item.id}`);
+                      }}
+                    >
+                      עריכה
+                    </Button>
+                  </td>
+                  <td>
+                    <Button
+                      variant="danger"
+                      title="מחיקה"
+                      onClick={() => {
+                        remove(item.id);
+                      }}
+                    >
+                      מחיקה
+                    </Button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <Pagination
+            currentPage={page}
+            totalAmontOfPages={totalAmontOfPages}
+            onChange={(newPage) => setPage(newPage)}
+          />
+        </div>
+        <div className="row"></div>
+      </div>
     </>
   );
 }
