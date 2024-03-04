@@ -11,7 +11,7 @@ import AuthForm from "./AuthForm";
 import DisplayErrors from "../utils/DisplayErrors";
 import Loading from "../utils/Loading";
 
-import css from "./Register.module.css";
+import css from "./../form.module.css";
 
 YupPassword(Yup);
 
@@ -62,8 +62,8 @@ export default function Login() {
 
   return (
     <>
-      <h1 className="text-lg-center">כניסה</h1>
-      <div className={css["login-page"]}>
+      <h1 className={css["auth-page-title"]}>כניסה</h1>
+      <div className={css["auth-container"]}>
         {loading && <Loading left="48%" top="55%" />}
         <div className={css["form"]}>
           <AuthForm

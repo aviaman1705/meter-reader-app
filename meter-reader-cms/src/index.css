@@ -2,6 +2,10 @@ body{
     min-height: 100vh;
     margin-top: 48px;
 }
+
+div#main-container {
+    height: 100vh;
+}
 /* //Mobile */
 @media (min-width: 300px) {
 
@@ -19,15 +23,6 @@ body{
     .table thead th {
         vertical-align: bottom;
         border-bottom: 2px solid #dee2e6;
-    }
-
-    /* FORM */
-    .form-wrap {
-        padding: 0 0.5rem;
-    }
-
-    .form-group.p-2 {
-        margin-bottom: 0.25rem;
     }
 }
 

@@ -1,10 +1,10 @@
 import { Form, Formik, FormikHelpers } from "formik";
 import TextField from "../../forms/TextField/TextField";
 import Button from "../../utils/Button";
-
-import classes from "./../Register.module.css";
 import { Link } from "react-router-dom";
 import { registerDTO } from "../auth.models";
+
+import classes from "./../../form.module.css";
 
 export default function RegisterForm(props: registerFormProps) {
   return (

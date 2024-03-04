@@ -4,7 +4,7 @@ import TextField from "../forms/TextField/TextField";
 import { userCredentials } from "./auth.models";
 import { Link } from "react-router-dom";
 
-import classes from "./Register.module.css";
+import classes from "./../form.module.css";
 
 export default function AuthForm(props: authFormProps) {
   return (

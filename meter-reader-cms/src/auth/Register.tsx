@@ -10,7 +10,7 @@ import DisplayErrors from "../utils/DisplayErrors";
 import Loading from "../utils/Loading";
 import RegisterForm from "./Register/RegisterForm";
 
-import css from "./Register.module.css";
+import css from "./../form.module.css";
 
 YupPassword(Yup);
 
@@ -69,8 +69,8 @@ export default function Register() {
 
   return (
     <>
-      <h1 className="text-lg-center">הרשמה</h1>
-      <div className={css["login-page"]}>
+      <h1 className={css["auth-page-title"]}>הרשמה</h1>
+      <div className={css["auth-container"]}>
         {loading && <Loading left="48%" top="55%" />}
         <div className={css["form"]}>
           <RegisterForm

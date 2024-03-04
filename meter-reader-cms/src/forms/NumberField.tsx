@@ -1,6 +1,6 @@
 import { Field, ErrorMessage } from "formik";
 
-import css from "./TextField/TextField.module.css";
+import css from "./../form.module.css";
 
 export default function NumberField(props: textFieldProps) {
   return (

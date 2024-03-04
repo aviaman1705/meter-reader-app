@@ -1,11 +1,11 @@
 import { Field, ErrorMessage } from "formik";
 
-import css from "./TextField.module.css";
+import css from "./../../form.module.css";
 
 export default function TextField(props: textFieldProps) {
   return (
-    <div className="form-group p-2">
-      <label className="form-label" htmlFor={props.field}>
+    <div className={css["form-group"]}>
+      <label className={css["form-label"]} htmlFor={props.field}>
         {props.displayName}
       </label>
       <Field
