@@ -2,9 +2,9 @@ import { useContext, useEffect, useState } from "react";
 import { Nav, NavDropdown, Navbar } from "react-bootstrap";
 import utf8 from "utf8";
 import { NavLink } from "react-router-dom";
-import { logout } from "./auth/handleJWT";
-import AuthenticationContext from "./auth/AuthenticationContext";
-import Authorized from "./auth/Authorized";
+import { logout } from "./components/auth/handleJWT";
+import AuthenticationContext from "./components/auth/AuthenticationContext";
+import Authorized from "./components/auth/Authorized";
 import { FcElectricity } from "react-icons/fc";
 import logo from "./logo.svg";
 

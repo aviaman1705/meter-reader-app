@@ -6,7 +6,7 @@ import classes from "./../Table.module.css";
 
 export default function ItemsPerPage(props: buttonProps) {
   return (
-    <div id={`${classes["per-page-item"]}`}>
+    <div className={`${classes["per-page-item"]}`}>
       <label id={`${classes["table-select-label"]}`}>הצג </label>
       <Form.Select
         id={`${classes["table-select-option"]}`}

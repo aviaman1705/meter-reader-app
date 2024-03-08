@@ -77,7 +77,7 @@ export default function Pagination(props: paginationProps) {
   }, [props.currentPage, props.totalAmontOfPages, props.radio]);
 
   return (
-    <ul className={`${classes["pagination"]}`}>
+    <ul className={`${classes["ul-table-pagination"]}`}>
       {linkModels.map((link) => (
         <li
           key={link.text}

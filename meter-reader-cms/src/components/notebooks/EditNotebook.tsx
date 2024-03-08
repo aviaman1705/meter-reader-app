@@ -1,12 +1,14 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { urlNotebooks } from "../endpoints";
+import { urlNotebooks } from "../../endpoints";
 import { notebookDTO } from "./notebook.models";
-import { convertNotebookToFormData } from "../utils/formDataUtils";
-import DisplayErrors from "../utils/DisplayErrors";
-import Loading from "../utils/Loading";
+import { convertNotebookToFormData } from "../../utils/formDataUtils";
+import DisplayErrors from "../../utils/DisplayErrors";
+import Loading from "../../utils/Loading";
 import NotebookForm from "./NotebookForm";
+
+import classes from "./../../Form.module.css";
 
 export default function EditNotebook() {
   const { id }: any = useParams();
@@ -41,17 +43,19 @@ export default function EditNotebook() {
 
   return (
     <div className="form-container">
-      <DisplayErrors errors={errors} />
-      {loading === true ? <Loading left="75%" top="45%" /> : null}
-      {notebook && (
-        <NotebookForm
-          title="עריכת פנקס"
-          model={notebook}
-          onSubmit={async (value) => {
-            await edit(value);
-          }}
-        />
-      )}
+      <div className={classes["form-box"]}>
+        <DisplayErrors errors={errors} />
+        {loading === true ? <Loading left="45%" top="42%" /> : null}
+        {notebook && (
+          <NotebookForm
+            title="עריכת פנקס"
+            model={notebook}
+            onSubmit={async (value) => {
+              await edit(value);
+            }}
+          />
+        )}
+      </div>
     </div>
   );
 }

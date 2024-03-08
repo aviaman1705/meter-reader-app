@@ -4,9 +4,9 @@ import Header from "./Header";
 import routes from "./route-config";
 import configureInterceptor from "./utils/httpInterceptors";
 import { useEffect, useState } from "react";
-import { claim } from "./auth/auth.models";
-import { getClaims } from "./auth/handleJWT";
-import AuthenticationContext from "./auth/AuthenticationContext";
+import { claim } from "./components/auth/auth.models";
+import { getClaims } from "./components/auth/handleJWT";
+import AuthenticationContext from "./components/auth/AuthenticationContext";
 import ThemeProvider from "react-bootstrap/ThemeProvider";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -40,33 +40,21 @@ function App() {
       <AuthenticationContext.Provider
         value={{ claims: claims, update: setClaims }}
       >
-        <div className="container-fluid">
-          <Row>
-            <Col className="p-0">
-              <Header />
-              <div id="main-container" className="container-fluid p-3">
-                <Switch>
-                  {routes.map((route, index) => (
-                    <Route
-                      exact={route.exact}
-                      path={route.path}
-                      key={route.path}
-                    >
-                      {route.isAdmin && !isAdmin() ? (
-                        <>You are not allowed to see this page</>
-                      ) : (
-                        <route.component />
-                      )}
-                    </Route>
-                  ))}
-                </Switch>
-              </div>
-              <Footer />
-            </Col>
-          </Row>
+        <div id="main-container">
+          <Header />
+          <Switch>
+            {routes.map((route, index) => (
+              <Route exact={route.exact} path={route.path} key={route.path}>
+                {route.isAdmin && !isAdmin() ? (
+                  <>You are not allowed to see this page</>
+                ) : (
+                  <route.component />
+                )}
+              </Route>
+            ))}
+          </Switch>
+          <Footer />
         </div>
-
-        <div className="container"></div>
       </AuthenticationContext.Provider>
     </ThemeProvider>
   );

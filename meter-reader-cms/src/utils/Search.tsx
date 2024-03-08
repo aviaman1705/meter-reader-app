@@ -4,7 +4,7 @@ import classes from "./../Table.module.css";
 
 export default function Search(props: searchProps) {
   return (
-    <div id={`${classes["search-input-wrap"]}`}>
+    <div className={`${classes["search-input-wrap"]}`}>
       <Form.Control
         type="text"
         placeholder="חפש..."

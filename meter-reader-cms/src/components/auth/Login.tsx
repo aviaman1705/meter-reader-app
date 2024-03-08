@@ -6,12 +6,12 @@ import axios, { AxiosResponse } from "axios";
 import AuthenticationContext from "./AuthenticationContext";
 import { getClaims, saveToken } from "./handleJWT";
 import { authenticationResponse, userCredentials } from "./auth.models";
-import { urlAccounts } from "../endpoints";
+import { urlAccounts } from "../../endpoints";
 import AuthForm from "./AuthForm";
-import DisplayErrors from "../utils/DisplayErrors";
-import Loading from "../utils/Loading";
+import DisplayErrors from "../../utils/DisplayErrors";
+import Loading from "../../utils/Loading";
 
-import css from "./../form.module.css";
+import css from "./../../Form.module.css";
 
 YupPassword(Yup);
 

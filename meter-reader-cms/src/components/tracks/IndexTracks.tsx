@@ -2,18 +2,18 @@ import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import axios, { AxiosResponse, AxiosError } from "axios";
 import dayjs from "dayjs";
-import { urlTracks } from "../endpoints";
-import { sysDataTablePager } from "../models/sysDataTablePager.models";
+import { urlTracks } from "../../endpoints";
+import { sysDataTablePager } from "../../models/sysDataTablePager.models";
 import { trackDTO } from "./track.models";
-import Search from "../utils/Search";
-import ItemsPerPage from "../utils/ItemsPerPage";
-import TableHeader from "../utils/TableHeader";
-import Loading from "../utils/Loading";
-import Pagination from "../utils/Pagination";
-import customConfirm from "../utils/customConfirm";
-import Button from "../utils/Button";
+import Search from "../../utils/Search";
+import ItemsPerPage from "../../utils/ItemsPerPage";
+import TableHeader from "../../utils/TableHeader";
+import Loading from "../../utils/Loading";
+import Pagination from "../../utils/Pagination";
+import customConfirm from "../../utils/customConfirm";
+import Button from "../../utils/Button";
 
-import classes from "./../Table.module.css";
+import classes from "./../../Table.module.css";
 
 export default function IndexTracks() {
   const history = useHistory();
@@ -175,32 +175,24 @@ export default function IndexTracks() {
 
   return (
     <>
+      <h1 className={`${classes["grid-title"]}`}>רשימת מסלולים</h1>
+      <Button
+        id={classes["grid-redirect-btn"]}
+        onClick={() => {
+          history.push(`/tracks/create`);
+        }}
+      >
+        הוספת מסלול
+      </Button>
+      <div className={classes["filter-box"]}>
+        <Search onSearch={(e: any) => onSearch(e)} />
+        <ItemsPerPage
+          limit={limit}
+          optins={options}
+          onChange={(e: any) => handlePageItemCount(e)}
+        />
+      </div>
       <div className="row">
-        <div className="col-lg-12">
-          <h1 className={`${classes["grid-title"]}`}>רשימת מסלולים</h1>
-          <Button
-            id={classes["grid-redirect-btn"]}
-            onClick={() => {
-              history.push(`/tracks/create`);
-            }}
-          >
-            הוספת מסלול
-          </Button>
-        </div>
-        <div className="col-lg-2 offset-lg-4">
-          <Search onSearch={(e: any) => onSearch(e)} />
-        </div>
-        <div className="col-lg-6">
-          <div id={classes["select-option-wrapper"]} className="row">
-            <div className="col-lg-3">
-              <ItemsPerPage
-                limit={limit}
-                optins={options}
-                onChange={(e: any) => handlePageItemCount(e)}
-              />
-            </div>
-          </div>
-        </div>
         <div id={classes["table-wrapper"]} className="col">
           {loading && <Loading left="50%" top="50%" />}
           <table className="table table-bordered table-hover table-striped table-responsive">
@@ -239,11 +231,13 @@ export default function IndexTracks() {
               ))}
             </tbody>
           </table>
-          <Pagination
-            currentPage={page}
-            totalAmontOfPages={totalAmontOfPages}
-            onChange={(newPage) => setPage(newPage)}
-          />
+          <div className={classes["pagination-box"]}>
+            <Pagination
+              currentPage={page}
+              totalAmontOfPages={totalAmontOfPages}
+              onChange={(newPage) => setPage(newPage)}
+            />
+          </div>
         </div>
         <div className="row"></div>
       </div>

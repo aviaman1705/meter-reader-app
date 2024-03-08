@@ -1,12 +1,14 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { urlTracks } from "../endpoints";
-import DisplayErrors from "../utils/DisplayErrors";
-import { convertTrackToFormData } from "../utils/formDataUtils";
-import Loading from "../utils/Loading";
+import { urlTracks } from "../../endpoints";
+import DisplayErrors from "../../utils/DisplayErrors";
+import { convertTrackToFormData } from "../../utils/formDataUtils";
+import Loading from "../../utils/Loading";
 import { trackDTO } from "./track.models";
 import TrackForm from "./TrackForm";
+
+import classes from "./../../Form.module.css";
 
 export default function EditTrack() {
   const { id }: any = useParams();
@@ -41,18 +43,20 @@ export default function EditTrack() {
 
   return (
     <div className="form-container">
-      <DisplayErrors errors={errors} />
-      {loading === true ? <Loading left="75%" top="50%" /> : null}
-      {track && (
-        <TrackForm
-          title="עריכת מסלול"
-          model={track}
-          ddlNotebooksValue={track.notebookId}
-          onSubmit={async (value) => {
-            await edit(value);
-          }}
-        />
-      )}
+      <div className={classes["form-box"]}>
+        <DisplayErrors errors={errors} />
+        {loading === true ? <Loading left="45%" top="42%" /> : null}
+        {track && (
+          <TrackForm
+            title="עריכת מסלול"
+            model={track}
+            ddlNotebooksValue={track.notebookId}
+            onSubmit={async (value) => {
+              await edit(value);
+            }}
+          />
+        )}
+      </div>
     </div>
   );
 }

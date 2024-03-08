@@ -1,16 +1,23 @@
-body{
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
     min-height: 100vh;
     margin-top: 48px;
 }
 
 div#main-container {
-    height: 100vh;
+    padding: 20px;
 }
+
 /* //Mobile */
 @media (min-width: 300px) {
 
     /* TABLE */
-    .table-row.row {
+    /* .table-row.row {
         position: relative;
     }
 
@@ -23,7 +30,7 @@ div#main-container {
     .table thead th {
         vertical-align: bottom;
         border-bottom: 2px solid #dee2e6;
-    }
+    } */
 }
 
 /* Small devies (tablets, 768px and up) */
@@ -39,7 +46,7 @@ div#main-container {
 @media (min-width: 1200px) {
 
     /* FORM */
-    .form-container{
+    /* .form-container{
         position: relative;
-    }
+    } */
 }

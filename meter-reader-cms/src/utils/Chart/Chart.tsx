@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { monthlyDataDTO } from "../../home/dashboard.models";
+import { monthlyDataDTO } from "../../components/home/dashboard.models";
 import BarChartItem from "./BarChartItem/BarChartItem";
 
 export default function Chart(props: ChartProps) {

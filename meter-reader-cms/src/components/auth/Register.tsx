@@ -5,12 +5,12 @@ import YupPassword from "yup-password";
 import axios, { AxiosResponse } from "axios";
 import Swal from "sweetalert2";
 import { authenticationResponse, registerDTO } from "./auth.models";
-import { urlAccounts } from "../endpoints";
-import DisplayErrors from "../utils/DisplayErrors";
-import Loading from "../utils/Loading";
+import { urlAccounts } from "../../endpoints";
+import DisplayErrors from "../../utils/DisplayErrors";
+import Loading from "../../utils/Loading";
 import RegisterForm from "./Register/RegisterForm";
 
-import css from "./../form.module.css";
+import css from "./../../Form.module.css";
 
 YupPassword(Yup);
 

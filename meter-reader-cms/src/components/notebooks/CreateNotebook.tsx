@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { notebookDTO } from "./notebook.models";
-import { convertNotebookToFormData } from "../utils/formDataUtils";
+import { convertNotebookToFormData } from "../../utils/formDataUtils";
 import axios, { AxiosResponse } from "axios";
-import { urlNotebooks } from "../endpoints";
-import DisplayErrors from "../utils/DisplayErrors";
-import Loading from "../utils/Loading";
+import { urlNotebooks } from "../../endpoints";
+import DisplayErrors from "../../utils/DisplayErrors";
+import Loading from "../../utils/Loading";
+
+import classes from "./../../Form.module.css";
 import NotebookForm from "./NotebookForm";
 
 export default function CreateNotebook() {
@@ -35,13 +37,15 @@ export default function CreateNotebook() {
 
   return (
     <div className="form-container">
-      <DisplayErrors errors={errors} />
-      {loading === true ? <Loading left="75%" top="45%" /> : null}
-      <NotebookForm
-        title="יצירת פנקס"
-        model={{ id: 0, number: null, tracksCount: null }}
-        onSubmit={async (values) => await create(values)}
-      />
+      <div className={classes["form-box"]}>
+        <DisplayErrors errors={errors} />
+        {loading === true ? <Loading left="45%" top="42%" /> : null}
+        <NotebookForm
+          title="יצירת פנקס"
+          model={{ id: 0, number: null, tracksCount: null }}
+          onSubmit={async (values) => await create(values)}
+        />
+      </div>
     </div>
   );
 }

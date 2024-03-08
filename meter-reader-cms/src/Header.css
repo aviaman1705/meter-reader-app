@@ -1,8 +1,9 @@
 /* //Mobile */
 @media (min-width: 300px) {
-    .bg-custom{
-    background-color: #009688;
-}
+    .bg-custom {
+        background-color: #009688;
+    }
+
     #navbarScrollingDropdown {
         display: none;
     }
@@ -33,6 +34,7 @@
     a.navbar-brand {
         color: #fff !important;
         font-size: 1.5rem;
+        margin-left: 20px;
     }
 
     .navbar-toggler:focus {

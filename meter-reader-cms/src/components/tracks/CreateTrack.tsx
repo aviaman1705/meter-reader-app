@@ -1,12 +1,14 @@
 import axios, { AxiosResponse } from "axios";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { urlTracks } from "../endpoints";
-import DisplayErrors from "../utils/DisplayErrors";
-import { convertTrackToFormData } from "../utils/formDataUtils";
-import Loading from "../utils/Loading";
+import { urlTracks } from "../../endpoints";
+import DisplayErrors from "../../utils/DisplayErrors";
+import { convertTrackToFormData } from "../../utils/formDataUtils";
+import Loading from "../../utils/Loading";
 import { trackDTO } from "./track.models";
 import TrackForm from "./TrackForm";
+
+import classes from "./../../Form.module.css";
 
 export default function CreateTrack() {
   const [loading, setLoading] = useState(false);
@@ -42,13 +44,15 @@ export default function CreateTrack() {
 
   return (
     <div className="form-container">
-      <DisplayErrors errors={errors} />
-      {loading === true ? <Loading left="75%" top="50%" /> : null}
-      <TrackForm
-        title="יצירת מסלול"
-        model={track}
-        onSubmit={async (values) => await create(values)}
-      />
+      <div className={classes["form-box"]}>
+        <DisplayErrors errors={errors} />
+        {loading === true ? <Loading left="45%" top="42%" /> : null}
+        <TrackForm
+          title="יצירת מסלול"
+          model={track}
+          onSubmit={async (values) => await create(values)}
+        />
+      </div>
     </div>
   );
 }

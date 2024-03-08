@@ -1,19 +1,19 @@
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import axios, { AxiosResponse, AxiosError } from "axios";
-import { urlNotebooks } from "../endpoints";
-import { sysDataTablePager } from "../models/sysDataTablePager.models";
+import { urlNotebooks } from "../../endpoints";
+import { sysDataTablePager } from "../../models/sysDataTablePager.models";
 import { notebookDTO } from "./notebook.models";
-import Search from "../utils/Search";
-import ItemsPerPage from "../utils/ItemsPerPage";
-import TableHeader from "../utils/TableHeader";
-import Loading from "../utils/Loading";
-import Pagination from "../utils/Pagination";
-import Button from "../utils/Button";
-import customConfirm from "../utils/customConfirm";
-import alert from "../utils/alert";
+import Search from "../../utils/Search";
+import ItemsPerPage from "../../utils/ItemsPerPage";
+import TableHeader from "../../utils/TableHeader";
+import Loading from "../../utils/Loading";
+import Pagination from "../../utils/Pagination";
+import Button from "../../utils/Button";
+import customConfirm from "../../utils/customConfirm";
+import alert from "../../utils/alert";
 
-import classes from "./../Table.module.css";
+import classes from "./../../Table.module.css";
 
 export default function IndexNotebooks() {
   const history = useHistory();
@@ -139,76 +139,72 @@ export default function IndexNotebooks() {
   };
 
   return (
-    <div className="row">
-      <div className="col-lg-12">
-        <h1 className={`${classes["grid-title"]}`}>רשימת פנקסים</h1>
-        <Button
-          id={classes["grid-redirect-btn"]}
-          onClick={() => {
-            history.push(`/notebooks/create`);
-          }}
-        >
-          הוספת פנקס
-        </Button>
-      </div>
-      <div className="col-lg-2 offset-lg-4">
+    <>
+      <h1 className={`${classes["grid-title"]}`}>רשימת פנקסים</h1>
+      <Button
+        id={classes["grid-redirect-btn"]}
+        onClick={() => {
+          history.push(`/notebooks/create`);
+        }}
+      >
+        הוספת פנקס
+      </Button>
+      <div className={classes["filter-box"]}>
         <Search onSearch={(e: any) => onSearch(e)} />
+        <ItemsPerPage
+          limit={limit}
+          optins={options}
+          onChange={(e: any) => handlePageItemCount(e)}
+        />
       </div>
-      <div className="col-lg-6">
-        <div id={classes["select-option-wrapper"]} className="row">
-          <div className="col-lg-3">
-            <ItemsPerPage
-              limit={limit}
-              optins={options}
-              onChange={(e: any) => handlePageItemCount(e)}
+      <div className="row">
+        <div id={classes["table-wrapper"]} className="col">
+          {loading && <Loading left="50%" top="50%" />}
+          <table className="table table-bordered table-hover table-striped table-responsive">
+            <TableHeader columns={columns} onSorting={onSorting} />
+            <tbody>
+              {data?.map((item, index, currentArray) => (
+                <tr key={index}>
+                  <td>{index + 1}</td>
+                  <td>{item.number}</td>
+                  <td>
+                    <Button
+                      variant="info"
+                      title={item.number.toString()}
+                      onClick={() => {
+                        history.push(`/notebooks/edit/${item.id}`);
+                      }}
+                    >
+                      עריכה
+                    </Button>
+                  </td>
+                  <td>
+                    <a
+                      className="btn btn-danger"
+                      onClick={() =>
+                        customConfirm(
+                          () => handleDelete(item.id),
+                          "האם אתה בטוח שברצונך למחוק ?"
+                        )
+                      }
+                    >
+                      מחיקה
+                    </a>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <div className={classes["pagination-box"]}>
+            <Pagination
+              currentPage={page}
+              totalAmontOfPages={totalAmontOfPages}
+              onChange={(newPage) => setPage(newPage)}
             />
           </div>
         </div>
+        <div className="row"></div>
       </div>
-      <div id={classes["table-wrapper"]} className="col">
-        {loading && <Loading left="50%" top="50%" />}
-        <table className="table table-bordered table-hover table-striped table-responsive">
-          <TableHeader columns={columns} onSorting={onSorting} />
-          <tbody>
-            {data?.map((item, index, currentArray) => (
-              <tr key={index}>
-                <td>{index + 1}</td>
-                <td>{item.number}</td>
-                <td>
-                  <Button
-                    variant="info"
-                    title={item.number.toString()}
-                    onClick={() => {
-                      history.push(`/notebooks/edit/${item.id}`);
-                    }}
-                  >
-                    עריכה
-                  </Button>
-                </td>
-                <td>
-                  <a
-                    className="btn btn-danger"
-                    onClick={() =>
-                      customConfirm(
-                        () => handleDelete(item.id),
-                        "האם אתה בטוח שברצונך למחוק ?"
-                      )
-                    }
-                  >
-                    מחיקה
-                  </a>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <Pagination
-          currentPage={page}
-          totalAmontOfPages={totalAmontOfPages}
-          onChange={(newPage) => setPage(newPage)}
-        />
-      </div>
-      <div className="row"></div>
-    </div>
+    </>
   );
 }

@@ -1,16 +1,17 @@
 import { Form, Formik, FormikHelpers } from "formik";
-import Button from "../utils/Button";
-import TextField from "../forms/TextField/TextField";
-import { userCredentials } from "./auth.models";
+import TextField from "../../forms/TextField/TextField";
+import Button from "../../../utils/Button";
 import { Link } from "react-router-dom";
+import { registerDTO } from "../auth.models";
 
-import classes from "./../form.module.css";
+import classes from "./../../../Form.module.css";
 
-export default function AuthForm(props: authFormProps) {
+export default function RegisterForm(props: registerFormProps) {
   return (
     <>
       <Formik
         initialValues={{
+          username: "",
           email: "",
           password: "",
         }}
@@ -21,6 +22,7 @@ export default function AuthForm(props: authFormProps) {
       >
         {(formikProps) => (
           <Form>
+            <TextField displayName="שם משתמש" field="username" />
             <TextField displayName="מייל" field="email" />
             <TextField displayName="סיסמא" field="password" type="password" />
             <Button disabled={formikProps.isSubmitting} type="submit">
@@ -37,20 +39,17 @@ export default function AuthForm(props: authFormProps) {
   );
 }
 
-interface authFormProps {
+interface registerFormProps {
   btnText: string;
   secondBtnText: string;
   secondBtnUrl: string;
   questionText: string;
   validationSchema: any;
-  model: userCredentials;
+  model: registerDTO;
 
-  onSubmit(
-    values: userCredentials,
-    actions: FormikHelpers<userCredentials>
-  ): void;
+  onSubmit(values: registerDTO, actions: FormikHelpers<registerDTO>): void;
 }
 
-AuthForm.defaultProps = {
+RegisterForm.defaultProps = {
   btnText: "כפתור",
 };

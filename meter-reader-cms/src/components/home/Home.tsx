@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import axios, { AxiosResponse } from "axios";
 import { Col, Container, Row } from "react-bootstrap";
-import { urlTracks } from "../endpoints";
+import { urlTracks } from "../../endpoints";
 import { dashboardDTO, dashboardSummaryDTO } from "./dashboard.models";
-import PanelItem from "../utils/Panel/PanelItem";
-import Chart from "../utils/Chart/Chart";
-import Panel from "../utils/Panel/Panel";
+import PanelItem from "../../utils/Panel/PanelItem";
+import Chart from "../../utils/Chart/Chart";
+import Panel from "../../utils/Panel/Panel";
 
 export default function Home() {
   const [chartData, setChartData] = useState([]);

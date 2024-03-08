@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getToken } from "../auth/handleJWT";
+import { getToken } from "../components/auth/handleJWT";
 
 export default function configureInterceptor() {
     axios.interceptors.request.use(

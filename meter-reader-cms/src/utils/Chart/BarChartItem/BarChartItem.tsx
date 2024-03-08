@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { monthlyDataDTO } from "../../../home/dashboard.models";
+import { monthlyDataDTO } from "../../../components/home/dashboard.models";
 import {
   BarChart,
   Bar,
