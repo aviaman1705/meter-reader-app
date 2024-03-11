@@ -10,12 +10,13 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import style from "./BarChartItem.module.css";
+
+import classes from "./BarChartItem.module.css";
 
 export default function BarChartItem(props: BarChartItemProps) {
   return (
     <ResponsiveContainer
-      className={style["recharts-responsive-container"]}
+      className={classes["recharts-responsive-container"]}
       width="100%"
       height={500}
     >

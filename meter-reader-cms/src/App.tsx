@@ -42,17 +42,19 @@ function App() {
       >
         <div id="main-container">
           <Header />
-          <Switch>
-            {routes.map((route, index) => (
-              <Route exact={route.exact} path={route.path} key={route.path}>
-                {route.isAdmin && !isAdmin() ? (
-                  <>You are not allowed to see this page</>
-                ) : (
-                  <route.component />
-                )}
-              </Route>
-            ))}
-          </Switch>
+          <div className="content-container">
+            <Switch>
+              {routes.map((route, index) => (
+                <Route exact={route.exact} path={route.path} key={route.path}>
+                  {route.isAdmin && !isAdmin() ? (
+                    <>You are not allowed to see this page</>
+                  ) : (
+                    <route.component />
+                  )}
+                </Route>
+              ))}
+            </Switch>
+          </div>
           <Footer />
         </div>
       </AuthenticationContext.Provider>

@@ -9,10 +9,6 @@ body {
     margin-top: 48px;
 }
 
-div#main-container {
-    padding: 20px;
-}
-
 /* //Mobile */
 @media (min-width: 300px) {
 

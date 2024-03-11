@@ -6,7 +6,11 @@ export default function Pagination(props: paginationProps) {
   const [linkModels, setLinkModels] = useState<linkModel[]>([]);
 
   function selectPage(link: linkModel) {
-    if (link.page === props.currentPage) {
+    const selectedPage = checkString(link.text)
+      ? parseInt(link.text)
+      : link.page;
+
+    if (selectedPage === props.currentPage) {
       return;
     }
 
@@ -14,7 +18,7 @@ export default function Pagination(props: paginationProps) {
       return;
     }
 
-    props.onChange(link.page);
+    props.onChange(selectedPage);
   }
 
   function getClass(link: linkModel) {
@@ -30,6 +34,10 @@ export default function Pagination(props: paginationProps) {
       return "disabled";
     }
     return "pointer";
+  }
+
+  function checkString(string: string) {
+    return /^[0-9]*$/.test(string);
   }
 
   useEffect(() => {
@@ -77,17 +85,19 @@ export default function Pagination(props: paginationProps) {
   }, [props.currentPage, props.totalAmontOfPages, props.radio]);
 
   return (
-    <ul className={`${classes["ul-table-pagination"]}`}>
-      {linkModels.map((link) => (
-        <li
-          key={link.text}
-          onClick={() => selectPage(link)}
-          className={`page-item cursor ${getClass(link)} ${link.class}`}
-        >
-          <span className="page-link">{link.text}</span>
-        </li>
-      ))}
-    </ul>
+    <>
+      <ul className={`${classes["ul-table-pagination"]}`}>
+        {linkModels.map((link) => (
+          <li
+            key={link.text}
+            onClick={() => selectPage(link)}
+            className={`page-item cursor ${getClass(link)} ${link.class}`}
+          >
+            <span className="page-link">{link.text}</span>
+          </li>
+        ))}
+      </ul>
+    </>
   );
 }
 

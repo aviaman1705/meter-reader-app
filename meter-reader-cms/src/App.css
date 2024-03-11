@@ -1,0 +1,17 @@
+div#main-container {
+    padding: 20px;
+    position: relative;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.content-container {
+    padding-bottom: 15.5rem;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 15.5rem;
+}

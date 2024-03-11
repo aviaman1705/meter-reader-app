@@ -1,20 +1,52 @@
-  #panel-page-title {
-      padding: 1rem 0rem;
-      text-align: center;
+  @media (min-width: 300px) {
+      #panel-page-title {
+          padding: 1rem 0rem;
+          text-align: center;
+      }
+
+      .panel-container {
+          display: flex;
+          flex-direction: column;
+          gap: 30px;
+          margin-bottom: 20px;
+      }
+
+      .card {
+          flex-basis: 100%;
+          padding: 10px;
+      }
   }
 
-  .panel-container {
-      display: flex;
-      justify-content: space-between;
-      gap: 30px;
-      flex-wrap: wrap;
+  @media (min-width: 768px) {
+      .panel-container {
+          flex-direction: row;
+          flex-wrap: wrap;
+          justify-content: space-between;
+      }
+
+      .card {
+          flex-basis: 45.5%;
+      }
+
   }
 
-  .card {
-      flex-basis: 30%;
-      padding: 10px;
+  @media (min-width: 992px) {
+      .Panel_card__j4mny {
+          flex-basis: 46.5%;
+      }
   }
 
-  .card:hover {
-      color: #009688;
+  @media (min-width: 1200px) {
+
+      .panel-container {          
+          flex-wrap: wrap;
+      }
+
+      .card {
+          flex-basis: 30%;
+      }
+
+      .card:hover {
+          color: #009688;
+      }
   }
