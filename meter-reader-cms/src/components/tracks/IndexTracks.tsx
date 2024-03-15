@@ -174,73 +174,75 @@ export default function IndexTracks() {
   }
 
   return (
-    <>
+    <div className={`${classes["grid-container"]}`}>
       <h1 className={`${classes["grid-title"]}`}>רשימת מסלולים</h1>
-      <Button
-        id={classes["grid-redirect-btn"]}
-        onClick={() => {
-          history.push(`/tracks/create`);
-        }}
-      >
-        הוספת מסלול
-      </Button>
-      <div className={classes["filter-box"]}>
-        <Search onSearch={(e: any) => onSearch(e)} />
-        <ItemsPerPage
-          limit={limit}
-          optins={options}
-          onChange={(e: any) => handlePageItemCount(e)}
-        />
-      </div>
-      <div className="row">
-        <div id={classes["table-wrapper"]} className="col">
-          {loading && <Loading left="50%" top="50%" />}
-          <table className="table table-bordered table-hover table-striped table-responsive">
-            <TableHeader columns={columns} onSorting={onSorting} />
-            <tbody>
-              {data?.map((item, index, currentArray) => (
-                <tr key={index}>
-                  <td>{index + 1}</td>
-                  <td>{item.date}</td>
-                  <td>{item.desc}</td>
-                  <td>{item.called}</td>
-                  <td>{item.unCalled}</td>
-                  <td>
-                    <Button
-                      variant="info"
-                      title={item.desc}
-                      onClick={() => {
-                        history.push(`/tracks/edit/${item.id}`);
-                      }}
-                    >
-                      עריכה
-                    </Button>
-                  </td>
-                  <td>
-                    <Button
-                      variant="danger"
-                      title="מחיקה"
-                      onClick={() => {
-                        remove(item.id);
-                      }}
-                    >
-                      מחיקה
-                    </Button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <div className={classes["pagination-box"]}>
-            <Pagination
-              currentPage={page}
-              totalAmontOfPages={totalAmontOfPages}
-              onChange={(newPage) => setPage(newPage)}
-            />
-          </div>
+      <div className={`${classes["operation-box"]}`}>
+        <div className={`${classes["right-box"]}`}>
+          <Button
+            id={classes["grid-redirect-btn"]}
+            onClick={() => {
+              history.push(`/tracks/create`);
+            }}
+          >
+            הוספת מסלול
+          </Button>
         </div>
-        <div className="row"></div>
+
+        <div className={`${classes["left-box"]}`}>
+          <Search onSearch={(e: any) => onSearch(e)} />
+          <ItemsPerPage
+            limit={limit}
+            optins={options}
+            onChange={(e: any) => handlePageItemCount(e)}
+          />
+        </div>
       </div>
-    </>
+      <div id={classes["table-wrapper"]} className="col">
+        {loading && <Loading left="50%" top="50%" />}
+        <table className="table table-bordered table-hover table-striped table-responsive">
+          <TableHeader columns={columns} onSorting={onSorting} />
+          <tbody>
+            {data?.map((item, index, currentArray) => (
+              <tr key={index}>
+                <td>{index + 1}</td>
+                <td>{item.date}</td>
+                <td>{item.desc}</td>
+                <td>{item.called}</td>
+                <td>{item.unCalled}</td>
+                <td>
+                  <Button
+                    variant="info"
+                    title={item.desc}
+                    onClick={() => {
+                      history.push(`/tracks/edit/${item.id}`);
+                    }}
+                  >
+                    עריכה
+                  </Button>
+                </td>
+                <td>
+                  <Button
+                    variant="danger"
+                    title="מחיקה"
+                    onClick={() => {
+                      remove(item.id);
+                    }}
+                  >
+                    מחיקה
+                  </Button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <div className={classes["pagination-box"]}>
+          <Pagination
+            currentPage={page}
+            totalAmontOfPages={totalAmontOfPages}
+            onChange={(newPage) => setPage(newPage)}
+          />
+        </div>
+      </div>
+    </div>
   );
 }

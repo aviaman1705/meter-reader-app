@@ -1,6 +1,31 @@
+   .grid-container {}
+
    .grid-title {
        text-align: center;
-       padding-top: 20px;
+       padding: 20px;
+   }
+
+   .operation-box {
+       display: flex;
+   }
+
+   .operation-box .right-box {
+       flex-grow: 10;
+   }
+
+   .operation-box .left-box {
+       flex-grow: 1;
+       display: flex;
+       align-items: center;
+       justify-content: space-between
+   }
+
+   .operation-box .left-box .search-input-wrap {}
+
+   .operation-box .left-box .per-page-item {
+       flex-basis: 110px;
+       display: flex;
+       gap: 10px;
    }
 
    #grid-redirect-btn {
@@ -89,20 +114,18 @@
    /* FLEXBOX */
 
    /* SEARCH */
-   .filter-box {
+   /* .filter-box {
        display: flex;
        align-items: flex-start;
        justify-content: space-between;
-   }
+   } */
 
-   .per-page-item {
+   /* .per-page-item {
        display: flex;
        gap: 10px;
-   }
+   } */
 
-   .search-input-wrap {
-       margin-bottom: 1rem;
-   }
+
 
    /* PAGINATION */
    .pagination-box {

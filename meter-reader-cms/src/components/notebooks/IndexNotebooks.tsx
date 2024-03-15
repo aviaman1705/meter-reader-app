@@ -139,72 +139,74 @@ export default function IndexNotebooks() {
   };
 
   return (
-    <>
+    <div className={`${classes["grid-container"]}`}>
       <h1 className={`${classes["grid-title"]}`}>רשימת פנקסים</h1>
-      <Button
-        id={classes["grid-redirect-btn"]}
-        onClick={() => {
-          history.push(`/notebooks/create`);
-        }}
-      >
-        הוספת פנקס
-      </Button>
-      <div className={classes["filter-box"]}>
-        <Search onSearch={(e: any) => onSearch(e)} />
-        <ItemsPerPage
-          limit={limit}
-          optins={options}
-          onChange={(e: any) => handlePageItemCount(e)}
-        />
-      </div>
-      <div className="row">
-        <div id={classes["table-wrapper"]} className="col">
-          {loading && <Loading left="50%" top="50%" />}
-          <table className="table table-bordered table-hover table-striped table-responsive">
-            <TableHeader columns={columns} onSorting={onSorting} />
-            <tbody>
-              {data?.map((item, index, currentArray) => (
-                <tr key={index}>
-                  <td>{index + 1}</td>
-                  <td>{item.number}</td>
-                  <td>
-                    <Button
-                      variant="info"
-                      title={item.number.toString()}
-                      onClick={() => {
-                        history.push(`/notebooks/edit/${item.id}`);
-                      }}
-                    >
-                      עריכה
-                    </Button>
-                  </td>
-                  <td>
-                    <a
-                      className="btn btn-danger"
-                      onClick={() =>
-                        customConfirm(
-                          () => handleDelete(item.id),
-                          "האם אתה בטוח שברצונך למחוק ?"
-                        )
-                      }
-                    >
-                      מחיקה
-                    </a>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <div className={classes["pagination-box"]}>
-            <Pagination
-              currentPage={page}
-              totalAmontOfPages={totalAmontOfPages}
-              onChange={(newPage) => setPage(newPage)}
-            />
-          </div>
+      <div className={`${classes["operation-box"]}`}>
+        <div className={`${classes["right-box"]}`}>
+          <Button
+            id={classes["grid-redirect-btn"]}
+            onClick={() => {
+              history.push(`/notebooks/create`);
+            }}
+          >
+            הוספת פנקס
+          </Button>
         </div>
-        <div className="row"></div>
+        <div className={`${classes["left-box"]}`}>
+          <Search onSearch={(e: any) => onSearch(e)} />
+          <ItemsPerPage
+            limit={limit}
+            optins={options}
+            onChange={(e: any) => handlePageItemCount(e)}
+          />
+        </div>
       </div>
-    </>
+
+      <div id={classes["table-wrapper"]} className="col">
+        {loading && <Loading left="50%" top="50%" />}
+        <table className="table table-bordered table-hover table-striped table-responsive">
+          <TableHeader columns={columns} onSorting={onSorting} />
+          <tbody>
+            {data?.map((item, index, currentArray) => (
+              <tr key={index}>
+                <td>{index + 1}</td>
+                <td>{item.number}</td>
+                <td>
+                  <Button
+                    variant="info"
+                    title={item.number.toString()}
+                    onClick={() => {
+                      history.push(`/notebooks/edit/${item.id}`);
+                    }}
+                  >
+                    עריכה
+                  </Button>
+                </td>
+                <td>
+                  <a
+                    className="btn btn-danger"
+                    onClick={() =>
+                      customConfirm(
+                        () => handleDelete(item.id),
+                        "האם אתה בטוח שברצונך למחוק ?"
+                      )
+                    }
+                  >
+                    מחיקה
+                  </a>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <div className={classes["pagination-box"]}>
+          <Pagination
+            currentPage={page}
+            totalAmontOfPages={totalAmontOfPages}
+            onChange={(newPage) => setPage(newPage)}
+          />
+        </div>
+      </div>
+    </div>
   );
 }
