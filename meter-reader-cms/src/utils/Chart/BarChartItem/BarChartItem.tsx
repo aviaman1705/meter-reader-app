@@ -1,4 +1,3 @@
-import React, { PureComponent } from "react";
 import { monthlyDataDTO } from "../../../components/home/dashboard.models";
 import {
   BarChart,
@@ -17,7 +16,6 @@ export default function BarChartItem(props: BarChartItemProps) {
   return (
     <ResponsiveContainer
       className={classes["recharts-responsive-container"]}
-      width="100%"
       height={500}
     >
       <BarChart width={500} height={300} data={props.data}>

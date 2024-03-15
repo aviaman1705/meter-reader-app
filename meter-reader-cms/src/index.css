@@ -4,45 +4,8 @@
     box-sizing: border-box;
 }
 
-body {
-    min-height: 100vh;
-    margin-top: 48px;
-}
-
-/* //Mobile */
-@media (min-width: 300px) {
-
-    /* TABLE */
-    /* .table-row.row {
-        position: relative;
-    }
-
-    .table .thead-dark th {
-        color: #fff;
-        background-color: #212529;
-        border-color: #32383e;
-    }
-
-    .table thead th {
-        vertical-align: bottom;
-        border-bottom: 2px solid #dee2e6;
-    } */
-}
-
-/* Small devies (tablets, 768px and up) */
-@media (min-width: 768px) {
-
-    /* TABLE */
-}
-
-/* Small devies (desktops, 992px and up) */
-@media (min-width: 992px) {}
-
-/* Small devies (large desktops, 1200px and up) */
-@media (min-width: 1200px) {
-
-    /* FORM */
-    /* .form-container{
-        position: relative;
-    } */
+#main-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
 }

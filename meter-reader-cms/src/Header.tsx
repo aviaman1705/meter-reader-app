@@ -1,12 +1,10 @@
 import { useContext, useEffect, useState } from "react";
-import { Nav, NavDropdown, Navbar } from "react-bootstrap";
 import utf8 from "utf8";
 import { NavLink } from "react-router-dom";
 import { logout } from "./components/auth/handleJWT";
 import AuthenticationContext from "./components/auth/AuthenticationContext";
 import Authorized from "./components/auth/Authorized";
 import { FcElectricity } from "react-icons/fc";
-import logo from "./logo.svg";
 
 import "./Header.css";
 
@@ -27,7 +25,7 @@ export default function Header() {
 
   return (
     <>
-      <nav className="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
+      <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
         <div className="container-fluid">
           <NavLink className="navbar-brand" to="/" exact={true}>
             <FcElectricity title="מערכת קריאת מונים" />
