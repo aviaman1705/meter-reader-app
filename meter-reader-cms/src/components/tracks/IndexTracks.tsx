@@ -4,7 +4,6 @@ import axios, { AxiosResponse, AxiosError } from "axios";
 import dayjs from "dayjs";
 import { urlTracks } from "../../endpoints";
 import { sysDataTablePager } from "../../models/sysDataTablePager.models";
-import { trackDTO } from "./track.models";
 import Search from "../../utils/Search";
 import ItemsPerPage from "../../utils/ItemsPerPage";
 import TableHeader from "../../utils/TableHeader";
@@ -14,10 +13,11 @@ import customConfirm from "../../utils/customConfirm";
 import Button from "../../utils/Button";
 
 import classes from "./../../Table.module.css";
+import { trackGridItemDTO } from "./track.models";
 
 export default function IndexTracks() {
   const history = useHistory();
-  const [data, setData] = useState<trackDTO[]>([]);
+  const [data, setData] = useState<trackGridItemDTO[]>([]);
   const [page, setPage] = useState(1);
   const [totalAmontOfPages, setTotalAmontOfPages] = useState(0);
   const [recordsPerPage, setRecordsPerPage] = useState(10);
@@ -39,6 +39,14 @@ export default function IndexTracks() {
     {
       dataKey: "date",
       title: "תאריך",
+      cursor: "pointer",
+      backgroundImage: `url("./../icons/sort_asc.png")`,
+      backgroundRepeat: "no-repeat",
+      backgroundPosition: "left center",
+    },
+    {
+      dataKey: "notebookNumber",
+      title: "מספר פנקס",
       cursor: "pointer",
       backgroundImage: `url("./../icons/sort_asc.png")`,
       backgroundRepeat: "no-repeat",
@@ -83,7 +91,7 @@ export default function IndexTracks() {
       .get(
         `${urlTracks}?page=${page}&itemPerPage=${limit}&sortColumn=${sortColumn}&sortType=${sortType}&search=${search}`
       )
-      .then((response: AxiosResponse<sysDataTablePager<trackDTO>>) => {
+      .then((response: AxiosResponse<sysDataTablePager<trackGridItemDTO>>) => {
         const totalAmontOfRecords = parseInt(
           response.headers["totalamountofrcords"],
           10
@@ -95,6 +103,7 @@ export default function IndexTracks() {
             id: track.id,
             called: track.called,
             unCalled: track.unCalled,
+            notebookNumber: track.notebookNumber,
             desc: track.desc,
             date: dayjs(track.date).format("DD/MM/YY"),
             notebookId: track.notebookId,
@@ -199,20 +208,23 @@ export default function IndexTracks() {
       </div>
       <div id={classes["table-wrapper"]} className="col">
         {loading && <Loading left="50%" top="50%" />}
-        <table className="table table-bordered table-hover table-striped table-responsive">
+        <table
+          className={`table table-bordered table-hover table-striped ${classes["custom-table"]}`}
+        >
           <TableHeader columns={columns} onSorting={onSorting} />
           <tbody>
             {data?.map((item, index, currentArray) => (
               <tr key={index}>
                 <td>{index + 1}</td>
                 <td>{item.date}</td>
+                <td>{item.notebookNumber}</td>
                 <td>{item.desc}</td>
                 <td>{item.called}</td>
                 <td>{item.unCalled}</td>
                 <td>
                   <Button
-                    variant="info"
                     title={item.desc}
+                    className={`${classes["btn-grid-edit"]}`}
                     onClick={() => {
                       history.push(`/tracks/edit/${item.id}`);
                     }}
@@ -222,8 +234,8 @@ export default function IndexTracks() {
                 </td>
                 <td>
                   <Button
-                    variant="danger"
                     title="מחיקה"
+                    className={`${classes["btn-grid-delete"]}`}
                     onClick={() => {
                       remove(item.id);
                     }}

@@ -1,8 +1,8 @@
   @media (min-width: 300px) {
-      #panel-page-title {
+      /* #panel-page-title {
           padding: 1rem 0rem;
           text-align: center;
-      }
+      } */
 
       .panel-container {
           display: flex;
@@ -47,6 +47,6 @@
       }
 
       .card:hover {
-          color: #009688;
+          color: #087f5b;
       }
   }

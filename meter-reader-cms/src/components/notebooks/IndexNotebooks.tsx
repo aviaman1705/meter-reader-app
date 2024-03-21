@@ -119,24 +119,23 @@ export default function IndexNotebooks() {
     setLimit(event.target.value!);
   };
 
-  const handleDelete = (id: number) => {
-    setLoading(true);
-    axios
-      .delete(`${urlNotebooks}/${id}`)
-      .then((response: AxiosResponse<any>) => {
-        loadData();
-        setLoading(false);
-      })
-      .catch((error: AxiosError) => {
-        const errors: any = error.response.data;
-        const errorMsg = errors[0];
-
-        setTimeout(() => {
-          alert(errorMsg);
-          setLoading(false);
-        }, 1000);
-      });
-  };
+  async function remove(id: number) {
+    customConfirm(() => {
+      setLoading(true);
+      axios
+        .delete(`${urlNotebooks}/${id}`)
+        .then((response: AxiosResponse<any>) => {
+          setTimeout(() => {
+            console.log(response);
+            setData(data.filter((notebook) => notebook.id !== id));
+            setLoading(false);
+          }, 2000);
+        })
+        .catch((error: AxiosError) => {
+          console.log(error);
+        });
+    }, "האם אתה בטוח שברצונך למחוק את הפריט ?");
+  }
 
   return (
     <div className={`${classes["grid-container"]}`}>
@@ -164,7 +163,9 @@ export default function IndexNotebooks() {
 
       <div id={classes["table-wrapper"]} className="col">
         {loading && <Loading left="50%" top="50%" />}
-        <table className="table table-bordered table-hover table-striped table-responsive">
+        <table
+          className={`table table-bordered table-hover table-striped ${classes["custom-table"]}`}
+        >
           <TableHeader columns={columns} onSorting={onSorting} />
           <tbody>
             {data?.map((item, index, currentArray) => (
@@ -173,8 +174,8 @@ export default function IndexNotebooks() {
                 <td>{item.number}</td>
                 <td>
                   <Button
-                    variant="info"
                     title={item.number.toString()}
+                    className={`${classes["btn-grid-edit"]}`}
                     onClick={() => {
                       history.push(`/notebooks/edit/${item.id}`);
                     }}
@@ -183,17 +184,15 @@ export default function IndexNotebooks() {
                   </Button>
                 </td>
                 <td>
-                  <a
-                    className="btn btn-danger"
-                    onClick={() =>
-                      customConfirm(
-                        () => handleDelete(item.id),
-                        "האם אתה בטוח שברצונך למחוק ?"
-                      )
-                    }
+                  <Button
+                    title="מחיקה"
+                    className={`${classes["btn-grid-delete"]}`}
+                    onClick={() => {
+                      remove(item.id);
+                    }}
                   >
                     מחיקה
-                  </a>
+                  </Button>
                 </td>
               </tr>
             ))}

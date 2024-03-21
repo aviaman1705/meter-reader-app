@@ -42,8 +42,12 @@ export default function Home() {
 
   return (
     <>
-      <Panel data={dashboardSummary} />
-      <Chart data={chartData} />
+      <section>
+        <Panel data={dashboardSummary} />
+      </section>
+      <section>
+        <Chart data={chartData} />
+      </section>
     </>
   );
 }

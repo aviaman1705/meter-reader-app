@@ -25,7 +25,7 @@ export default function Header() {
 
   return (
     <>
-      <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
+      <nav className="navbar navbar-expand-sm navbar-dark">
         <div className="container-fluid">
           <NavLink className="navbar-brand" to="/" exact={true}>
             <FcElectricity title="מערכת קריאת מונים" />

@@ -40,7 +40,7 @@ function App() {
       <AuthenticationContext.Provider
         value={{ claims: claims, update: setClaims }}
       >
-        <div id="main-container">
+        <div id="main-container" className="container-fluid">
           <Header />
           <div className="content-container">
             <Switch>

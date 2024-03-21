@@ -15,7 +15,7 @@ export default function NumberField(props: textFieldProps) {
         className="form-control text-end"
         placeholder={props.displayName}
       />
-      <div className={css["wrap-error-message"]}>
+      <div>
         <ErrorMessage name={props.field}>
           {(msg: string) => (
             <span

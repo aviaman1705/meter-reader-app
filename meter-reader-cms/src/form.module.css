@@ -42,11 +42,11 @@
   font-size: 14px;
 }
 
-.wrap-error-message {
+/* .wrap-error-message {
   height: 24px;
   margin-bottom: 0.2rem;
   text-align: right;
-}
+} */
 
 .form button {
   font-family: "Roboto", sans-serif;

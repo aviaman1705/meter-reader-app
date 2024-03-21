@@ -12,3 +12,12 @@ export interface trackCreationDTO {
     called: string;
     unCalled: string;
 }
+export interface trackGridItemDTO {
+    id?: number;
+    called: string;
+    unCalled: string;
+    notebookNumber: number;
+    desc: string;
+    date: date;
+    notebookId: number;
+}

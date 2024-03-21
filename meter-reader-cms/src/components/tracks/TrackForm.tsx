@@ -93,16 +93,11 @@ export default function TrackForm(props: trackFormProps) {
               <NumberField displayName="נקרא" field="called" />
               <NumberField displayName="לא נקרא" field="unCalled" />
               <div className={`form-group ${classes["buttons-section"]} p-2`}>
-                <Button
-                  id={`${classes["system-btn"]}`}
-                  disabled={formikProps.isSubmitting}
-                  type="submit"
-                >
+                <Button disabled={formikProps.isSubmitting} type="submit">
                   שמור שינויים
                 </Button>
                 <Button
-                  id={`${classes["btn-cancel"]}`}
-                  variant="secondary"
+                  className={`${classes["btn-cancel"]}`}
                   onClick={() => {
                     history.push("/tracks");
                   }}

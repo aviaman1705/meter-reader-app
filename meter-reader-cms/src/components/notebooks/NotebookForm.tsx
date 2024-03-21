@@ -49,7 +49,7 @@ export default function NotebookForm(props: notebookFormProps) {
               <NumberField displayName="מספר פנקס" field="number" />
               <div className={`form-group ${classes["buttons-section"]} p-2`}>
                 <Button
-                  id={`${classes["system-btn"]}`}
+                  className={`${classes["btn-submit"]}`}
                   disabled={formikProps.isSubmitting}
                   type="submit"
                 >
@@ -57,8 +57,7 @@ export default function NotebookForm(props: notebookFormProps) {
                 </Button>
 
                 <Button
-                  id={`${classes["btn-cancel"]}`}
-                  variant="secondary"
+                  className={`${classes["btn-cancel"]}`}
                   onClick={() => {
                     history.push("/notebooks");
                   }}

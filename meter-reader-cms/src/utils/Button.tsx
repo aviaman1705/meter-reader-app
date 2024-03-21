@@ -3,16 +3,15 @@ import { Button as Btn } from "react-bootstrap";
 export default function Button(props: buttonProps) {
   return (
     <>
-      <Btn
+      <button
         id={props.id}
         type={props.type}
-        variant={props.variant}
         className={props.className}
         title={props.title}
         onClick={props.onClick}
       >
         {props.children}
-      </Btn>
+      </button>
     </>
   );
 }
@@ -20,7 +19,6 @@ export default function Button(props: buttonProps) {
 interface buttonProps {
   id: string;
   className: string;
-  variant: string;
   onClick?(): void;
   disabled: boolean;
   children: React.ReactNode;
@@ -31,7 +29,6 @@ interface buttonProps {
 Button.defaultProps = {
   id: "",
   className: "",
-  variant: "primary",
   type: "button",
   disabled: false,
   title: "",

@@ -4,7 +4,7 @@ import css from "./../../../Form.module.css";
 
 export default function TextField(props: textFieldProps) {
   return (
-    <div className={css["form-group"]}>
+    <div className="form-group p-2">
       <label className={css["form-label"]} htmlFor={props.field}>
         {props.displayName}
       </label>
@@ -15,7 +15,7 @@ export default function TextField(props: textFieldProps) {
         className="form-control text-end"
         placeholder={props.displayName}
       />
-      <div className={css["wrap-error-message"]}>
+      <div>
         <ErrorMessage name={props.field}>
           {(msg: string) => (
             <span

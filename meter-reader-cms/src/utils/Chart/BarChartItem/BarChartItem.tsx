@@ -24,8 +24,8 @@ export default function BarChartItem(props: BarChartItemProps) {
         <YAxis domain={[0, 12000]} />
         <Tooltip />
         <Legend />
-        <Bar dataKey="unCalled" fill="#5C8374" name="לא נקרא" />
-        <Bar dataKey="called" fill="#1B4242" name="נקרא" />
+        <Bar dataKey="unCalled" fill="#343a40" name="לא נקרא" />
+        <Bar dataKey="called" fill="#087f5b" name="נקרא" />
       </BarChart>
     </ResponsiveContainer>
   );
