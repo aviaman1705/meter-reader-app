@@ -8,7 +8,7 @@ import Search from "../../utils/Search";
 import ItemsPerPage from "../../utils/ItemsPerPage";
 import TableHeader from "../../utils/TableHeader";
 import Loading from "../../utils/Loading";
-import Pagination from "../../utils/Pagination";
+import Pagination from "../../utils/Pagination/Pagination";
 import Button from "../../utils/Button";
 import customConfirm from "../../utils/customConfirm";
 import alert from "../../utils/alert";

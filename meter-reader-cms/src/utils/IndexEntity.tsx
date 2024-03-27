@@ -3,7 +3,6 @@ import axios, { AxiosResponse, AxiosError } from "axios";
 import { useHistory } from "react-router-dom";
 import Table from "react-bootstrap/Table";
 import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
-import PaginationItem from "../utils/PaginationItem";
 import { urlNotebooks } from "../endpoints";
 import { sysDataTablePager } from "../models/sysDataTablePager.models";
 // import { notebookDTO } from "./notebook.models";
@@ -150,11 +149,11 @@ export default function IndexEntity<T>(props: indexEntityProps<T>) {
               <Col md="12">
                 <Row className="align-items-center p-3">
                   <Col md="6">
-                    <PaginationItem
+                    {/* <PaginationItem
                       pagesCount={pagesCount}
                       page={page}
                       onClick={(e) => handlePageChange(e)}
-                    />
+                    /> */}
                   </Col>
                   <Col md="6">
                     <div>סה"כ {totalItems} רשומות</div>
