@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import classes from "./Pagination/Pagination.module.css";
+import classes from "./Pagination.module.css";
 
 export default function Pagination(props: paginationProps) {
   const [linkModels, setLinkModels] = useState<linkModel[]>([]);
