@@ -22,7 +22,7 @@
     div.buttons-section {
         display: flex;
         flex-direction: row;
-        gap:20px;
+        gap: 20px;
     }
 
     .btn-cancel {
@@ -104,6 +104,7 @@
     .pagination-box {
         display: flex;
         justify-content: center;
+        align-items: center;
     }
 
     .ul-table-pagination {
