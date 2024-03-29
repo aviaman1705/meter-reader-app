@@ -27,7 +27,10 @@ export default function Pagination(props: paginationProps) {
   }
 
   useEffect(() => {
+    // בדיקה האם ניתן ללחוץ על כפתור הקודם
     const previousPageEnabled = props.currentPage !== 1;
+
+    //אתחול משתנה previousPage לדף הנוכחי פחות 1
     const previousPage = props.currentPage - 1;
     const links: linkModel[] = [];
 
@@ -48,7 +51,7 @@ export default function Pagination(props: paginationProps) {
           text: `${i}`,
           active: props.currentPage === i,
           enabled: true,
-          page: 1,
+          page: i,
           class: "",
         });
       }

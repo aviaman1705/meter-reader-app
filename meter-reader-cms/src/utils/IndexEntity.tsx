@@ -18,7 +18,7 @@ export default function IndexEntity<T>(props: indexEntityProps<T>) {
 
   const [data, setData] = useState<T[]>([]);
   const [search, setSearch] = useState("");
-  const [limit, setLimit] = useState(10);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
   const [page, setPage] = useState(1);
   const [pagesCount, setPagesCount] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
@@ -52,15 +52,15 @@ export default function IndexEntity<T>(props: indexEntityProps<T>) {
   useEffect(() => {
     setLoading(true);
     loadData();
-  }, [page, limit, props.sortColumn, props.sortDirection, search]);
+  }, [page, itemsPerPage, props.sortColumn, props.sortDirection, search]);
 
   const loadData = () => {
     axios
       .get(
-        `${props.url}/?page=${page}&itemPerPage=${limit}&sortColumn=${props.sortColumn}&sortDirection=${props.sortDirection}&search=${search}`
+        `${props.url}/?page=${page}&itemPerPage=${itemsPerPage}&sortColumn=${props.sortColumn}&sortDirection=${props.sortDirection}&search=${search}`
       )
       .then((response: AxiosResponse<sysDataTablePager<T>>) => {
-        setLimit(response.data.iTotalDisplayRecords);
+        setItemsPerPage(response.data.iTotalDisplayRecords);
         setTotalItems(response.data.iTotalRecords);
 
         let totalPages = Math.floor(
@@ -118,7 +118,7 @@ export default function IndexEntity<T>(props: indexEntityProps<T>) {
   };
 
   const handlePageItemCount = (event: any) => {
-    setLimit(event.target.value!);
+    setItemsPerPage(event.target.value!);
   };
 
   return (
@@ -134,7 +134,7 @@ export default function IndexEntity<T>(props: indexEntityProps<T>) {
                   </Col>
                   <Col md={{ span: 2, offset: 7 }}>
                     <ItemsPerPage
-                      limit={limit}
+                      itemsPerPage={itemsPerPage}
                       optins={optins}
                       onChange={(e: any) => handlePageItemCount(e)}
                     />

@@ -14,17 +14,18 @@ import customConfirm from "../../utils/customConfirm";
 import alert from "../../utils/alert";
 
 import classes from "./../../Table.module.css";
+import TableFooter from "../../utils/TableFooter";
 
 export default function IndexNotebooks() {
   const history = useHistory();
   const [data, setData] = useState<notebookDTO[]>([]);
   const [page, setPage] = useState(1);
   const [totalAmontOfPages, setTotalAmontOfPages] = useState(0);
-  const [recordsPerPage, setRecordsPerPage] = useState(10);
+  const [totalItems, setTotalItems] = useState(0);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
   const [sortColumn, setSortColumn] = useState("number");
   const [sortType, setSortType] = useState<string>("asc");
   const [search, setSearch] = useState("");
-  const [limit, setLimit] = useState(10);
   const options = [5, 10, 25, 50];
   const [loading, setLoading] = useState(false);
   const [columns, setColumns] = useState([
@@ -50,19 +51,19 @@ export default function IndexNotebooks() {
     setLoading(true);
     loadData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page, limit, sortColumn, sortType, search]);
+  }, [page, itemsPerPage, sortColumn, sortType, search]);
 
   const loadData = () => {
     axios
       .get(
-        `${urlNotebooks}?page=${page}&itemPerPage=${limit}&sortColumn=${sortColumn}&sortType=${sortType}&search=${search}`
+        `${urlNotebooks}?page=${page}&itemPerPage=${itemsPerPage}&sortColumn=${sortColumn}&sortType=${sortType}&search=${search}`
       )
       .then((response: AxiosResponse<sysDataTablePager<notebookDTO>>) => {
         const totalAmontOfRecords = parseInt(
           response.headers["totalamountofrcords"],
           10
         );
-        setTotalAmontOfPages(Math.ceil(totalAmontOfRecords / recordsPerPage));
+        setTotalAmontOfPages(Math.ceil(totalAmontOfRecords / itemsPerPage));
 
         let mappedNotebooks = response.data.aaData.map((notebook) => {
           return {
@@ -72,7 +73,8 @@ export default function IndexNotebooks() {
           };
         });
 
-        setLimit(response.data.iTotalDisplayRecords);
+        setItemsPerPage(response.data.iTotalDisplayRecords);
+        setTotalItems(response.data.iTotalRecords);
         setData(mappedNotebooks);
         setLoading(false);
       })
@@ -116,7 +118,7 @@ export default function IndexNotebooks() {
   };
 
   const handlePageItemCount = (event: any) => {
-    setLimit(event.target.value!);
+    setItemsPerPage(event.target.value!);
   };
 
   async function remove(id: number) {
@@ -154,7 +156,7 @@ export default function IndexNotebooks() {
         <div className={`${classes["left-box"]}`}>
           <Search onSearch={(e: any) => onSearch(e)} />
           <ItemsPerPage
-            limit={limit}
+            itemsPerPage={itemsPerPage}
             optins={options}
             onChange={(e: any) => handlePageItemCount(e)}
           />
@@ -198,6 +200,12 @@ export default function IndexNotebooks() {
             ))}
           </tbody>
         </table>
+        <TableFooter
+          itemsPerPage={itemsPerPage}
+          page={page}
+          totalItems={totalItems}
+          onClick={() => {}}
+        />
         <div className={classes["pagination-box"]}>
           <Pagination
             currentPage={page}

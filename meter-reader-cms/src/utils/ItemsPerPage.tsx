@@ -11,7 +11,7 @@ export default function ItemsPerPage(props: buttonProps) {
       <Form.Select
         id={`${classes["table-select-option"]}`}
         onChange={props.onChange}
-        defaultValue={props.limit}
+        defaultValue={props.itemsPerPage}
         aria-label="Default select example"
       >
         {props.optins.map(function (option, index) {
@@ -27,7 +27,7 @@ export default function ItemsPerPage(props: buttonProps) {
 }
 
 interface buttonProps {
-  limit: number;
+  itemsPerPage: number;
   onChange?(event: any): void;
   optins: number[];
 }

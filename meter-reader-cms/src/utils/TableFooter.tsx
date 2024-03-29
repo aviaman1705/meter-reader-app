@@ -1,6 +1,6 @@
 import { Col, Row } from "react-bootstrap";
 import { tableHeaderDTO } from "./table.model";
-import "./TableFooter.css";
+// import "./TableFooter.css";
 
 export default function TableFooter(props: tableFooterProps) {
   return (
@@ -14,7 +14,7 @@ export default function TableFooter(props: tableFooterProps) {
 }
 
 interface tableFooterProps {
-  pageCount: number;
+  itemsPerPage: number;
   page: number;
   totalItems: number;
   onClick(e: any): void;

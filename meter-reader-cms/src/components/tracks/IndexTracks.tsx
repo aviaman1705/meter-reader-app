@@ -14,17 +14,18 @@ import Button from "../../utils/Button";
 
 import classes from "./../../Table.module.css";
 import { trackGridItemDTO } from "./track.models";
+import TableFooter from "../../utils/TableFooter";
 
 export default function IndexTracks() {
   const history = useHistory();
   const [data, setData] = useState<trackGridItemDTO[]>([]);
   const [page, setPage] = useState(1);
   const [totalAmontOfPages, setTotalAmontOfPages] = useState(0);
-  const [recordsPerPage, setRecordsPerPage] = useState(10);
+  const [totalItems, setTotalItems] = useState(0);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
   const [sortColumn, setSortColumn] = useState("number");
   const [sortType, setSortType] = useState<string>("asc");
   const [search, setSearch] = useState("");
-  const [limit, setLimit] = useState(10);
   const options = [5, 10, 25, 50];
   const [loading, setLoading] = useState(false);
   const [columns, setColumns] = useState([
@@ -84,19 +85,16 @@ export default function IndexTracks() {
     setTimeout(() => {
       loadData();
     }, 1000);
-  }, [page, limit, sortColumn, sortType, search]);
+  }, [page, itemsPerPage, sortColumn, sortType, search]);
 
   const loadData = () => {
     axios
       .get(
-        `${urlTracks}?page=${page}&itemPerPage=${limit}&sortColumn=${sortColumn}&sortType=${sortType}&search=${search}`
+        `${urlTracks}?page=${page}&itemPerPage=${itemsPerPage}&sortColumn=${sortColumn}&sortType=${sortType}&search=${search}`
       )
       .then((response: AxiosResponse<sysDataTablePager<trackGridItemDTO>>) => {
-        const totalAmontOfRecords = parseInt(
-          response.headers["totalamountofrcords"],
-          10
-        );
-        setTotalAmontOfPages(Math.ceil(totalAmontOfRecords / recordsPerPage));
+        const totalAmontOfRecords = response.data.iTotalRecords;
+        setTotalAmontOfPages(Math.ceil(totalAmontOfRecords / itemsPerPage));
 
         let mappedTracks = response.data.aaData.map((track) => {
           return {
@@ -110,14 +108,8 @@ export default function IndexTracks() {
           };
         });
 
-        setLimit(response.data.iTotalDisplayRecords);
-        //setTotalItems(response.data.iTotalRecords);
-
-        // let totalPages = Math.floor(
-        //   response.data.iTotalRecords / response.data.iTotalDisplayRecords
-        // );
-
-        // setPagesCount(totalPages);
+        setItemsPerPage(response.data.iTotalDisplayRecords);
+        setTotalItems(response.data.iTotalRecords);
         setData(mappedTracks);
         setLoading(false);
       })
@@ -157,11 +149,13 @@ export default function IndexTracks() {
   };
 
   const onSearch = (event: any) => {
+    // עדכון פרמטר חיפוש
     setSearch(event.target.value);
   };
 
   const handlePageItemCount = (event: any) => {
-    setLimit(event.target.value!);
+    // עדכון פרמטר כמות איימים בדף
+    setItemsPerPage(event.target.value!);
   };
 
   async function remove(id: number) {
@@ -200,7 +194,7 @@ export default function IndexTracks() {
         <div className={`${classes["left-box"]}`}>
           <Search onSearch={(e: any) => onSearch(e)} />
           <ItemsPerPage
-            limit={limit}
+            itemsPerPage={itemsPerPage}
             optins={options}
             onChange={(e: any) => handlePageItemCount(e)}
           />
@@ -247,6 +241,12 @@ export default function IndexTracks() {
             ))}
           </tbody>
         </table>
+        <TableFooter
+          itemsPerPage={itemsPerPage}
+          page={page}
+          totalItems={totalItems}
+          onClick={() => {}}
+        />
         <div className={classes["pagination-box"]}>
           <Pagination
             currentPage={page}
