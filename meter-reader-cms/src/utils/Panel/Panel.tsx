@@ -9,19 +9,6 @@ export default function Panel(props: panelProps) {
       <h1 id={classes["panel-page-title"]}>נתוני קריאות</h1>
       <div className={classes["panel-container"]}>
         <PanelItem
-          header="מונים שנקראו החודש"
-          text={props.data.monthlyCalled.toString()}
-        />
-
-        <PanelItem
-          header="מונים שלא שנקראו החודש"
-          text={props.data.monthlyUnCalled.toString()}
-        />
-        <PanelItem
-          header="אחוזי אי קריאה החודש"
-          text={`${props.data.monthlyUncalledPercentage}%`}
-        />
-        <PanelItem
           header='סה"כ מונים שנקראו'
           text={props.data.called.toString()}
         />

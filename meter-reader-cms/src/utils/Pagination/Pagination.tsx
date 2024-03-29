@@ -78,14 +78,14 @@ export default function Pagination(props: paginationProps) {
             <button
               className={classes["btn"]}
               disabled={props.currentPage == 1}
+              key={link.text}
+              onClick={(e: any) => selectPage(e, link)}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 16 16"
                 fill="currentColor"
                 className={classes["btn-icon"]}
-                key={link.text}
-                onClick={(e: any) => selectPage(e, link)}
               >
                 <path
                   fillRule="evenodd"
@@ -101,14 +101,14 @@ export default function Pagination(props: paginationProps) {
             <button
               className={classes["btn"]}
               disabled={props.currentPage == props.totalAmontOfPages}
+              key={link.text}
+              onClick={(e: any) => selectPage(e, link)}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 16 16"
                 fill="currentColor"
                 className={classes["btn-icon"]}
-                key={link.text}
-                onClick={(e: any) => selectPage(e, link)}
               >
                 <path
                   fillRule="evenodd"

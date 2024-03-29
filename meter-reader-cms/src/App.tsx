@@ -1,6 +1,4 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-
-import Header from "./Header";
 import routes from "./route-config";
 import configureInterceptor from "./utils/httpInterceptors";
 import { useEffect, useState } from "react";
@@ -8,11 +6,10 @@ import { claim } from "./components/auth/auth.models";
 import { getClaims } from "./components/auth/handleJWT";
 import AuthenticationContext from "./components/auth/AuthenticationContext";
 import ThemeProvider from "react-bootstrap/ThemeProvider";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import Header from "./Header";
+import Footer from "./Footer";
 
 import "./App.css";
-import Footer from "./Footer";
 
 configureInterceptor();
 
