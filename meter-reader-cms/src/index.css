@@ -28,7 +28,10 @@ body {
     margin: 0 auto; */
 }
 
-nav,
+nav {
+    margin-bottom: 64px;
+}
+
 section {
     margin-bottom: 96px;
 }
@@ -55,13 +58,14 @@ h1 {
 /* SMALLER ELEMENTS */
 button {
     font-size: 16px;
-    padding:8px 18px;
+    padding: 8px 18px;
     cursor: pointer;
     background-color: #099268;
     border: 1px solid #087f5b;
     color: #fff;
     border-radius: 8px;
 }
-button:hover{
+
+button:hover {
     background-color: #047e59;
 }

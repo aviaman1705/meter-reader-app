@@ -56,7 +56,7 @@ export default function IndexNotebooks() {
   const loadData = () => {
     axios
       .get(
-        `${urlNotebooks}?page=${page}&itemPerPage=${itemsPerPage}&sortColumn=${sortColumn}&sortType=${sortType}&search=${search}`
+        `${urlNotebooks}?page=${page}&itemsPerPage=${itemsPerPage}&sortColumn=${sortColumn}&sortType=${sortType}&search=${search}`
       )
       .then((response: AxiosResponse<sysDataTablePager<notebookDTO>>) => {
         const totalAmontOfRecords = parseInt(
