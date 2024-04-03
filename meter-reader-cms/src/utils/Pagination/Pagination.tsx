@@ -80,7 +80,7 @@ export default function Pagination(props: paginationProps) {
           return (
             <button
               className={classes["btn"]}
-              disabled={props.currentPage == 1}
+              disabled={props.currentPage === 1}
               key={link.text}
               onClick={(e: any) => selectPage(e, link)}
             >
@@ -103,7 +103,7 @@ export default function Pagination(props: paginationProps) {
           return (
             <button
               className={classes["btn"]}
-              disabled={props.currentPage == props.totalAmontOfPages}
+              disabled={props.currentPage === props.totalAmontOfPages}
               key={link.text}
               onClick={(e: any) => selectPage(e, link)}
             >
@@ -129,7 +129,7 @@ export default function Pagination(props: paginationProps) {
                   ? classes["page-link--current"]
                   : undefined
               }`}
-              href="#"
+              href="/#"
               key={link.text}
               onClick={(e: any) => selectPage(e, link)}
             >

@@ -1,5 +1,3 @@
-import { Button as Btn } from "react-bootstrap";
-
 export default function Button(props: buttonProps) {
   return (
     <>

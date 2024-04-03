@@ -37,7 +37,7 @@ export default function Login() {
     setLoading(true);
     setErrors([]);
 
-    const response = await axios
+    axios
       .post<authenticationResponse>(`${urlAccounts}/login`, credentials)
       .then((response: AxiosResponse<any>) => {
         setTimeout(() => {

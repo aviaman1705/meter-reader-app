@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { monthlyDataDTO } from "../../components/home/dashboard.models";
 import BarChartItem from "./BarChartItem/BarChartItem";
 

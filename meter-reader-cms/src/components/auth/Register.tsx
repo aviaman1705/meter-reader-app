@@ -38,7 +38,7 @@ export default function Register() {
     setLoading(true);
     setErrors([]);
 
-    const response = await axios
+    axios
       .post<authenticationResponse>(`${urlAccounts}/create`, credentials)
       .then((response: AxiosResponse<any>) => {
         setTimeout(() => {

@@ -1,6 +1,4 @@
-import { Col, Row } from "react-bootstrap";
-import { tableHeaderDTO } from "./table.model";
-// import "./TableFooter.css";
+import { Col } from "react-bootstrap";
 
 export default function TableFooter(props: tableFooterProps) {
   return (

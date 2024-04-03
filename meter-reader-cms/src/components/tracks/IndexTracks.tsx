@@ -82,41 +82,44 @@ export default function IndexTracks() {
   useEffect(() => {
     setLoading(true);
 
+    const loadData = () => {
+      axios
+        .get(
+          `${urlTracks}?page=${page}&itemsPerPage=${itemsPerPage}&sortColumn=${sortColumn}&sortType=${sortType}&search=${search}`
+        )
+        .then(
+          (response: AxiosResponse<sysDataTablePager<trackGridItemDTO>>) => {
+            const totalAmontOfRecords = response.data.iTotalRecords;
+            setTotalAmontOfPages(Math.ceil(totalAmontOfRecords / itemsPerPage));
+
+            let mappedTracks = response.data.aaData.map((track) => {
+              return {
+                id: track.id,
+                called: track.called,
+                unCalled: track.unCalled,
+                notebookNumber: track.notebookNumber,
+                desc: track.desc,
+                date: dayjs(track.date).format("DD/MM/YY"),
+                notebookId: track.notebookId,
+              };
+            });
+
+            setItemsPerPage(response.data.iTotalDisplayRecords);
+            setTotalItems(response.data.iTotalRecords);
+            setData(mappedTracks);
+            setLoading(false);
+          }
+        )
+        .catch((error: AxiosError) => {
+          console.log(error);
+        });
+    };
+
     setTimeout(() => {
       loadData();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, 1000);
   }, [page, itemsPerPage, sortColumn, sortType, search]);
-
-  const loadData = () => {
-    axios
-      .get(
-        `${urlTracks}?page=${page}&itemsPerPage=${itemsPerPage}&sortColumn=${sortColumn}&sortType=${sortType}&search=${search}`
-      )
-      .then((response: AxiosResponse<sysDataTablePager<trackGridItemDTO>>) => {
-        const totalAmontOfRecords = response.data.iTotalRecords;
-        setTotalAmontOfPages(Math.ceil(totalAmontOfRecords / itemsPerPage));
-
-        let mappedTracks = response.data.aaData.map((track) => {
-          return {
-            id: track.id,
-            called: track.called,
-            unCalled: track.unCalled,
-            notebookNumber: track.notebookNumber,
-            desc: track.desc,
-            date: dayjs(track.date).format("DD/MM/YY"),
-            notebookId: track.notebookId,
-          };
-        });
-
-        setItemsPerPage(response.data.iTotalDisplayRecords);
-        setTotalItems(response.data.iTotalRecords);
-        setData(mappedTracks);
-        setLoading(false);
-      })
-      .catch((error: AxiosError) => {
-        console.log(error);
-      });
-  };
 
   const updateState = (arr: any[]) => {
     arr.forEach(function (item, index) {

@@ -1,5 +1,4 @@
-import { useContext, useEffect, useState } from "react";
-import utf8 from "utf8";
+import { useContext, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { logout } from "./components/auth/handleJWT";
 import AuthenticationContext from "./components/auth/AuthenticationContext";
@@ -10,17 +9,15 @@ import "./Header.css";
 
 export default function Header() {
   const { update, claims } = useContext(AuthenticationContext);
-  const [expanded, setexpanded] = useState(false);
-  const [username, setUsername] = useState("");
+  // const [username, setUsername] = useState("");
 
   useEffect(() => {
-    if (claims.find((claim) => claim.name === "username") !== undefined) {
-      const currentUsername = utf8.decode(
-        claims.find((claim) => claim.name === "username").value
-      );
-
-      setUsername(`היי ${currentUsername}`);
-    }
+    // if (claims.find((claim) => claim.name === "username") !== undefined) {
+    //   const currentUsername = utf8.decode(
+    //     claims.find((claim) => claim.name === "username").value
+    //   );
+    //   setUsername(`היי ${currentUsername}`);
+    // }
   }, [claims]);
 
   return (
@@ -45,12 +42,7 @@ export default function Header() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <NavLink
-                  className="nav-link"
-                  to="/"
-                  exact={true}
-                  onClick={() => setexpanded(false)}
-                >
+                <NavLink className="nav-link" to="/" exact={true}>
                   עמוד הבית
                 </NavLink>
               </li>
@@ -59,29 +51,17 @@ export default function Header() {
                 authorized={
                   <>
                     <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/tracks"
-                        onClick={() => setexpanded(false)}
-                      >
+                      <NavLink className="nav-link" to="/tracks">
                         מסלולים
                       </NavLink>
                     </li>
                     <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/notebooks"
-                        onClick={() => setexpanded(false)}
-                      >
+                      <NavLink className="nav-link" to="/notebooks">
                         פנקסים
                       </NavLink>
                     </li>
                     <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/statistics"
-                        onClick={() => setexpanded(false)}
-                      >
+                      <NavLink className="nav-link" to="/statistics">
                         סטטיסטיקות
                       </NavLink>
                     </li>
@@ -98,10 +78,10 @@ export default function Header() {
                       id="logout-mobile-btn"
                       className="nav-link"
                       onClick={() => {
-                        setexpanded(false);
                         logout();
                         update([]);
                       }}
+                      href="/#"
                     >
                       יציאה
                     </a>
@@ -110,20 +90,12 @@ export default function Header() {
                 notAuthorized={
                   <>
                     <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/login"
-                        onClick={() => setexpanded(false)}
-                      >
+                      <NavLink className="nav-link" to="/login">
                         כניסה
                       </NavLink>
                     </li>
                     <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/register"
-                        onClick={() => setexpanded(false)}
-                      >
+                      <NavLink className="nav-link" to="/register">
                         הרשמה
                       </NavLink>
                     </li>

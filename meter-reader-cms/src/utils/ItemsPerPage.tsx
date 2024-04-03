@@ -1,6 +1,4 @@
 import { Form } from "react-bootstrap";
-import { Button as Btn } from "rsuite";
-import { TypeAttributes } from "rsuite/esm/@types/common";
 
 import classes from "./../Table.module.css";
 

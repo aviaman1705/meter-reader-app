@@ -1,11 +1,11 @@
 import { ErrorMessage, useFormikContext } from "formik";
-import { ReactElement, useState } from "react";
+import { useState } from "react";
 import Form from "react-bootstrap/Form";
 
 import classes from "./../../Form.module.css";
 
 export default function DropDownField(props: dropDownFieldProps) {
-  const { values, validateForm, touched, errors } = useFormikContext<any>();
+  const { values } = useFormikContext<any>();
   const [value, setValue] = useState<number>(props.ddlValue);
 
   return (

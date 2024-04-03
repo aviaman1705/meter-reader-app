@@ -1,12 +1,11 @@
 import { useState } from "react";
 import AccordionItem from "./AccordionItem";
-import { accordionItemDTO } from "./accordion.models";
 
 import classes from "./Accordion.module.css";
 
 export default function Accordion() {
   const [accordionItemOpen, setAccordionItemOpen] = useState(1);
-  const [data, setData] = useState<accordionItemDTO[]>([
+  const data = [
     {
       number: "01",
       title: "How long do I have to return my chair?",
@@ -46,7 +45,7 @@ export default function Accordion() {
         "nesciunt dolore veniam qui iusto quia fuga dictablanditiis!",
       ],
     },
-  ]);
+  ];
 
   return (
     <div className={classes["accordion"]}>

@@ -11,7 +11,6 @@ import Loading from "../../utils/Loading";
 import Pagination from "../../utils/Pagination/Pagination";
 import Button from "../../utils/Button";
 import customConfirm from "../../utils/customConfirm";
-import alert from "../../utils/alert";
 
 import classes from "./../../Table.module.css";
 import TableFooter from "../../utils/TableFooter";
@@ -49,39 +48,39 @@ export default function IndexNotebooks() {
 
   useEffect(() => {
     setLoading(true);
+    const loadData = () => {
+      axios
+        .get(
+          `${urlNotebooks}?page=${page}&itemsPerPage=${itemsPerPage}&sortColumn=${sortColumn}&sortType=${sortType}&search=${search}`
+        )
+        .then((response: AxiosResponse<sysDataTablePager<notebookDTO>>) => {
+          const totalAmontOfRecords = parseInt(
+            response.headers["totalamountofrcords"],
+            10
+          );
+          setTotalAmontOfPages(Math.ceil(totalAmontOfRecords / itemsPerPage));
+
+          let mappedNotebooks = response.data.aaData.map((notebook) => {
+            return {
+              id: notebook.id,
+              number: notebook.number,
+              tracksCount: notebook.tracksCount,
+            };
+          });
+
+          setItemsPerPage(response.data.iTotalDisplayRecords);
+          setTotalItems(response.data.iTotalRecords);
+          setData(mappedNotebooks);
+          setLoading(false);
+        })
+        .catch((error: AxiosError) => {
+          console.log(error);
+        });
+    };
+
     loadData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, itemsPerPage, sortColumn, sortType, search]);
-
-  const loadData = () => {
-    axios
-      .get(
-        `${urlNotebooks}?page=${page}&itemsPerPage=${itemsPerPage}&sortColumn=${sortColumn}&sortType=${sortType}&search=${search}`
-      )
-      .then((response: AxiosResponse<sysDataTablePager<notebookDTO>>) => {
-        const totalAmontOfRecords = parseInt(
-          response.headers["totalamountofrcords"],
-          10
-        );
-        setTotalAmontOfPages(Math.ceil(totalAmontOfRecords / itemsPerPage));
-
-        let mappedNotebooks = response.data.aaData.map((notebook) => {
-          return {
-            id: notebook.id,
-            number: notebook.number,
-            tracksCount: notebook.tracksCount,
-          };
-        });
-
-        setItemsPerPage(response.data.iTotalDisplayRecords);
-        setTotalItems(response.data.iTotalRecords);
-        setData(mappedNotebooks);
-        setLoading(false);
-      })
-      .catch((error: AxiosError) => {
-        console.log(error);
-      });
-  };
 
   const updateState = (arr: any[]) => {
     arr.forEach(function (item, index) {

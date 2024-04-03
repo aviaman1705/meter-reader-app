@@ -1,5 +1,3 @@
-import { Panel, Placeholder } from "rsuite";
-
 import classes from "./Panel.module.css";
 
 export default function PanelItem(props: panelItemlProps) {

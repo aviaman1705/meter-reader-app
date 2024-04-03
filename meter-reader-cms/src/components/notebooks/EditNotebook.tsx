@@ -4,7 +4,6 @@ import { useHistory, useParams } from "react-router-dom";
 import { urlNotebooks } from "../../endpoints";
 import { notebookDTO } from "./notebook.models";
 import { convertNotebookToFormData } from "../../utils/formDataUtils";
-import DisplayErrors from "../../utils/DisplayErrors";
 import Loading from "../../utils/Loading";
 import NotebookForm from "./NotebookForm";
 
@@ -14,7 +13,6 @@ export default function EditNotebook() {
   const { id }: any = useParams();
   const [notebook, setNotebook] = useState<notebookDTO>();
   const [loading, setLoading] = useState(false);
-  const [errors, setErrors] = useState<string[]>([]);
   const history = useHistory();
 
   useEffect(() => {
@@ -31,12 +29,14 @@ export default function EditNotebook() {
     axios
       .put(`${urlNotebooks}/${id}`, formData)
       .then((response: AxiosResponse<notebookDTO>) => {
+        debugger;
         setTimeout(() => {
           setLoading(false);
           history.push(`/notebooks`);
         }, 2000);
       })
       .catch((error: AxiosError) => {
+        debugger;
         console.log(error);
       });
   }
@@ -44,7 +44,6 @@ export default function EditNotebook() {
   return (
     <div className="form-container">
       <div className={classes["form-box"]}>
-        <DisplayErrors errors={errors} />
         {loading === true ? <Loading left="45%" top="42%" /> : null}
         {notebook && (
           <NotebookForm

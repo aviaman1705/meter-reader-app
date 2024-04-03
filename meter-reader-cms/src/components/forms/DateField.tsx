@@ -1,4 +1,4 @@
-import { ErrorMessage, Field, useFormikContext } from "formik";
+import { ErrorMessage, useFormikContext } from "formik";
 
 import classes from "./../../Form.module.css";
 
@@ -9,8 +9,8 @@ export default function DateField(props: dateFieldProps) {
     ? ""
     : new Date(values[props.field]).toLocaleDateString("en-CA");
 
-  let inputTouched = touched[props.field];
-  let inputError = errors[props.field];
+  // let inputTouched = touched[props.field];
+  // let inputError = errors[props.field];
 
   return (
     <div className={classes["form-group"]}>

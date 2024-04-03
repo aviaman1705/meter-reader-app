@@ -1,5 +1,5 @@
 import { notebookDTO } from "../components/notebooks/notebook.models";
-import { trackCreationDTO, trackDTO } from "../components/tracks/track.models";
+import { trackDTO } from "../components/tracks/track.models";
 
 export function convertTrackToFormData(track: trackDTO): FormData {
     const formData = new FormData();
