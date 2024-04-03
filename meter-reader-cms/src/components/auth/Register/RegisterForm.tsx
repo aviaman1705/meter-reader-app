@@ -1,5 +1,5 @@
 import { Form, Formik, FormikHelpers } from "formik";
-import TextField from "../../forms/TextField/TextField";
+import TextField from "../../forms/TextField";
 import Button from "../../../utils/Button";
 import { Link } from "react-router-dom";
 import { registerDTO } from "../auth.models";
@@ -25,13 +25,15 @@ export default function RegisterForm(props: registerFormProps) {
             <TextField displayName="שם משתמש" field="username" />
             <TextField displayName="מייל" field="email" />
             <TextField displayName="סיסמא" field="password" type="password" />
-            <Button disabled={formikProps.isSubmitting} type="submit">
-              {props.btnText}
-            </Button>
-            <p className={classes["message"]}>
-              {props.questionText}
-              <Link to={props.secondBtnUrl}>{props.secondBtnText}</Link>
-            </p>
+            <div className={classes["auth-buttons-section"]}>
+              <Button disabled={formikProps.isSubmitting} type="submit">
+                {props.btnText}
+              </Button>
+              <p className={classes["message"]}>
+                {props.questionText}
+                <Link to={props.secondBtnUrl}>{props.secondBtnText}</Link>
+              </p>
+            </div>
           </Form>
         )}
       </Formik>

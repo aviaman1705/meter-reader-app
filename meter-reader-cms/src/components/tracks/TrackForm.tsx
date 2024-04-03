@@ -8,7 +8,7 @@ import { urlNotebooks } from "../../endpoints";
 import { trackDTO } from "./track.models";
 import { notebookDTO } from "../notebooks/notebook.models";
 import Button from "../../utils/Button";
-import TextField from "../forms/TextField/TextField";
+import TextField from "../forms/TextField";
 import NumberField from "../forms/NumberField";
 import DateField from "../forms/DateField";
 import DropDownField, { dropDownItemDTO } from "../forms/DropDownField";

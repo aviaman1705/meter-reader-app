@@ -1,4 +1,6 @@
-import { useFormikContext } from "formik";
+import { ErrorMessage, Field, useFormikContext } from "formik";
+
+import classes from "./../../Form.module.css";
 
 export default function DateField(props: dateFieldProps) {
   const { values, validateForm, touched, errors } = useFormikContext<any>();
@@ -11,11 +13,10 @@ export default function DateField(props: dateFieldProps) {
   let inputError = errors[props.field];
 
   return (
-    <div className="form-group p-2">
-      <label className="form-label" htmlFor={props.field}>
+    <div className={classes["form-group"]}>
+      <label className={classes["form-label"]} htmlFor={props.field}>
         {props.displayName}
       </label>
-
       <input
         id={props.field}
         name={props.field}
@@ -25,15 +26,19 @@ export default function DateField(props: dateFieldProps) {
           values[props.field] = date;
           validateForm();
         }}
-        className="form-control text-end"
+        className="form-control"
         defaultValue={trackDate}
       />
 
-      {touched[props.field] && errors[props.field] ? (
-        <div className="text-danger text-end">
-          {errors[props.field]?.toString()}
-        </div>
-      ) : null}
+      <div>
+        <ErrorMessage name={props.field}>
+          {(msg: string) => (
+            <span id={`input-${props.field}-error`} className="text-danger">
+              {msg}
+            </span>
+          )}
+        </ErrorMessage>
+      </div>
     </div>
   );
 }
@@ -41,6 +46,4 @@ export default function DateField(props: dateFieldProps) {
 interface dateFieldProps {
   field: string;
   displayName: string;
-  // onChange(e: any): void;
-  // onBlur(e: any): void;
 }
