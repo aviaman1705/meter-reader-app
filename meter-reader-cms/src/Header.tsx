@@ -1,111 +1,137 @@
-import { useContext, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { NavLink, useHistory } from "react-router-dom";
+import utf8 from "utf8";
+import { IoMdArrowDropdown } from "react-icons/io";
 import { logout } from "./components/auth/handleJWT";
 import AuthenticationContext from "./components/auth/AuthenticationContext";
 import Authorized from "./components/auth/Authorized";
-import { FcElectricity } from "react-icons/fc";
 
 import "./Header.css";
 
 export default function Header() {
   const { update, claims } = useContext(AuthenticationContext);
-  // const [username, setUsername] = useState("");
+  const history = useHistory();
+  const [display, setDisplay] = useState("none");
+  const [username, setUsername] = useState("");
 
   useEffect(() => {
-    // if (claims.find((claim) => claim.name === "username") !== undefined) {
-    //   const currentUsername = utf8.decode(
-    //     claims.find((claim) => claim.name === "username").value
-    //   );
-    //   setUsername(`היי ${currentUsername}`);
-    // }
+    if (claims.find((claim) => claim.name === "username") !== undefined) {
+      const currentUsername = utf8.decode(
+        claims.find((claim) => claim.name === "username").value
+      );
+      setUsername(`היי ${currentUsername}`);
+    }
   }, [claims]);
 
   return (
     <>
-      <nav className="navbar navbar-expand-sm navbar-dark">
-        <div className="container-fluid">
-          <NavLink className="navbar-brand" to="/" exact={true}>
-            <FcElectricity title="מערכת קריאת מונים" />
-            מערכת קריאת מונים
-          </NavLink>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/" exact={true}>
-                  עמוד הבית
-                </NavLink>
-              </li>
-              <Authorized
-                role="admin"
-                authorized={
-                  <>
-                    <li className="nav-item">
-                      <NavLink className="nav-link" to="/tracks">
-                        מסלולים
-                      </NavLink>
-                    </li>
-                    <li className="nav-item">
-                      <NavLink className="nav-link" to="/notebooks">
-                        פנקסים
-                      </NavLink>
-                    </li>
-                    <li className="nav-item">
-                      <NavLink className="nav-link" to="/statistics">
-                        סטטיסטיקות
-                      </NavLink>
-                    </li>
-                  </>
-                }
-              />
-            </ul>
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <Authorized
-                role=""
-                authorized={
-                  <li className="nav-item">
+      <header className="header">
+        <nav className="main-nav">
+          <ul className="main-nav-list">
+            <li>
+              <NavLink
+                className="main-nav-link"
+                activeClassName="nav-cta"
+                exact={true}
+                to="/"
+              >
+                עמוד הבית
+              </NavLink>
+            </li>
+
+            <Authorized
+              authorized={
+                <>
+                  <li>
+                    <NavLink
+                      className="main-nav-link"
+                      activeClassName="nav-cta"
+                      to="/tracks"
+                    >
+                      מסלולים
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      className="main-nav-link"
+                      activeClassName="nav-cta"
+                      to="/notebooks"
+                    >
+                      פנקסים
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      className="main-nav-link"
+                      activeClassName="nav-cta"
+                      to="/statistics"
+                    >
+                      סטטיסטיקות
+                    </NavLink>
+                  </li>
+                </>
+              }
+            />
+          </ul>
+
+          <Authorized
+            notAuthorized={
+              <>
+                <ul className="main-nav-list">
+                  <li>
+                    <NavLink
+                      className="main-nav-link"
+                      activeClassName="nav-cta"
+                      to="/login"
+                    >
+                      כניסה
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      className="main-nav-link"
+                      activeClassName="nav-cta"
+                      to="/register"
+                    >
+                      הרשמה
+                    </NavLink>
+                  </li>
+                </ul>
+              </>
+            }
+            authorized={
+              <>
+                <div className="dropdown-box">
+                  <div className="dropdown">
+                    <button className="dropbtn">
+                      {username}
+                      <IoMdArrowDropdown />
+                    </button>
+                  </div>
+                  <div className="dropdown-content">
                     <a
                       id="logout-mobile-btn"
-                      className="nav-link"
-                      onClick={() => {
+                      className="main-nav-link"
+                      onClick={(e: any) => {
+                        e.preventDefault();
                         logout();
                         update([]);
+                        history.push("/");
                       }}
                       href="/#"
                     >
                       יציאה
                     </a>
-                  </li>
-                }
-                notAuthorized={
-                  <>
-                    <li className="nav-item">
-                      <NavLink className="nav-link" to="/login">
-                        כניסה
-                      </NavLink>
-                    </li>
-                    <li className="nav-item">
-                      <NavLink className="nav-link" to="/register">
-                        הרשמה
-                      </NavLink>
-                    </li>
-                  </>
-                }
-              />
-            </ul>
-          </div>
-        </div>
-      </nav>
+                  </div>
+                </div>
+              </>
+            }
+          />
+        </nav>
+        <NavLink className="navbar-brand" to="/" exact={true}>
+          <img className="logo" alt="Omnifood logo" src="logo192.png" />
+        </NavLink>
+      </header>
     </>
   );
 }

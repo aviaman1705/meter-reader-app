@@ -1,70 +1,131 @@
-/* //Mobile */
-@media (min-width: 300px) {
-    .bg-custom {
-        background-color: #009688;
-    }
+/*
+--- 01 TYPOGRAPHY SYSTEM
 
-    #navbarScrollingDropdown {
-        display: none;
-    }
+- Font sizes (px)
+10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98
 
-    #logout-mobile-btn {
-        display: block;
-        color: rgba(255, 255, 255, 0.55);
-    }
+- Font weights
+Default: 400
+Medium: 500
+Semi-bold: 600
+Bold: 700
 
-    a.navbar-brand {
-        margin: 0;
-    }
+- Line heights
+Default: 1
+Small: 1.05
+Paragraph default: 1.6
 
-    .navbar {
-        padding: 0.5rem 0;
-    }
+--- 02 COLORS
 
-    button.navbar-toggler {
-        border: none;
-        background-repeat: no-repeat !important;
-        background-position: 13px 8px !important;
-    }
+- Primary: #087f5b
+- Tins:#cee5de
+- Shades:#066649
+- Accents:
+- Greys:#343a40
+#555
+#333
 
-    span.navbar-toggler-icon {
-        background-image: none;
-    }
+--- 05 SHADOWS
 
-    a.navbar-brand {
-        color: #fff !important;
-        font-size: 1.5rem;
-        margin-left: 20px;
-    }
+--- 06 BORDER-RADIUS
 
-    .navbar-toggler:focus {
-        box-shadow: none;
-    }
+Default: 9px
 
-    .navbar-nav .nav-link.active,
-    .navbar-nav .nav-link.show {
-        color: #fff;
-    }
+--- 07 WHITESPACE
 
-    h1#logo {
-        padding-right: 1.2rem;
-    }
+- SpacingG System (px)
+2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128
+*/
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #cee5de;
+
+    /* Becuase we want header to be sticky later */
+    height: 9.6rem;
+    padding: 0 4.8rem;
 }
 
-/* Small devies (tablets, 768px and up) */
-@media (min-width: 768px) {}
-
-/* Small devies (desktops, 992px and up) */
-@media (min-width: 992px) {
-    #navbarScrollingDropdown {
-        display: block;
-    }
-
-    #logout-mobile-btn {
-        /* display: none; */
-        cursor: pointer;
-    }
+.main-nav {
+    display: flex;
+    justify-content: space-between;
+    flex-grow: 1;
 }
 
-/* Small devies (large desktops, 1200px and up) */
-@media (min-width: 1200px) {}
+.logo {
+    height: 2.2rem;
+}
+
+.main-nav-list {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 3.2rem;
+}
+
+.main-nav-link:link,
+.main-nav-link:visited {
+    display: inline-block;
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    font-size: 1.8rem;
+    transition: color 0.3s;
+}
+
+.main-nav-link:hover,
+.main-nav-link:active {
+    color: #066649;
+}
+
+.main-nav-link.nav-cta:link,
+.main-nav-link.nav-cta:visited {
+    border-radius: 9px;
+    color: #087f5b;
+}
+
+.dropdown {
+    float: left;
+    overflow: hidden;
+}
+
+.dropdown .dropbtn {
+    font-size: 16px;
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    left: 6.2rem;
+    top: 6.4rem;
+}
+
+#logout-mobile-btn {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: right;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.dropdown-box:hover .dropdown-content {
+    display: block;
+}
