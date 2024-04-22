@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import * as Yup from "yup";
 import YupPassword from "yup-password";
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import AuthenticationContext from "./AuthenticationContext";
 import { getClaims, saveToken } from "./handleJWT";
 import { authenticationResponse, userCredentials } from "./auth.models";
@@ -51,9 +51,17 @@ export default function Login() {
           history.push("/");
         }, 3000);
       })
-      .catch((error) => {
+      .catch((error: AxiosError) => {
         setTimeout(() => {
-          setErrors(["מייל הוא סיסמא אינם נכונים."]);
+          if (
+            error.code === "ERR_NETWORK" ||
+            error.code === "ERR_BAD_RESPONSE"
+          ) {
+            setErrors(["ישנה תקלת תקשורת."]);
+          }
+          if (error.code === "ERR_BAD_REQUEST") {
+            setErrors(["מייל הוא סיסמא אינם נכונים."]);
+          }
           setLoading(false);
           actions.setSubmitting(false);
         }, 2000);
