@@ -57,10 +57,16 @@ export default function Register() {
       .catch((error) => {
         setTimeout(() => {
           setLoading(false);
-          if (error.response.data.length === 0) {
+
+          if (
+            error.response.data[0].toLocaleLowerCase().indexOf("username") > -1
+          ) {
+            setErrors(["שם משתמש כבר קיים במערכת."]);
+          }
+          if (
+            error.response.data[0].toLocaleLowerCase().indexOf("email") > -1
+          ) {
             setErrors(["מייל: המייל כבר קיים במערכת"]);
-          } else {
-            setErrors(error.response.data);
           }
           actions.setSubmitting(false);
         }, 2000);
