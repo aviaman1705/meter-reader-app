@@ -51,18 +51,23 @@ export default function Login() {
           history.push("/");
         }, 3000);
       })
-      .catch((error: AxiosError) => {
+      .catch((error) => {
         setTimeout(() => {
+          setLoading(false);
+
+          if (
+            error.response?.data[0].toLocaleLowerCase().indexOf("incorrect") >
+            -1
+          ) {
+            setErrors(["מייל הוא סיסמא אינם נכונים."]);
+          }
           if (
             error.code === "ERR_NETWORK" ||
             error.code === "ERR_BAD_RESPONSE"
           ) {
             setErrors(["ישנה תקלת תקשורת."]);
           }
-          if (error.code === "ERR_BAD_REQUEST") {
-            setErrors(["מייל הוא סיסמא אינם נכונים."]);
-          }
-          setLoading(false);
+
           actions.setSubmitting(false);
         }, 2000);
       });
