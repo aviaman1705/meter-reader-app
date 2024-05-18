@@ -47,6 +47,7 @@ export default function Header() {
                       className="main-nav-link"
                       activeClassName="nav-cta"
                       to="/tracks"
+                      exact={true}
                     >
                       מסלולים
                     </NavLink>

@@ -1,15 +1,15 @@
+import { useEffect, useState } from "react";
 import { Route, Switch } from "react-router-dom";
 import routes from "./route-config";
 import configureInterceptor from "./utils/httpInterceptors";
-import { useEffect, useState } from "react";
 import { claim } from "./components/auth/auth.models";
 import { getClaims } from "./components/auth/handleJWT";
 import AuthenticationContext from "./components/auth/AuthenticationContext";
-import ThemeProvider from "react-bootstrap/ThemeProvider";
-import Header from "./Header";
+import Header from "./components/header/Header";
 import Footer from "./Footer";
+import Sidebar from "./components/sidebar/Sidebar";
 
-import "./App.css";
+import classes from "./App.module.css";
 
 configureInterceptor();
 
@@ -29,33 +29,38 @@ function App() {
   }
 
   return (
-    <ThemeProvider
-      breakpoints={["xxxl", "xxl", "xl", "lg", "md", "sm", "xs", "xxs"]}
-      minBreakpoint="xxs"
-      dir="rtl"
+    <AuthenticationContext.Provider
+      value={{ claims: claims, update: setClaims }}
     >
-      <AuthenticationContext.Provider
-        value={{ claims: claims, update: setClaims }}
-      >
-        <div id="main-container" className="container-fluid">
+      <div id={classes["main-container"]}>
+        <div id="wrapper">
           <Header />
-          <div className="content-container">
-            <Switch>
-              {routes.map((route, index) => (
-                <Route exact={route.exact} path={route.path} key={route.path}>
-                  {route.isAdmin && !isAdmin() ? (
-                    <>You are not allowed to see this page</>
-                  ) : (
-                    <route.component />
-                  )}
-                </Route>
-              ))}
-            </Switch>
+          <Sidebar />
+          <div id="page-wrapper">
+            <main>
+              <Switch>
+                {routes.map((route, index) => (
+                  <Route exact={route.exact} path={route.path} key={route.path}>
+                    {route.isAdmin && !isAdmin() ? (
+                      <>You are not allowed to see this page</>
+                    ) : (
+                      <route.component />
+                    )}
+                  </Route>
+                ))}
+              </Switch>
+            </main>
           </div>
-          <Footer />
         </div>
-      </AuthenticationContext.Provider>
-    </ThemeProvider>
+        {/* <Header /> */}
+        {/* <!-- Navigation --> */}
+
+        {/* <Sidebar />
+
+      
+        <Footer /> */}
+      </div>
+    </AuthenticationContext.Provider>
   );
 }
 

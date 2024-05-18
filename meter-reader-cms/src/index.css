@@ -33,7 +33,7 @@ Default: 9px
 
 --- 07 WHITESPACE
 
-- SpacingG System (px)
+- Spacing System (px)
 2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128
 */
 
@@ -70,11 +70,6 @@ section {
 /*************************/
 /* HEADER */
 /*************************/
-
-footer {
-    background-color: #087f5b;
-}
-
 
 h1 {
     margin-bottom: 32px;
