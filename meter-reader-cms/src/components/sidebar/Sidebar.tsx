@@ -47,6 +47,16 @@ export default function Sidebar() {
                       <i className="fa fa-edit fa-fw"></i> פנקסים
                     </NavLink>
                   </li>
+                  <li>
+                    <NavLink activeClassName="active" to="/user-profile">
+                      <i className="fa fa-user fa-fw"></i> פרופיל
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink activeClassName="active" to="/settings">
+                      <i className="fa fa-cog fa-fw"></i> הגדרות
+                    </NavLink>
+                  </li>
                 </>
               }
             />
