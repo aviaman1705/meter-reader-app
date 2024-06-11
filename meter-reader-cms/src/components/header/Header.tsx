@@ -320,9 +320,9 @@ export default function Header() {
                       </NavLink>
                     </li>
                     <li>
-                      <a href="#">
-                        <i className="fa fa-gear fa-fw"></i> Settings
-                      </a>
+                      <NavLink to="/settings">
+                        <i className="fa fa-gear fa-fw"></i> הגדרות
+                      </NavLink>
                     </li>
                     <li className="divider"></li>
                     <li>
