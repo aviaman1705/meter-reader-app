@@ -55,7 +55,7 @@ export default function TrackForm(props: trackFormProps) {
           initialValues={props.model}
           onSubmit={props.onSubmit}
           validationSchema={Yup.object({
-            date: Yup.date()
+            fromDate: Yup.date()
               .transform(function (value, originalValue) {
                 if (this.isType(value)) {
                   return value;
@@ -63,9 +63,18 @@ export default function TrackForm(props: trackFormProps) {
                 const result = parse(originalValue, "dd.MM.yyyy", new Date());
                 return result;
               })
-              .typeError("שדה תאריך הוא שדה חובה!")
-              .required()
-              .min("2022-11-13", "Date is too early"),
+              .typeError("שדה מ-תאריך הוא שדה חובה!")
+              .required(),
+            toDate: Yup.date()
+              .transform(function (value, originalValue) {
+                if (this.isType(value)) {
+                  return value;
+                }
+                const result = parse(originalValue, "dd.MM.yyyy", new Date());
+                return result;
+              })
+              .typeError("שדה עד תאריך הוא שדה חובה!")
+              .required(),
             notebookId: Yup.number().required("חובה לבחור מספר פנקס!"),
             desc: Yup.string()
               .required("שדה תיאור הוא שדה חובה!")
@@ -80,7 +89,8 @@ export default function TrackForm(props: trackFormProps) {
         >
           {(formikProps) => (
             <Form>
-              <DateField displayName="תאריך" field="date" />
+              <DateField displayName="תאריך" field="fromDate" />
+              <DateField displayName="תאריך" field="toDate" />
               <DropDownField
                 displayName="פנקס"
                 label="בחר פנקס..."

@@ -7,7 +7,7 @@ export default function Chart(props: ChartProps) {
   return (
     <div className={classes["panel-container"]}>
       <h1 id={classes["panel-page-title"]}>גרף קריאות</h1>
-      <BarChartItem data={props.data} />
+      <BarChartItem data={props.data} name="טסט" />
     </div>
   );
 }

@@ -16,10 +16,10 @@ export default function Panel(props: panelProps) {
           header='סה"כ מונים שלא שנקראו'
           text={props.data.unCalled.toString()}
         />
-        <PanelItem
+        {/* <PanelItem
           header='סה"כ אחוזי אי קריאה'
           text={`${props.data.totalUncalledPercentage}%`}
-        />
+        /> */}
       </div>
     </>
   );

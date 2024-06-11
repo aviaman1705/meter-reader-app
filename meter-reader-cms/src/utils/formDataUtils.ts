@@ -8,8 +8,12 @@ export function convertTrackToFormData(track: trackDTO): FormData {
         formData.append('id', track.id.toString());
     }
 
-    if (track.date) {
-        formData.append('date', formatDate(track.date));
+    if (track.fromDate) {
+        formData.append('fromDate', formatDate(track.fromDate));
+    }
+
+    if (track.toDate) {
+        formData.append('toDate', formatDate(track.toDate));
     }
 
     if (track.called) {

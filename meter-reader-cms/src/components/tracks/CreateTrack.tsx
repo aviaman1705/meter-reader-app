@@ -15,7 +15,8 @@ export default function CreateTrack() {
   const [errors, setErrors] = useState<string[]>([]);
   const history = useHistory();
   const track: trackDTO = {
-    date: "dfdfd",
+    fromDate: "",
+    toDate: "",
     desc: "",
     notebookId: null as any,
     called: "",

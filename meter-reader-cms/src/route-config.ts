@@ -9,6 +9,7 @@ import CreateTrack from "./components/tracks/CreateTrack";
 import EditTrack from "./components/tracks/EditTrack";
 import IndexTracks from "./components/tracks/IndexTracks";
 import RedirectToLandingPage from "./utils/RedirectToLandingPage";
+import UserProfile from "./components/user/UserProfile";
 const routes = [
 
     { path: '/register', component: Register },
@@ -23,7 +24,7 @@ const routes = [
     { path: '/notebooks/edit/:id(\\d+)', component: EditNotebook, isAdmin: true },
 
     { path: '/statistics', component: IndexStatistics, exact: true, isAdmin: true },
-
+    { path: '/user-profile', component: UserProfile },
     { path: '/', component: Home, exact: true },
     { path: '*', component: RedirectToLandingPage }
 ]

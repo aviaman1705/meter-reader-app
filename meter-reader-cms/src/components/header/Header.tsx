@@ -3,8 +3,6 @@ import { NavLink, useHistory } from "react-router-dom";
 import utf8 from "utf8";
 import { logout } from "../auth/handleJWT";
 import AuthenticationContext from "../auth/AuthenticationContext";
-
-import classes from "Header.module.css";
 import Authorized from "../auth/Authorized";
 
 export default function Header() {
@@ -317,9 +315,9 @@ export default function Header() {
                   </a>
                   <ul className="dropdown-menu dropdown-user">
                     <li>
-                      <a href="#">
-                        <i className="fa fa-user fa-fw"></i> User Profile
-                      </a>
+                      <NavLink to="/user-profile">
+                        <i className="fa fa-user fa-fw"></i> פרופיל
+                      </NavLink>
                     </li>
                     <li>
                       <a href="#">

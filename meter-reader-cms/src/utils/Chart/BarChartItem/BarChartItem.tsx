@@ -24,8 +24,7 @@ export default function BarChartItem(props: BarChartItemProps) {
         <YAxis domain={[0, 12000]} />
         <Tooltip />
         <Legend />
-        <Bar dataKey="unCalled" fill="#343a40" name="לא נקרא" />
-        <Bar dataKey="called" fill="#087f5b" name="נקרא" />
+        <Bar dataKey="count" fill={props.color} name={props.name} />
       </BarChart>
     </ResponsiveContainer>
   );
@@ -33,4 +32,10 @@ export default function BarChartItem(props: BarChartItemProps) {
 
 interface BarChartItemProps {
   data: monthlyDataDTO[];
+  name: string;
+  color: string;
 }
+
+BarChartItem.defaultProps = {
+  color: "#087f5b",
+};

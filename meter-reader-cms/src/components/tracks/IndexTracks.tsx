@@ -99,7 +99,8 @@ export default function IndexTracks() {
                 unCalled: track.unCalled,
                 notebookNumber: track.notebookNumber,
                 desc: track.desc,
-                date: dayjs(track.date).format("DD/MM/YY"),
+                fromDate: dayjs(track.fromDate).format("DD/MM/YY"),
+                toDate: dayjs(track.toDate).format("DD/MM/YY"),
                 notebookId: track.notebookId,
               };
             });
@@ -213,7 +214,7 @@ export default function IndexTracks() {
             {data?.map((item, index, currentArray) => (
               <tr key={index}>
                 <td>{index + 1}</td>
-                <td>{item.date}</td>
+                <td>{item.toDate}</td>
                 <td>{item.notebookNumber}</td>
                 <td>{item.desc}</td>
                 <td>{item.called}</td>
