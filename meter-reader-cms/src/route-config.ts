@@ -11,6 +11,7 @@ import IndexTracks from "./components/tracks/IndexTracks";
 import RedirectToLandingPage from "./utils/RedirectToLandingPage";
 import UserProfile from "./components/user/UserProfile";
 import Settings from "./components/settings/settings";
+import SearchResults from "./components/search/SearchResults";
 const routes = [
 
     { path: '/register', component: Register },
@@ -27,6 +28,7 @@ const routes = [
     { path: '/statistics', component: IndexStatistics, exact: true, isAdmin: true },
     { path: '/user-profile', component: UserProfile },
     { path: '/settings', component: Settings },
+    { path: '/search-results/:term', component: SearchResults },
     { path: '/', component: Home, exact: true },
     { path: '*', component: RedirectToLandingPage }
 ]

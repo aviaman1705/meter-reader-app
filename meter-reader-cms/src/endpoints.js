@@ -3,3 +3,4 @@ const baseURL = "https://localhost:7089/api";
 export const urlTracks = `${baseURL}/tracks`;
 export const urlAccounts = `${baseURL}/accounts`;
 export const urlNotebooks = `${baseURL}/notebooks`;
+export const urlSearch = `${baseURL}/search`;

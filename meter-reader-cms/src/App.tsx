@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { Route, Switch } from "react-router-dom";
-import routes from "./route-config";
 import configureInterceptor from "./utils/httpInterceptors";
-import { claim } from "./components/auth/auth.models";
 import { getClaims } from "./components/auth/handleJWT";
+import { claim } from "./components/auth/auth.models";
 import AuthenticationContext from "./components/auth/AuthenticationContext";
+import { searchResultsDTO } from "./components/search/search.models";
+import routes from "./route-config";
 import Header from "./components/header/Header";
-import Footer from "./Footer";
 import Sidebar from "./components/sidebar/Sidebar";
 
 import classes from "./App.module.css";

@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory, useParams } from "react-router-dom";
 import Authorized from "../auth/Authorized";
 import { MdDashboard } from "react-icons/md";
 import { FaWalking } from "react-icons/fa";
@@ -7,8 +7,29 @@ import { CiSettings } from "react-icons/ci";
 import { TbArrowsMoveVertical } from "react-icons/tb";
 
 import classes from "./Sidebar.module.css";
+import { useContext, useEffect, useRef, useState } from "react";
+import SearchContext from "../../store/search-context";
 
 export default function Sidebar() {
+  const inputRef = useRef(null);
+  const history = useHistory();
+  const [isDisabeld, setIsDisabeld] = useState(true);
+
+  function searchHandler() {
+    const helper = inputRef.current.value;
+    inputRef.current.value = "";
+
+    history.push(`/search-results/${helper}`);
+  }
+
+  function keyUpHandler() {
+    if (inputRef.current.value) {
+      setIsDisabeld(false);
+    } else {
+      setIsDisabeld(true);
+    }
+  }
+
   return (
     <>
       <div className="navbar-default sidebar" role="navigation">
@@ -20,9 +41,16 @@ export default function Sidebar() {
                   type="text"
                   className="form-control"
                   placeholder="חפש..."
+                  onKeyUp={keyUpHandler}
+                  ref={inputRef}
                 />
                 <span className="input-group-btn">
-                  <button className="btn btn-default" type="button">
+                  <button
+                    className="btn btn-default"
+                    type="button"
+                    disabled={isDisabeld}
+                    onClick={searchHandler}
+                  >
                     <i className="fa fa-search"></i>
                   </button>
                 </span>

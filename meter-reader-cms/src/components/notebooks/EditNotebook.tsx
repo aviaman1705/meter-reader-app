@@ -29,14 +29,12 @@ export default function EditNotebook() {
     axios
       .put(`${urlNotebooks}/${id}`, formData)
       .then((response: AxiosResponse<notebookDTO>) => {
-        debugger;
         setTimeout(() => {
           setLoading(false);
           history.push(`/notebooks`);
         }, 2000);
       })
       .catch((error: AxiosError) => {
-        debugger;
         console.log(error);
       });
   }

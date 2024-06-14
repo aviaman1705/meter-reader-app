@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios, { AxiosResponse } from "axios";
 import { urlTracks } from "../../endpoints";
 import { dashboardDTO, dashboardSummaryDTO } from "./dashboard.models";
@@ -6,9 +6,11 @@ import Chart from "../../utils/Chart/Chart";
 import Panel from "../../utils/Panel/Panel";
 import BarChartItem from "../../utils/Chart/BarChartItem/BarChartItem";
 import { NavLink } from "react-router-dom";
+import SearchContext from "../../store/search-context";
 
 export default function Home() {
   const [chartData, setChartData] = useState([]);
+  const searchCtx = useContext(SearchContext);
   const [dashboardSummary, setDashboardSummary] = useState<dashboardSummaryDTO>(
     {
       called: 0,
@@ -48,6 +50,9 @@ export default function Home() {
       </div>
       {/* <!-- /.row --> */}
       <div className="row">
+        {searchCtx.items.map((item) => (
+          <div>{item.title}</div>
+        ))}
         <div className="col-lg-4 col-md-6">
           <div className="panel panel-primary">
             <div className="panel-heading">
