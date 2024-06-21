@@ -8,6 +8,7 @@ export default function ItemsPerPage(props: buttonProps) {
       <label id={`${classes["table-select-label"]}`}>הצג </label>
       <Form.Select
         id={`${classes["table-select-option"]}`}
+        className="form-control"
         onChange={props.onChange}
         defaultValue={props.itemsPerPage}
         aria-label="Default select example"
