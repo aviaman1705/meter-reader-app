@@ -162,7 +162,7 @@ export default function IndexNotebooks() {
         </div>
       </div>
 
-      <div id={classes["table-wrapper"]} className="col">
+      <div id={classes["table-wrapper"]}>
         {loading && <Loading left="50%" top="50%" />}
         <table
           className={`table table-bordered table-hover table-striped ${classes["custom-table"]}`}
