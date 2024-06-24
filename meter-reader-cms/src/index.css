@@ -46,7 +46,7 @@ Default: 9px
     box-sizing: border-box;
 }
 
-html{
+html {
     font-size: 62.5%;
 }
 
@@ -93,3 +93,12 @@ button {
 button:hover {
     background-color: #047e59;
 }
+
+
+@media (min-width: 300px) {
+    h1 {
+        text-align: center;
+    }
+}
+
+ @media (min-width: 768px) {}
