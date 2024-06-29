@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import axios, { AxiosResponse, AxiosError } from "axios";
 import dayjs from "dayjs";
 import { urlTracks } from "../../endpoints";
@@ -11,6 +11,8 @@ import Loading from "../../utils/Loading";
 import Pagination from "../../utils/Pagination/Pagination";
 import customConfirm from "../../utils/customConfirm";
 import Button from "../../utils/Button";
+import { CiEdit } from "react-icons/ci";
+import { MdDeleteOutline } from "react-icons/md";
 
 import classes from "./../../Table.module.css";
 import { trackGridItemDTO } from "./track.models";
@@ -229,6 +231,12 @@ export default function IndexTracks() {
                   >
                     עריכה
                   </Button>
+                  <Link
+                    className={`${classes["btn-grid-mobile-edit"]}`}
+                    to={`/tracks/edit/${item.id}`}
+                  >
+                    <CiEdit />
+                  </Link>
                 </td>
                 <td>
                   <Button
@@ -240,6 +248,15 @@ export default function IndexTracks() {
                   >
                     מחיקה
                   </Button>
+                  <a
+                    className={`${classes["btn-grid-mobile-delete"]}`}
+                    href="#/"
+                    onClick={() => {
+                      remove(item.id);
+                    }}
+                  >
+                    <MdDeleteOutline />
+                  </a>
                 </td>
               </tr>
             ))}

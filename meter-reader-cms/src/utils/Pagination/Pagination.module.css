@@ -53,3 +53,16 @@
  .dots {
      color: #868e96;
  }
+
+ @media (min-width: 300px) {
+     .btn {
+         width: 28px;
+         height: 28px;
+     }
+
+     .page-link:link,
+     .page-link:visited {
+         width: 26px;
+         height: 26px;
+     }
+ }

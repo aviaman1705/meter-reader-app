@@ -70,9 +70,64 @@
         margin-bottom: 20px;
     }
 
-    @media (min-width: 300px) {}
+    @media (min-width: 300px) {
+        .operation-box {
+            flex-direction: column-reverse;
+            gap: 10px;
+        }
 
-    @media (min-width: 768px) {}
+        .right-box {
+            display: flex;
+        }
+
+        .right-box button {
+            flex: 1;
+        }
+
+        .btn-grid-edit,
+        .btn-grid-delete {
+            display: none;
+        }
+
+        .btn-grid-mobile-edit,
+        .btn-grid-mobile-delete {
+            display: block;
+        }
+
+        .custom-table {
+
+            margin-bottom: 10px ;
+        }
+
+        table th,
+        table tbody td {
+            font-size: 0.9rem;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+
+        #total-records-text {
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        .pagination-box {
+            padding-top: 1rem;
+        }
+    }
+
+    @media (min-width: 768px) {
+
+        .btn-grid-edit,
+        .btn-grid-delete {
+            display: block;
+        }
+
+        .btn-grid-mobile-edit,
+        .btn-grid-mobile-delete {
+            display: none;
+        }
+    }
 
     /* Small devies (desktops, 992px and up) */
     @media (min-width: 992px) {}

@@ -226,11 +226,11 @@ export default function Home() {
       {/* <!-- /.row --> */}
       <div className="row">
         <div className="col-lg-6">
-          <h2>גרף קריאות</h2>
+          <h2 className="text-center">גרף קריאות</h2>
           <BarChartItem data={dashboardSummary.calledsPerMonths} name="נקרא" />
         </div>
         <div className="col-lg-6">
-          <h2>גרף אי קריאות</h2>
+          <h2 className="text-center">גרף אי קריאות</h2>
           <BarChartItem
             data={dashboardSummary.unCalledsPerMonths}
             name="לא נקרא"
