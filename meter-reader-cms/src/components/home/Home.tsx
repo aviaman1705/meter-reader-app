@@ -73,10 +73,10 @@ export default function Home() {
 
             <NavLink exact={true} to="/tracks">
               <div className="panel-footer">
-                <span className="pull-left">צפה בפרטים</span>
+                {/* <span className="pull-left">צפה בפרטים</span>
                 <span className="pull-right">
                   <i className="fa fa-arrow-circle-right"></i>
-                </span>
+                </span> */}
                 <div className="clearfix"></div>
               </div>
             </NavLink>
@@ -99,10 +99,10 @@ export default function Home() {
             </div>
             <NavLink exact={true} to="/tracks">
               <div className="panel-footer">
-                <span className="pull-left">צפה בפרטים</span>
+                {/* <span className="pull-left">צפה בפרטים</span>
                 <span className="pull-right">
                   <i className="fa fa-arrow-circle-right"></i>
-                </span>
+                </span> */}
                 <div className="clearfix"></div>
               </div>
             </NavLink>
@@ -125,10 +125,10 @@ export default function Home() {
             </div>
             <NavLink exact={true} to="/tracks">
               <div className="panel-footer">
-                <span className="pull-left">צפה בפרטים</span>
+                {/* <span className="pull-left">צפה בפרטים</span>
                 <span className="pull-right">
                   <i className="fa fa-arrow-circle-right"></i>
-                </span>
+                </span> */}
                 <div className="clearfix"></div>
               </div>
             </NavLink>
@@ -155,10 +155,10 @@ export default function Home() {
               to={`/tracks/edit/${dashboardSummary.highestUnCalledTrack?.id}`}
             >
               <div className="panel-footer">
-                <span className="pull-left">צפה בפרטים</span>
+                {/* <span className="pull-left">צפה בפרטים</span>
                 <span className="pull-right">
                   <i className="fa fa-arrow-circle-right"></i>
-                </span>
+                </span> */}
                 <div className="clearfix"></div>
               </div>
             </NavLink>
@@ -184,10 +184,10 @@ export default function Home() {
               to={`/tracks/edit/${dashboardSummary.lowestUnCalledTrack?.id}`}
             >
               <div className="panel-footer">
-                <span className="pull-left">צפה בפרטים</span>
+                {/* <span className="pull-left">צפה בפרטים</span>
                 <span className="pull-right">
                   <i className="fa fa-arrow-circle-right"></i>
-                </span>
+                </span> */}
                 <div className="clearfix"></div>
               </div>
             </NavLink>
@@ -213,10 +213,10 @@ export default function Home() {
               to={`/notebooks/edit/${dashboardSummary.popularNotebook?.id}`}
             >
               <div className="panel-footer">
-                <span className="pull-left">צפה בפרטים</span>
+                {/* <span className="pull-left">צפה בפרטים</span>
                 <span className="pull-right">
                   <i className="fa fa-arrow-circle-right"></i>
-                </span>
+                </span> */}
                 <div className="clearfix"></div>
               </div>
             </NavLink>
