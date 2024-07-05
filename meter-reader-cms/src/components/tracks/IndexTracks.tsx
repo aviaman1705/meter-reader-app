@@ -215,7 +215,7 @@ export default function IndexTracks() {
           <tbody>
             {data?.map((item, index, currentArray) => (
               <tr key={index}>
-                <td>{index + 1}</td>
+                <td>{item.id}</td>
                 <td>{item.toDate}</td>
                 <td>{item.notebookNumber}</td>
                 <td>{item.desc}</td>
