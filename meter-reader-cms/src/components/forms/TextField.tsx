@@ -1,8 +1,16 @@
-import { Field, ErrorMessage } from "formik";
+import { Field, ErrorMessage, getIn } from "formik";
 
 import classes from "./../../Form.module.css";
 
 export default function TextField(props: textFieldProps) {
+  function getStyles(errors: string[], fieldName: string) {
+    if (getIn(errors, fieldName)) {
+      return {
+        border: "1px solid red",
+      };
+    }
+  }
+
   return (
     <div className={classes["form-group"]}>
       <label className={classes["form-label"]} htmlFor={props.field}>
@@ -13,6 +21,7 @@ export default function TextField(props: textFieldProps) {
         name={props.field}
         type={props.type}
         className="form-control"
+        style={getStyles(props.formikProps.errors, props.field)}
         placeholder={props.displayName}
       />
       <div>
@@ -32,6 +41,7 @@ interface textFieldProps {
   field: string;
   displayName: string;
   type: "text" | "password" | "date";
+  formikProps: any;
 }
 
 TextField.defaultProps = {

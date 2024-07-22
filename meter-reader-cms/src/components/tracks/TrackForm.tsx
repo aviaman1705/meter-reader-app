@@ -99,7 +99,11 @@ export default function TrackForm(props: trackFormProps) {
                 ddlValue={props.ddlNotebooksValue}
                 onChange={formikProps.handleChange}
               />
-              <TextField displayName="תיאור" field="desc" />
+              <TextField
+                displayName="תיאור"
+                field="desc"
+                formikProps={formikProps}
+              />
               <NumberField displayName="נקרא" field="called" />
               <NumberField displayName="לא נקרא" field="unCalled" />
               <div className={`form-group ${classes["buttons-section"]} p-2`}>

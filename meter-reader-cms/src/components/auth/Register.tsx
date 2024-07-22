@@ -3,23 +3,27 @@ import { useHistory } from "react-router-dom";
 import * as Yup from "yup";
 import YupPassword from "yup-password";
 import axios, { AxiosResponse } from "axios";
-import Swal from "sweetalert2";
 import { authenticationResponse, registerDTO } from "./auth.models";
 import { urlAccounts } from "../../endpoints";
 import DisplayErrors from "../../utils/DisplayErrors";
 import Loading from "../../utils/Loading";
-import RegisterForm from "./Register/RegisterForm";
+import Swal from "sweetalert2";
 
 import css from "./../../Form.module.css";
+import AuthForm from "./AuthForm";
 
 YupPassword(Yup);
 
 export default function Register() {
+  //* הצגת רכיב טעינה
   const [loading, setLoading] = useState(false);
+  //* מערך שמציג שגיאות שרת
   const [errors, setErrors] = useState<string[]>([]);
+  //* אובייקט לניווט לדף אחר
   const history = useHistory();
 
-  const SignupSchema = Yup.object().shape({
+  // אובייקט שאחראי על הוולידציה של הטופס
+  const RegisterSchema = Yup.object().shape({
     username: Yup.string()
       .min(2, "שם חייב להכיל להכיל 2 תווים לפחות")
       .required("חובה להזין שם"),
@@ -34,7 +38,8 @@ export default function Register() {
       .required("חובה להזין סיסמא"),
   });
 
-  async function register(credentials: registerDTO, actions: any) {
+  // פונקציה לביצוע הרשמה
+  function register(credentials: registerDTO, actions: any) {
     setLoading(true);
     setErrors([]);
 
@@ -58,16 +63,25 @@ export default function Register() {
         setTimeout(() => {
           setLoading(false);
 
-          if (
-            error.response.data[0].toLocaleLowerCase().indexOf("username") > -1
-          ) {
-            setErrors(["שם משתמש כבר קיים במערכת."]);
-          }
-          if (
-            error.response.data[0].toLocaleLowerCase().indexOf("email") > -1
-          ) {
-            setErrors(["מייל: המייל כבר קיים במערכת"]);
-          }
+          let helper: string[] = [];
+
+          error.response.data.forEach((err: string) => {
+            if (err.toLocaleLowerCase().indexOf("alphanumeric") > -1) {
+              err = "סיסמא חייבת לפחות לפחות תו אחד שאינו אלפאנומרי.";
+            }
+
+            if (err.toLocaleLowerCase().indexOf("lowercase") > -1) {
+              err = "סיסמא חייבת להכיל לפחות אות קטנה אחת ('a'-'z').";
+            }
+
+            if (err.toLocaleLowerCase().indexOf("uppercase") > -1) {
+              err = "סיסמא חייבת להכיל לפחות אות אחת גדולה ('A'-'Z').";
+            }
+
+            helper.push(err);
+          });
+
+          setErrors(helper);
           actions.setSubmitting(false);
         }, 2000);
       });
@@ -79,16 +93,16 @@ export default function Register() {
       <div className={css["auth-container"]}>
         {loading && <Loading left="48%" top="55%" />}
         <div className={css["form"]}>
-          <RegisterForm
-            model={{ username: "", email: "", password: "" }}
-            validationSchema={SignupSchema}
-            btnText="הרשמה"
+          <AuthForm
+            initialValues={{ username: "", email: "", password: "" }}
+            validationSchema={RegisterSchema}
             secondBtnText="התחבר"
             secondBtnUrl="/login"
             questionText="כבר יש לך חשבון ? "
-            onSubmit={async (values, actions) =>
-              await register(values, actions)
-            }
+            onSubmit={(values, actions) => {
+              register(values, actions);
+            }}
+            formType="register"
           />
           <DisplayErrors errors={errors} />
         </div>

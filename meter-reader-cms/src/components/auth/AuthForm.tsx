@@ -10,10 +10,7 @@ export default function AuthForm(props: authFormProps) {
   return (
     <>
       <Formik
-        initialValues={{
-          email: "",
-          password: "",
-        }}
+        initialValues={props.initialValues}
         validationSchema={props.validationSchema}
         onSubmit={(values, actions) => {
           props.onSubmit(values, actions);
@@ -21,8 +18,26 @@ export default function AuthForm(props: authFormProps) {
       >
         {(formikProps) => (
           <Form>
-            <TextField displayName="מייל" field="email" />
-            <TextField displayName="סיסמא" field="password" type="password" />
+            {props.formType === "register" ? (
+              <TextField
+                displayName="שם משתמש"
+                field="username"
+                formikProps={formikProps}
+              />
+            ) : null}
+
+            <TextField
+              displayName="מייל"
+              field="email"
+              formikProps={formikProps}
+            />
+            <TextField
+              displayName="סיסמא"
+              field="password"
+              type="password"
+              formikProps={formikProps}
+            />
+
             <div className={classes["auth-buttons-section"]}>
               <Button disabled={formikProps.isSubmitting} type="submit">
                 {props.btnText}
@@ -40,19 +55,20 @@ export default function AuthForm(props: authFormProps) {
 }
 
 interface authFormProps {
+  initialValues: any;
+  validationSchema: any;
+  formType: string;
+
   btnText: string;
   secondBtnText: string;
   secondBtnUrl: string;
   questionText: string;
-  validationSchema: any;
-  model: userCredentials;
+  //model: userCredentials;
 
-  onSubmit(
-    values: userCredentials,
-    actions: FormikHelpers<userCredentials>
-  ): void;
+  onSubmit(values: any, actions: FormikHelpers<userCredentials>): void;
 }
 
 AuthForm.defaultProps = {
   btnText: "כפתור",
+  formType: "login",
 };

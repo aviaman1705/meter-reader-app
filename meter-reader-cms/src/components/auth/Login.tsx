@@ -2,26 +2,31 @@ import { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import * as Yup from "yup";
 import YupPassword from "yup-password";
-import axios, { AxiosError, AxiosResponse } from "axios";
+import axios, { AxiosResponse } from "axios";
 import AuthenticationContext from "./AuthenticationContext";
 import { getClaims, saveToken } from "./handleJWT";
 import { authenticationResponse, userCredentials } from "./auth.models";
 import { urlAccounts } from "../../endpoints";
-import AuthForm from "./AuthForm";
 import DisplayErrors from "../../utils/DisplayErrors";
 import Loading from "../../utils/Loading";
+import AuthForm from "./AuthForm";
 
 import css from "./../../Form.module.css";
 
 YupPassword(Yup);
 
 export default function Login() {
+  // פונקציה לעדכון פרטי משתמש בלוגין
   const { update } = useContext(AuthenticationContext);
+  //* הצגת רכיב טעינה
   const [loading, setLoading] = useState(false);
+  //* מערך שמציג שגיאות שרת
   const [errors, setErrors] = useState<string[]>([]);
+  //* אובייקט לניווט לדף אחר
   const history = useHistory();
 
-  const SignupSchema = Yup.object().shape({
+  // אובייקט שאחראי על הוולידציה של הטופס
+  const LoginSchema = Yup.object().shape({
     email: Yup.string().email("הזן מייל תקין").required("חובה להזין מייל"),
     password: Yup.string()
       .password()
@@ -33,7 +38,8 @@ export default function Login() {
       .required("חובה להזין סיסמא"),
   });
 
-  async function login(credentials: userCredentials, actions: any) {
+  // פונקציה לביצוע לוגין
+  function login(credentials: userCredentials, actions: any) {
     setLoading(true);
     setErrors([]);
 
@@ -55,19 +61,13 @@ export default function Login() {
         setTimeout(() => {
           setLoading(false);
 
-          if (
-            error.response?.data[0].toLocaleLowerCase().indexOf("incorrect") >
-            -1
-          ) {
-            setErrors(["מייל הוא סיסמא אינם נכונים."]);
-          }
-          if (
-            error.code === "ERR_NETWORK" ||
-            error.code === "ERR_BAD_RESPONSE"
-          ) {
-            setErrors(["ישנה תקלת תקשורת."]);
-          }
+          let helper: string[] = [];
 
+          error.response.data.forEach((err: string) => {
+            helper.push(err);
+          });
+
+          setErrors(helper);
           actions.setSubmitting(false);
         }, 2000);
       });
@@ -80,13 +80,13 @@ export default function Login() {
         {loading && <Loading left="48%" top="55%" />}
         <div className={css["form"]}>
           <AuthForm
-            model={{ email: "", password: "" }}
-            validationSchema={SignupSchema}
+            initialValues={{ email: "", password: "" }}
+            validationSchema={LoginSchema}
             btnText="כניסה"
             secondBtnText="הרשם"
             secondBtnUrl="/register"
             questionText="עוד אין לך חשבון ? "
-            onSubmit={async (values, actions) => await login(values, actions)}
+            onSubmit={(values, actions) => login(values, actions)}
           />
           <DisplayErrors errors={errors} />
         </div>
