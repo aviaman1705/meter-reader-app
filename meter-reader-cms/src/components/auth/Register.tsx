@@ -91,7 +91,7 @@ export default function Register() {
     <>
       <h1 className={css["auth-page-title"]}>הרשמה</h1>
       <div className={css["auth-container"]}>
-        {loading && <Loading left="48%" top="55%" />}
+        {loading && <Loading left="150px" top="90px" />}
         <div className={css["form"]}>
           <AuthForm
             initialValues={{ username: "", email: "", password: "" }}
