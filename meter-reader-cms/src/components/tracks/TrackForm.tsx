@@ -10,14 +10,13 @@ import Button from "../../utils/Button";
 import TextField from "../forms/TextField";
 import NumberField from "../forms/NumberField";
 import DateField from "../forms/DateField";
-import DropDownField, { dropDownItemDTO } from "../forms/DropDownField";
 
 import classes from "./../../Table.module.css";
 import { trackSchema } from "../../Schema";
 import SelectField from "../forms/SelectField";
 
 export default function TrackForm(props: trackFormProps) {
-  const [notebooks, setNotebooks] = useState<dropDownItemDTO[]>([]);
+  const [notebooks, setNotebooks] = useState<any[]>([]);
 
   const history = useHistory();
 
@@ -29,7 +28,7 @@ export default function TrackForm(props: trackFormProps) {
     axios
       .get(`${urlNotebooks}/GetNotebooks`)
       .then((response: AxiosResponse<notebookDTO[]>) => {
-        let mappedNotebooks: dropDownItemDTO[];
+        let mappedNotebooks: any[];
 
         mappedNotebooks = response.data.map((notebook) => {
           return {
