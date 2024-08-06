@@ -8,10 +8,9 @@ import { urlAccounts } from "../../endpoints";
 import DisplayErrors from "../../utils/DisplayErrors";
 import Loading from "../../utils/Loading";
 import Swal from "sweetalert2";
+import RegisterForm from "./RegisterForm";
 
 import css from "./../../Form.module.css";
-import AuthForm from "./AuthForm";
-
 YupPassword(Yup);
 
 export default function Register() {
@@ -22,23 +21,6 @@ export default function Register() {
   //* אובייקט לניווט לדף אחר
   const history = useHistory();
 
-  // אובייקט שאחראי על הוולידציה של הטופס
-  const RegisterSchema = Yup.object().shape({
-    username: Yup.string()
-      .min(2, "שם חייב להכיל להכיל 2 תווים לפחות")
-      .required("חובה להזין שם"),
-    email: Yup.string().email("הזן מייל תקין").required("חובה להזין מייל"),
-    password: Yup.string()
-      .password()
-      .min(6, "סיסמא חייבת להכיל 6 תווים לפחות")
-      .minNumbers(1, "סיסמא חייבת להכיל ספרה 1 לפחות")
-      .minSymbols(1, "סיסמא חייבת להכיל תו מיוחד 1")
-      .minLowercase(1, "סיסמא חייבת להכיל אות 1 קטנה")
-      .minUppercase(1, "סיסמא חייבת להכיל אות 1 גדולה")
-      .required("חובה להזין סיסמא"),
-  });
-
-  // פונקציה לביצוע הרשמה
   function register(credentials: registerDTO, actions: any) {
     setLoading(true);
     setErrors([]);
@@ -48,6 +30,7 @@ export default function Register() {
       .then((response: AxiosResponse<any>) => {
         setTimeout(() => {
           setLoading(false);
+          actions.resetForm();
           Swal.fire({
             icon: "success",
             title: "תהליך הרשמה בוצע בהצלחה",
@@ -93,17 +76,7 @@ export default function Register() {
       <div className={css["auth-container"]}>
         {loading && <Loading left="150px" top="90px" />}
         <div className={css["form"]}>
-          <AuthForm
-            initialValues={{ username: "", email: "", password: "" }}
-            validationSchema={RegisterSchema}
-            secondBtnText="התחבר"
-            secondBtnUrl="/login"
-            questionText="כבר יש לך חשבון ? "
-            onSubmit={(values, actions) => {
-              register(values, actions);
-            }}
-            formType="register"
-          />
+          <RegisterForm onSubmit={register} />
           <DisplayErrors errors={errors} />
         </div>
       </div>

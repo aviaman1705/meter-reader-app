@@ -1,7 +1,5 @@
 import { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
-import * as Yup from "yup";
-import YupPassword from "yup-password";
 import axios, { AxiosResponse } from "axios";
 import AuthenticationContext from "./AuthenticationContext";
 import { getClaims, saveToken } from "./handleJWT";
@@ -9,11 +7,9 @@ import { authenticationResponse, userCredentials } from "./auth.models";
 import { urlAccounts } from "../../endpoints";
 import DisplayErrors from "../../utils/DisplayErrors";
 import Loading from "../../utils/Loading";
-import AuthForm from "./AuthForm";
+import LoginForm from "./LoginForm";
 
 import css from "./../../Form.module.css";
-
-YupPassword(Yup);
 
 export default function Login() {
   // פונקציה לעדכון פרטי משתמש בלוגין
@@ -24,19 +20,6 @@ export default function Login() {
   const [errors, setErrors] = useState<string[]>([]);
   //* אובייקט לניווט לדף אחר
   const history = useHistory();
-
-  // אובייקט שאחראי על הוולידציה של הטופס
-  const LoginSchema = Yup.object().shape({
-    email: Yup.string().email("הזן מייל תקין").required("חובה להזין מייל"),
-    password: Yup.string()
-      .password()
-      .min(6, "סיסמא חייבת להכיל 6 תווים לפחות")
-      .minNumbers(1, "סיסמא חייבת להכיל ספרה 1 לפחות")
-      .minSymbols(1, "סיסמא חייבת להכיל תו מיוחד 1")
-      .minLowercase(1, "סיסמא חייבת להכיל אות 1 קטנה")
-      .minUppercase(1, "סיסמא חייבת להכיל אות 1 גדולה")
-      .required("חובה להזין סיסמא"),
-  });
 
   // פונקציה לביצוע לוגין
   function login(credentials: userCredentials, actions: any) {
@@ -79,15 +62,7 @@ export default function Login() {
       <div className={css["auth-container"]}>
         {loading && <Loading left="150px" top="90px" />}
         <div className={css["form"]}>
-          <AuthForm
-            initialValues={{ email: "", password: "" }}
-            validationSchema={LoginSchema}
-            btnText="כניסה"
-            secondBtnText="הרשם"
-            secondBtnUrl="/register"
-            questionText="עוד אין לך חשבון ? "
-            onSubmit={(values, actions) => login(values, actions)}
-          />
+          <LoginForm onSubmit={login} />
           <DisplayErrors errors={errors} />
         </div>
       </div>

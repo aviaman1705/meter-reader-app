@@ -2,23 +2,26 @@ import { useField } from "formik";
 
 import classes from "./../../Form.module.css";
 
-export default function TextField(props: textFieldProps) {
+export default function SelectField(props: selectFieldProps) {
   const [field, meta] = useField(props);
+  console.log("field", field);
+  console.log("meta", meta);
 
   return (
     <div className={classes["form-group"]}>
       <label>{props.label}</label>
-      <input
+      <select
         {...field}
         name={props.name}
-        type={props.type}
         placeholder={props.placeholder}
         className={
           meta.touched && meta.error
             ? "form-control " + classes["input-error"]
             : "form-control"
         }
-      />
+      >
+        {props.children}
+      </select>
       {meta.touched && meta.error && (
         <div className={classes["error"]}>{meta.error}</div>
       )}
@@ -26,13 +29,13 @@ export default function TextField(props: textFieldProps) {
   );
 }
 
-interface textFieldProps {
+interface selectFieldProps {
   label: string;
   name: string;
-  type: "text" | "password" | "date" | "number";
   placeholder: string;
+  children: React.ReactNode;
 }
 
-TextField.defaultProps = {
+SelectField.defaultProps = {
   type: "text",
 };

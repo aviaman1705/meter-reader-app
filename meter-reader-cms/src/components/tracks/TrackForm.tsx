@@ -3,7 +3,6 @@ import { Form, Formik, FormikHelpers } from "formik";
 import * as Yup from "yup";
 import { useHistory } from "react-router-dom";
 import axios, { AxiosError, AxiosResponse } from "axios";
-import { parse } from "date-fns";
 import { urlNotebooks } from "../../endpoints";
 import { trackDTO } from "./track.models";
 import { notebookDTO } from "../notebooks/notebook.models";
@@ -14,6 +13,8 @@ import DateField from "../forms/DateField";
 import DropDownField, { dropDownItemDTO } from "../forms/DropDownField";
 
 import classes from "./../../Table.module.css";
+import { trackSchema } from "../../Schema";
+import SelectField from "../forms/SelectField";
 
 export default function TrackForm(props: trackFormProps) {
   const [notebooks, setNotebooks] = useState<dropDownItemDTO[]>([]);
@@ -54,58 +55,59 @@ export default function TrackForm(props: trackFormProps) {
         <Formik
           initialValues={props.model}
           onSubmit={props.onSubmit}
-          validationSchema={Yup.object({
-            fromDate: Yup.date()
-              .transform(function (value, originalValue) {
-                if (this.isType(value)) {
-                  return value;
-                }
-                const result = parse(originalValue, "dd.MM.yyyy", new Date());
-                return result;
-              })
-              .typeError("שדה מ-תאריך הוא שדה חובה!")
-              .required(),
-            toDate: Yup.date()
-              .transform(function (value, originalValue) {
-                if (this.isType(value)) {
-                  return value;
-                }
-                const result = parse(originalValue, "dd.MM.yyyy", new Date());
-                return result;
-              })
-              .typeError("שדה עד תאריך הוא שדה חובה!")
-              .required(),
-            notebookId: Yup.number().required("חובה לבחור מספר פנקס!"),
-            desc: Yup.string()
-              .required("שדה תיאור הוא שדה חובה!")
-              .min(2, "חובה להזין 2 תווים לפחות!"),
-            called: Yup.number()
-              .required("שדה נקרא הוא שדה חובה!")
-              .min(0, "לא ניתן להזין מספר שלילי"),
-            unCalled: Yup.number()
-              .required("שדה לא נקרא הוא שדה חובה!")
-              .min(0, "לא ניתן להזין מספר שלילי"),
-          })}
+          validationSchema={trackSchema}
         >
           {(formikProps) => (
             <Form>
-              <DateField displayName="תאריך" field="fromDate" />
-              <DateField displayName="תאריך" field="toDate" />
-              <DropDownField
-                displayName="פנקס"
-                label="בחר פנקס..."
-                field="notebookId"
-                list={notebooks}
-                ddlValue={props.ddlNotebooksValue}
-                onChange={formikProps.handleChange}
-              />
               <TextField
-                displayName="תיאור"
-                field="desc"
-                formikProps={formikProps}
+                label="מ-תאריך"
+                name="fromDate"
+                type="date"
+                placeholder="בחר מ-תאריך"
               />
-              <NumberField displayName="נקרא" field="called" />
-              <NumberField displayName="לא נקרא" field="unCalled" />
+
+              <TextField
+                label=" עד תאריך"
+                name="toDate"
+                type="date"
+                placeholder="בחר עד-תאריך"
+              />
+              <SelectField
+                label="פנקס"
+                name="notebookId"
+                placeholder="בחר פנקס..."
+              >
+                {
+                  <>
+                    <option value="">בחר פנקס...</option>
+                    {notebooks?.map((item, index) => (
+                      <option value={item.value} key={index}>
+                        {item.text}
+                      </option>
+                    ))}
+                  </>
+                }
+              </SelectField>
+              <TextField
+                label="תיאור"
+                name="desc"
+                type="text"
+                placeholder="הזן תיאור"
+              />
+
+              <TextField
+                label="נקרא"
+                name="called"
+                type="number"
+                placeholder="הזן כמות מונים שנקראו"
+              />
+
+              <TextField
+                label="נקרא"
+                name="unCalled"
+                type="number"
+                placeholder="הזן כמות מונים שלא נקראו"
+              />
               <div className={`form-group ${classes["buttons-section"]} p-2`}>
                 <Button disabled={formikProps.isSubmitting} type="submit">
                   שמור שינויים

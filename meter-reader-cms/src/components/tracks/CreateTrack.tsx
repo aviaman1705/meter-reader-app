@@ -23,7 +23,7 @@ export default function CreateTrack() {
     unCalled: "",
   };
 
-  async function create(track: trackDTO) {
+  function create(track: trackDTO) {
     setLoading(true);
     const formData = convertTrackToFormData(track);
     axios({
@@ -51,7 +51,7 @@ export default function CreateTrack() {
         <TrackForm
           title="יצירת מסלול"
           model={track}
-          onSubmit={async (values) => await create(values)}
+          onSubmit={(values) => create(values)}
         />
       </div>
     </div>

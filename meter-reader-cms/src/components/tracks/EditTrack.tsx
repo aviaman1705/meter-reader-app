@@ -23,7 +23,7 @@ export default function EditTrack() {
       });
   }, [id]);
 
-  async function edit(track: trackDTO) {
+  function edit(track: trackDTO) {
     setLoading(true);
     const formData = convertTrackToFormData(track);
     axios
@@ -48,8 +48,8 @@ export default function EditTrack() {
             title="עריכת מסלול"
             model={track}
             ddlNotebooksValue={track.notebookId}
-            onSubmit={async (value) => {
-              await edit(value);
+            onSubmit={(value) => {
+              edit(value);
             }}
           />
         )}

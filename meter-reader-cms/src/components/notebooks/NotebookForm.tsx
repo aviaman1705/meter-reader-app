@@ -8,6 +8,7 @@ import axios, { AxiosResponse } from "axios";
 import { urlNotebooks } from "../../endpoints";
 
 import classes from "./../../Table.module.css";
+import TextField from "../forms/TextField";
 
 export default function NotebookForm(props: notebookFormProps) {
   const history = useHistory();
@@ -46,7 +47,13 @@ export default function NotebookForm(props: notebookFormProps) {
         >
           {(formikProps) => (
             <Form>
-              <NumberField displayName="מספר פנקס" field="number" />
+              <TextField
+                label="מספר פנקס"
+                name="number"
+                type="number"
+                placeholder="מספר פנקס"
+              />
+
               <div className={`form-group ${classes["buttons-section"]} p-2`}>
                 <Button
                   className={`${classes["btn-submit"]}`}
