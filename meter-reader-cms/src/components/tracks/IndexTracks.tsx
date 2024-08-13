@@ -14,9 +14,10 @@ import Button from "../../utils/Button";
 import { CiEdit } from "react-icons/ci";
 import { MdDeleteOutline } from "react-icons/md";
 
-import classes from "./../../Table.module.css";
 import { trackGridItemDTO } from "./track.models";
 import TableFooter from "../../utils/TableFooter";
+
+import classes from "./../../Table.module.css";
 
 export default function IndexTracks() {
   const history = useHistory();

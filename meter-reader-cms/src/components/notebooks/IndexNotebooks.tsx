@@ -1,19 +1,22 @@
 import { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import axios, { AxiosResponse, AxiosError } from "axios";
 import { urlNotebooks } from "../../endpoints";
 import { sysDataTablePager } from "../../models/sysDataTablePager.models";
-import { notebookDTO } from "./notebook.models";
 import Search from "../../utils/Search";
 import ItemsPerPage from "../../utils/ItemsPerPage";
 import TableHeader from "../../utils/TableHeader";
 import Loading from "../../utils/Loading";
 import Pagination from "../../utils/Pagination/Pagination";
 import Button from "../../utils/Button";
+import { CiEdit } from "react-icons/ci";
+import { MdDeleteOutline } from "react-icons/md";
 import customConfirm from "../../utils/customConfirm";
 
-import classes from "./../../Table.module.css";
+import { notebookDTO } from "./notebook.models";
 import TableFooter from "../../utils/TableFooter";
+
+import classes from "./../../Table.module.css";
 
 export default function IndexNotebooks() {
   const history = useHistory();
@@ -183,6 +186,12 @@ export default function IndexNotebooks() {
                   >
                     עריכה
                   </Button>
+                  <Link
+                    className={`${classes["btn-grid-mobile-edit"]}`}
+                    to={`/notebooks/edit/${item.id}`}
+                  >
+                    <CiEdit />
+                  </Link>
                 </td>
                 <td>
                   <Button
@@ -194,6 +203,15 @@ export default function IndexNotebooks() {
                   >
                     מחיקה
                   </Button>
+                  <a
+                    className={`${classes["btn-grid-mobile-delete"]}`}
+                    href="#/"
+                    onClick={() => {
+                      remove(item.id);
+                    }}
+                  >
+                    <MdDeleteOutline />
+                  </a>
                 </td>
               </tr>
             ))}
